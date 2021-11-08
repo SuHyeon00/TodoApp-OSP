@@ -1,2 +1,2 @@
 # TodoApp-OSP
-Open Sw Platform Team6 Project
+Open SW Platform Team6 Project
