@@ -17,6 +17,11 @@ export const viewStyles = StyleSheet.create({
         paddingBottom: 100,
         
     },
+    maintitle: {
+        flex:1,
+        backgroundColor: theme.background,
+        alignItems: 'baseline',
+    },
    
 });
 
@@ -28,7 +33,7 @@ export const textStyles = StyleSheet.create({
         alignItems: 'flex-start',
         marginTop: 50,
         marginLeft: 20,
-        marginBottom: 20,
+        marginBottom: 10,
     
     },
     header: {
@@ -41,7 +46,7 @@ export const textStyles = StyleSheet.create({
         marginBottom: 10,
     },
     item: {
-        fontSize: 18,
+        fontSize: 16,
         fontWeight: '600',
         color: theme.main,
         alignItems: 'flex-start',
@@ -68,5 +73,6 @@ export const textStyles = StyleSheet.create({
         marginLeft: 20,
         marginBottom: 0,
     },
+
     
 });

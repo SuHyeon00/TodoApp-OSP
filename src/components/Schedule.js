@@ -1,27 +1,27 @@
 import React from 'react';
-import { StyleSheet, View, Text, ScrollView } from 'react-native';
+import { StyleSheet, View, Text } from 'react-native';
 import {theme} from '../theme';
 import PropTypes from 'prop-types';   
 import IconButton from './IconButton';
 import { images } from '../images';
 
-const Task = ({ text }) => {
+const Schedule = ({ text }) => {
     return (
-        <View style={taskStyle.container}>
-            <IconButton type = {images.uncompleted} />
-            <Text style ={taskStyle.contents}>{text}</Text>
+        <View style={scheduleStyle.container}>
+            <IconButton type = {images.Schedulebutton} />
+            <Text style ={scheduleStyle.contents}>{text}</Text>
         </View>
     )
 }
 
-const taskStyle = StyleSheet.create({
+const scheduleStyle = StyleSheet.create({
     container: {
         flexDirection: 'row',
         alignItems: 'baseline',
         borderRadius: 0,
         padding: 0,
         marginTop: 3,
-        marginLeft: 3,
+        marginLeft: 0,
     },
 
     contents: {
@@ -32,8 +32,8 @@ const taskStyle = StyleSheet.create({
     },
 });
 
-Task.propTypes = {
+Schedule.propTypes = {
     text: PropTypes.string.isRequired,
 };
 
-export default Task;
+export default Schedule;
