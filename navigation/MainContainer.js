@@ -3,6 +3,7 @@ import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import { theme } from '../src_Final/theme';
 
 // Screens
 import CalendarScreen from './screens/CalendarScreen';
@@ -41,9 +42,9 @@ export default function MainContainer() {
 
                         return <Ionicons name={iconName} size={size} color={color}/>
                     },})}
-                Options={{
-                    activeTintColor: 'tomato',
-                    inactiveTintColor: 'grey',
+                tabBarOptions={{
+                    activeTintColor: theme.main,
+                    inactiveTintColor: theme.Grey,
                     labelStyle: { paddingBottom: 10, fontSize: 10 },
                     style: {padding: 10, height: 70}
                 }}
