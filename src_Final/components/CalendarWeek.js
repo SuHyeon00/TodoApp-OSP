@@ -1,3 +1,6 @@
+import * as React from 'react';
+import { View, Dimensions } from 'react-native';
+import CalendarStrip from 'react-native-calendar-strip';
 import { theme } from '../theme';
 
 const CalendarWeek = () => {
