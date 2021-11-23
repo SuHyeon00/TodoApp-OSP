@@ -50,8 +50,8 @@ export default function MainContainer() {
                 }}
             >
 
-                <Tab.Screen name={calendarName} component={CalendarScreen}/>
                 <Tab.Screen name={todoListName} component={TodoListScreen}/>
+                <Tab.Screen name={calendarName} component={CalendarScreen}/>
                 <Tab.Screen name={friendsName} component={FriendsScreen}/>
                 <Tab.Screen name={settingsName} component={SettingsScreen}/>
 

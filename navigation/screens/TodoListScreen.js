@@ -1,9 +1,10 @@
 import * as React from 'react';
 import { useState } from 'react';
 import { StatusBar, SafeAreaView, Text, Dimensions, View, ScrollView } from 'react-native';
-import {viewStyles, textStyles, barStyles} from '../../src/styles';
-import Input_task from '../../src/components/Input_task';
-import Task from '../../src/components/Task';
+import {viewStyles, textStyles, barStyles} from '../../src_Final/styles';
+import Input from '../../src_Final/components/Input';
+import Task from '../../src_Final/components/Task';
+import Schedule from '../../src_Final/components/Schedule';
 
 export default function TodoListScreen({navigation}) {
 
@@ -34,7 +35,6 @@ export default function TodoListScreen({navigation}) {
         const currentTasks = Object.assign({}, tasks);
         currentTasks[id]['completed'] = !currentTasks[id]['completed'];
         setTasks(currentTasks);
-
     };
 
     // edit a task
@@ -48,8 +48,47 @@ export default function TodoListScreen({navigation}) {
         setNewTask('');
     };
 
-    const _handleTextChange = text => {
+    const _handleTextChangeTask = text => {
         setNewTask(text);
+    };
+
+    // Managing Schedule
+    const [newSchedule, setNewSchedule] = useState('');
+    const [schedules, setSchedules] = useState({});
+
+    // add a schedule
+    const _addSchedule = () => {
+        const ID = Date.now().toString();
+        const newScheduleObject = {
+            [ID]: {id: ID, text: newSchedule, completed: false},
+        };
+        setNewSchedule('');
+        setSchedules({...schedules, ...newScheduleObject});
+    };
+
+    // delete a task
+    const _deleteSchedule = id => {
+        const currentSchedules = Object.assign({}, schedules);
+        delete currentSchedules[id];
+        setSchedules(currentSchedules);
+    };
+
+    // check a completed task
+    const _toggleSchedule = id => {
+        const currentSchedules = Object.assign({}, schedules);
+        currentSchedules[id]['completed'] = !currentSchedules[id]['completed'];
+        setSchedules(currentSchedules);
+    };
+
+    // edit a task
+    const _updateSchedule = item => {
+        const currentSchedules = Object.assign({}, schedules);
+        currentSchedules[item.id] = item;
+        setSchedules(currentSchedules);
+    };
+
+    const _handleTextChangeSchedule = text => {
+        setNewSchedule(text);
     };
 
     return (
@@ -59,11 +98,20 @@ export default function TodoListScreen({navigation}) {
             <View>
                 <Text style={textStyles.category}>-- Today's Schedule</Text>
             </View>
+            <Input value={newSchedule} onChangeText={_handleTextChangeSchedule} 
+            onSubmitEditing={_addSchedule}/>
+            <View style={{marginBottom: 10}} width={width-20}>
+                {Object.values(schedules).reverse().map(item => (
+                    <Schedule key={item.id} item={item}
+                    deleteSchedule={_deleteSchedule} toggleSchedule={_toggleSchedule}
+                    updateSchedule={_updateSchedule} />
+                ))}
+            </View>
             
             <Text style={viewStyles.divisionLine}> </Text>
 
             <Text style={textStyles.category}>-- Category 1</Text>
-            <Input_task value={newTask} onChangeText={_handleTextChange} 
+            <Input value={newTask} onChangeText={_handleTextChangeTask} 
             onSubmitEditing={_addTask} onBlur={_onBlur}/>
             <ScrollView width={width-20}>
                 {Object.values(tasks).reverse().map(item => (
