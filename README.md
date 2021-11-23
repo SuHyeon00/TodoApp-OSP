@@ -15,7 +15,6 @@ expo install @react-native-async-storage/async-storage
 
 npm install --save styled-components
 
-
 ### 네비게이션 바 모듈 설치 관련  
 npm add react-native-vector-icons
 
@@ -30,7 +29,6 @@ expo install react-native-gesture-handler react-native-reanimated react-native-s
 npm add @react-navigation/stack
 
 npm add @react-navigation/bottom-tabs
-
 
 ### 캘린더 모듈 설치 관련
 
