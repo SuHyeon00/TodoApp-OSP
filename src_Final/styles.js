@@ -39,3 +39,35 @@ export const barStyles = StyleSheet.create({
         backgroundColor: theme.background,
     },
 });
+
+export const inputStyle = StyleSheet.create({
+    textInput: {
+        fontSize: 20,
+        width: Dimensions.get('window').width-30,
+        height: 40,
+        marginLeft: 3,
+        marginBottom: 10,
+        paddingLeft: 15,
+        borderRadius: 10,
+        backgroundColor: "#E5E5E5",
+        color: theme.text,
+    },
+});
+
+export const taskStyle = StyleSheet.create({
+    container: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        backgroundColor: theme.itemBackground,
+        borderRadius: 10,
+        paddingLeft: 5,
+        marginTop: 3,
+        marginLeft: 0,
+    },
+
+    contents: {
+        flex: 1,
+        fontSize: 20,
+        color: theme.text,
+    },
+});
