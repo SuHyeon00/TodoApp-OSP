@@ -45,13 +45,14 @@ const ScheduleList = () => {
 
     return (
         <View>
-            <Input value={newSchedule} onChangeText={_handleTextChangeSchedule} 
-            onSubmitEditing={_addSchedule}/>
+            <Input value={newSchedule} placeholder="+ Add a schedule"
+                onChangeText={_handleTextChangeSchedule} 
+                onSubmitEditing={_addSchedule}/>
             <View style={{marginBottom: 10}} width={width-20}>
                 {Object.values(schedules).reverse().map(item => (
                     <Schedule key={item.id} item={item}
-                    deleteSchedule={_deleteSchedule} toggleSchedule={_toggleSchedule}
-                    updateSchedule={_updateSchedule} />
+                        deleteSchedule={_deleteSchedule} toggleSchedule={_toggleSchedule}
+                        updateSchedule={_updateSchedule} />
                 ))}
             </View>
         </View>
