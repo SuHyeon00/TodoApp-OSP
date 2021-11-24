@@ -28,9 +28,10 @@ const Task = ({ item, deleteTask, toggleTask, updateTask }) => {
     };
 
     return isEditing ? (
-        <Input value={text} onChangeText={text => setText(text)}
-        onSubmitEditing={_onSubmitEditing}
-        onBlur={_onBlur}/>
+        <Input value={text} placeholder="+ Add a task"
+            onChangeText={text => setText(text)}
+            onSubmitEditing={_onSubmitEditing}
+            onBlur={_onBlur}/>
     ) : (
         <View style={taskStyle.container}>
             <IconButton type = {item.completed ? images.completed : images.uncompleted}
@@ -40,9 +41,9 @@ const Task = ({ item, deleteTask, toggleTask, updateTask }) => {
             <Text style ={[taskStyle.contents,
                 {color: (item.completed ? theme.done : theme.text)},
                 {textDecorationLine: (item.completed ? 'line-through' : 'none')}]}>
-            {item.text}</Text>
+                {item.text}</Text>
             {item.completed || (<IconButton type={images.update}
-            onPressOut={_handleUpdateButtonPress}/>)}
+                onPressOut={_handleUpdateButtonPress}/>)}
 
             <IconButton type={images.delete} id={item.id} onPressOut={deleteTask} />
         </View>
