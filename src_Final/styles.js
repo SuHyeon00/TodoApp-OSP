@@ -54,6 +54,17 @@ export const inputStyle = StyleSheet.create({
     },
 });
 
+export const categoryStyle = StyleSheet.create({
+    container: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent:'flex-start',
+        paddingLeft: 5,
+        marginTop: 3,
+        marginLeft: 0,
+    }
+})
+
 export const taskStyle = StyleSheet.create({
     container: {
         flexDirection: 'row',
