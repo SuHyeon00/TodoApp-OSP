@@ -24,7 +24,8 @@ export default function MainContainer() {
         <NavigationContainer>
             <Tab.Navigator
                 initialRouteName={todoListName}
-                screenOptions={({route}) => ({
+                screenOptions={
+                    ({route}) => ({
                     tabBarIcon: ({focused, color, size}) => {
                         let iconName;
                         let rn = route.name;
@@ -41,19 +42,20 @@ export default function MainContainer() {
                         }
 
                         return <Ionicons name={iconName} size={size} color={color}/>
-                    },})}
+                    },})
+                }
                 tabBarOptions={{
                     activeTintColor: theme.main,
                     inactiveTintColor: theme.Grey,
                     labelStyle: { paddingBottom: 10, fontSize: 10 },
-                    style: {padding: 10, height: 70}
+                    style: { height: 100 }
                 }}
             >
 
-                <Tab.Screen name={todoListName} component={TodoListScreen}/>
-                <Tab.Screen name={calendarName} component={CalendarScreen}/>
-                <Tab.Screen name={friendsName} component={FriendsScreen}/>
-                <Tab.Screen name={settingsName} component={SettingsScreen}/>
+                <Tab.Screen name={todoListName} component={TodoListScreen} />
+                <Tab.Screen name={calendarName} component={CalendarScreen} />
+                <Tab.Screen name={friendsName} component={FriendsScreen} />
+                <Tab.Screen name={settingsName} component={SettingsScreen} />
 
             </Tab.Navigator>
         </NavigationContainer>
