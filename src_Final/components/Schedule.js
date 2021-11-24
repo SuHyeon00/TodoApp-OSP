@@ -28,9 +28,10 @@ const Schedule = ({ item, deleteSchedule, toggleSchedule, updateSchedule }) => {
     };
 
     return isEditing ? (
-        <Input value={text} onChangeText={text => setText(text)}
-        onSubmitEditing={_onSubmitEditing}
-        onBlur={_onBlur}/>
+        <Input value={text} placeholder="+ Add a schedule"
+            onChangeText={text => setText(text)}
+            onSubmitEditing={_onSubmitEditing}
+            onBlur={_onBlur}/>
     ) : (
         <View style={taskStyle.container}>
             <IconButton type = {item.completed ? images.completed : images.uncompleted}
