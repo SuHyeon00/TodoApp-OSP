@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useState } from 'react';
-import { View, ScrollView, Dimensions } from 'react-native';
+import { View, Dimensions } from 'react-native';
 import Input from '../../src_Final/components/Input';
 import Task from '../../src_Final/components/Task';
 
@@ -48,15 +48,16 @@ const TaskList = () => {
 
     return (
         <View>
-            <Input value={newTask} onChangeText={_handleTextChangeTask} 
-            onSubmitEditing={_addTask} onBlur={_onBlur}/>
-            <ScrollView width={width-20}>
+            <Input value={newTask} placeholder="+ Add a task"
+                onChangeText={_handleTextChangeTask} 
+                onSubmitEditing={_addTask} onBlur={_onBlur}/>
+            <View width={width-20}>
                 {Object.values(tasks).reverse().map(item => (
                     <Task key={item.id} item={item}
                     deleteTask={_deleteTask} toggleTask={_toggleTask}
                     updateTask={_updateTask} />
                 ))}
-            </ScrollView>
+            </View>
         </View> 
     );
 }
