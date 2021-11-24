@@ -8,38 +8,35 @@ Open SW Platform Team6 Project
 
 
 ### 수업시간에 한 기본 모듈 설치
-
-npm -g install react-native
-
-npm install prop-types
-
-expo install @react-native-async-storage/async-storage
-
-npm install --save styled-components
+<ul>
+  <li>npm -g install react-native</li>
+  <li>npm install prop-types</li>
+  <li>expo install @react-native-async-storage/async-storage</li>
+  <li>npm install --save styled-components</li>
+</ul>
 
 
 ### react-native 아이콘 모듈 설치 관련 
-
-npm add react-native-vector-icons
-
-react-native link react-native-vector-icons
+<ul>
+  <li>npm add react-native-vector-icons</li>
+  <li>react-native link react-native-vector-icons</li>
+</ul>
 
 
 ### 네비게이션 바 모듈 설치 관련
-
-npm add @react-navigation/native
-
-//cmd를 관리자 권한으로 실행해서(sudo)
-
-expo install react-native-gesture-handler react-native-reanimated react-native-screens react-native-safe-area-context @react-native-community/masked-view
-
-npm add @react-navigation/stack
-
-npm add @react-navigation/bottom-tabs
+<ul>
+  <li>npm add @react-navigation/native</li>
+</ul>
+/* cmd를 관리자 권한으로 실행해서(sudo) */
+<ul>
+  <li>expo install react-native-gesture-handler react-native-reanimated react-native-screens react-native-safe-area-context @react-native-community/masked-view</li>
+  <li>npm add @react-navigation/stack</li>
+  <li>npm add @react-navigation/bottom-tabs</li>
+</ul>
 
 
 ### 캘린더 모듈 설치 관련
-
-npm install react-native-calendars
-
-npm install react-native-calendar-strip
+<ul>
+  <li>npm install react-native-calendars</li>
+  <li>npm install react-native-calendar-strip</li>
+</ul>
