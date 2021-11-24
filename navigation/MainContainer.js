@@ -47,7 +47,7 @@ export default function MainContainer() {
                 tabBarOptions={{
                     activeTintColor: theme.main,
                     inactiveTintColor: theme.Grey,
-                    labelStyle: { paddingBottom: 10, fontSize: 10 },
+                    labelStyle: { paddingBottom: 5, fontSize: 10 },
                     style: { height: 100 }
                 }}
             >
