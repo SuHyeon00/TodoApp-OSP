@@ -37,6 +37,6 @@ Open SW Platform Team6 Project
 
 ### 캘린더 모듈 설치 관련
 <ul>
-  <li>npm install react-native-calendars</li>
+  <li>npm install --save react-native-calendars</li>
   <li>npm install react-native-calendar-strip</li>
 </ul>
