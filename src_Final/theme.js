@@ -1,5 +1,5 @@
 export const theme = {
-    background: '#ffffff',
+    background: '#F2F2F2',
     itemBackground: '#FFFCFA',
     main: '#6B5A48',
     text: '#101010',
