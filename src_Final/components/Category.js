@@ -5,10 +5,11 @@ import PropTypes from 'prop-types';
 import IconButton from "./IconButton";
 import { images } from "../images";
 import Input from "./Input";
-import { categoryStyle, taskStyle, textStyles } from "../styles";
+import { categoryStyle, inputStyle, textStyles } from "../styles";
 import TaskList from "./TaskList";
+import { TextInput } from "react-native-gesture-handler";
 
-const Category = ({ item, deleteCategory, updateCategory, setNewCategory, setCategories }) => {
+const Category = ({ item, deleteCategory, updateCategory, newCategory, setNewCategory, categories, setCategories }) => {
     const [isEditing, setIsEditing] = useState(false);
     const [text, setText] = useState(item.text);
     const _handleUpdateButtonPress = () => {
@@ -29,12 +30,19 @@ const Category = ({ item, deleteCategory, updateCategory, setNewCategory, setCat
     };
 
     return isEditing ? (
-        <Input value={text} placeholder="+ Add a Category"
-            onChangeText={text => setText(text)}
-            onSubmitEditing={_onSubmitEditing}
-            onBlur={_onBlur}
-            setNewItem={setNewCategory}
-            setItems={setCategories}/>
+        <View style={{flexDirection: 'row'}}>
+                <IconButton type = {images.addCategory} />
+                <TextInput
+                    style={inputStyle.textInput}
+                    placeholder="+ Add a Category"
+                    placeholderTextColor= {theme.main}
+                    maxLength={20}
+                    value={text}
+                    onChangeText={text => setText(text)}
+                    onSubmitEditing={_onSubmitEditing}
+                    onBlur={_onBlur}>
+                </TextInput>
+        </View>
     ) : (
         <View>
             <View style={categoryStyle.container}>

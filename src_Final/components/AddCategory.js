@@ -63,11 +63,14 @@ const AddCategory = () => {
 
             <View width={width-20}>
                 {Object.values(categories).reverse().map(item => (
-                    <Category key={item.id} item={item}
-                    deleteCategory={_deleteCategory}
-                    updateCategory={_updateCategory}
-                    setNewCategory={setNewCategory}
-                    setCateogries={setCategories}/>
+                    <Category 
+                        item={item}
+                        deleteCategory={_deleteCategory}
+                        updateCategory={_updateCategory}
+                        newCategory={newCategory}
+                        setNewCategory={setNewCategory}
+                        categories={categories}
+                        setCateogries={setCategories}/>
                 ))}
             </View>
         </View> 

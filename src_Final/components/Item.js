@@ -21,6 +21,7 @@ const Item = ({ item, items, placeholder, setItems }) => {
         const currentItems = Object.assign({}, items);
         currentItems[id]['completed'] = !currentItems[id]['completed'];
         setItems(currentItems);
+        alert(currentItems[id].date)
     };
     
     // edit a item
@@ -32,6 +33,7 @@ const Item = ({ item, items, placeholder, setItems }) => {
 
     const [isEditing, setIsEditing] = useState(false);
     const [text, setText] = useState(item.text);
+    
     const _handleUpdateButtonPress = () => {
         setIsEditing(true);
     };

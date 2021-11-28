@@ -9,7 +9,7 @@ import { commentStyle, inputStyle } from "../styles";
 import CommentInput from "./CommentInput";
 import Item from "./Item";
 
-const Comment = ({ comment, deleteComment, updateComment }) => { //c->i
+const Comment = ({ setComments,comments, setNewComment, comment, deleteComment, updateComment }) => { //c->i
     const [isEditing, setIsEditing] = useState(false);
     const [text, setText] = useState(comment.text); //c->i
 
