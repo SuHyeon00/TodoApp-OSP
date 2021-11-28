@@ -66,7 +66,8 @@ const AddCategory = () => {
                     <Category key={item.id} item={item}
                     deleteCategory={_deleteCategory}
                     updateCategory={_updateCategory}
-                    setNewCategory={setNewCategory}/>
+                    setNewCategory={setNewCategory}
+                    setCateogries={setCategories}/>
                 ))}
             </View>
         </View> 
