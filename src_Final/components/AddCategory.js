@@ -7,7 +7,7 @@ import { theme } from '../theme';
 import Category from './Category';
 import IconButton from './IconButton';
 
-const TaskList = () => {
+const AddCategory = () => {
     const width = Dimensions.get('window').width;
 
     // Managing Category
@@ -65,11 +65,12 @@ const TaskList = () => {
                 {Object.values(categories).reverse().map(item => (
                     <Category key={item.id} item={item}
                     deleteCategory={_deleteCategory}
-                    updateCategory={_updateCategory} />
+                    updateCategory={_updateCategory}
+                    setNewCategory={setNewCategory}/>
                 ))}
             </View>
         </View> 
     );
 }
 
-export default TaskList;
+export default AddCategory;
