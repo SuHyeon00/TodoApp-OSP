@@ -21,7 +21,6 @@ const Item = ({ item, items, placeholder, setItems }) => {
         const currentItems = Object.assign({}, items);
         currentItems[id]['completed'] = !currentItems[id]['completed'];
         setItems(currentItems);
-        alert(currentItems[id].date)
     };
     
     // edit a item
