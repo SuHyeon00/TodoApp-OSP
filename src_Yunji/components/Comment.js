@@ -1,15 +1,15 @@
 import React, { useState } from "react";
-import { View, Text } from "react-native";
+import { View, Text, TextInput } from "react-native";
 import { theme } from "../theme";
 import PropTypes from 'prop-types';
 import IconButton from "./IconButton";
 import { images } from "../images";
 import Input from "./Input";
-import { commentStyle } from "../styles";  
+import { commentStyle, inputStyle } from "../styles";  
 import CommentInput from "./CommentInput";
 import Item from "./Item";
 
-const Comment = ({ setComments,comments, setNewComment, comment, deleteComment, updateComment }) => { //c->i
+const Comment = ({ comment, deleteComment, updateComment }) => { //c->i
     const [isEditing, setIsEditing] = useState(false);
     const [text, setText] = useState(comment.text); //c->i
 
@@ -31,10 +31,12 @@ const Comment = ({ setComments,comments, setNewComment, comment, deleteComment, 
     };
 
     return isEditing ? (
-        <Input value={text} placeholder="+ Add a comment"
+        <TextInput style={inputStyle.textInput}
+            placeholder="+ Add a comment"
+            value={text}
             onChangeText={text => setText(text)}
             onSubmitEditing={_onSubmitEditing}
-            onBlur={_onBlur} setNewItem={setNewComment} items={comments} setItems={setComments}/>
+            onBlur={_onBlur}/>
     ) : (
         <View>
             <View style={commentStyle.container}>
