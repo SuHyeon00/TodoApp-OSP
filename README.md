@@ -27,7 +27,7 @@ Open SW Platform Team6 Project
 <ul>
   <li>npm add @react-navigation/native</li>
 </ul>
-/* cmd를 관리자 권한으로 실행해서(sudo) */
+<-- cmd를 관리자 권한으로 실행해서(sudo) -->
 <ul>
   <li>expo install react-native-gesture-handler react-native-reanimated react-native-screens react-native-safe-area-context @react-native-community/masked-view</li>
   <li>npm add @react-navigation/stack</li>
