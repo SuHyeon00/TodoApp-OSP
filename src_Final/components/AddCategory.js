@@ -57,7 +57,7 @@ const AddCategory = () => {
                     onChangeText={_handleTextChangeCategory} 
                     onSubmitEditing={_addCategory}
                     onBlur={_onBlur}>
-            </TextInput>
+                </TextInput>
 
             </View>
 
@@ -66,11 +66,7 @@ const AddCategory = () => {
                     <Category 
                         item={item}
                         deleteCategory={_deleteCategory}
-                        updateCategory={_updateCategory}
-                        newCategory={newCategory}
-                        setNewCategory={setNewCategory}
-                        categories={categories}
-                        setCateogries={setCategories}/>
+                        updateCategory={_updateCategory}/>
                 ))}
             </View>
         </View> 
