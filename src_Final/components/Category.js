@@ -8,7 +8,7 @@ import Input from "./Input";
 import { categoryStyle, taskStyle, textStyles } from "../styles";
 import TaskList from "./TaskList";
 
-const Category = ({ item, deleteCategory, updateCategory, setNewCategory }) => {
+const Category = ({ item, deleteCategory, updateCategory, setNewCategory, setCategories }) => {
     const [isEditing, setIsEditing] = useState(false);
     const [text, setText] = useState(item.text);
     const _handleUpdateButtonPress = () => {
@@ -33,7 +33,8 @@ const Category = ({ item, deleteCategory, updateCategory, setNewCategory }) => {
             onChangeText={text => setText(text)}
             onSubmitEditing={_onSubmitEditing}
             onBlur={_onBlur}
-            setNewItem={setNewCategory}/>
+            setNewItem={setNewCategory}
+            setItems={setCategories}/>
     ) : (
         <View>
             <View style={categoryStyle.container}>
