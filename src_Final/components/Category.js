@@ -4,12 +4,11 @@ import { theme } from "../theme";
 import PropTypes from 'prop-types';
 import IconButton from "./IconButton";
 import { images } from "../images";
-import Input from "./Input";
 import { categoryStyle, inputStyle, textStyles } from "../styles";
 import TaskList from "./TaskList";
 import { TextInput } from "react-native-gesture-handler";
 
-const Category = ({ item, deleteCategory, updateCategory, newCategory, setNewCategory, categories, setCategories }) => {
+const Category = ({ item, deleteCategory, updateCategory }) => {
     const [isEditing, setIsEditing] = useState(false);
     const [text, setText] = useState(item.text);
     const _handleUpdateButtonPress = () => {
