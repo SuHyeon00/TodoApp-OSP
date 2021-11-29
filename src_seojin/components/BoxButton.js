@@ -1,45 +1,59 @@
 import React from 'react';
-import { /*Pressable,*/ TouchableOpacity, Text, StyleSheet } from 'react-native';
+import { Pressable, Text, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
 import { theme } from '../theme';
+import { images } from '../images';
 
-export default class BoxButton extends React.Component {
-    
-    static defaultProps = {
-        title: 'untitled',
-        onPress: () => null,
+const BoxButton = ({ id, onPressOut, label, selectAll, deleteAll}) => {
+    const _onPressOut = () => {
+        onPressOut(id);
     };
 
-    constructor(props) {
-        super(props);
-    };
+    return (
+        <Pressable onPressOut={_onPressOut} style = {BoxButtonStyles.button}>
+            <Text style = {BoxButtonStyles.text}>{label}</Text>
+        </Pressable>
 
-    render(){
-        return(
-            /*<Pressable style = {BoxButtonStyles.button}>
-                <Text style = {BoxButtonStyles.text} />
-            </Pressable>
-            */
-            <TouchableOpacity style = {BoxButtonStyles.button} onPress = {this.props.onPress}>
-                <Text style = {BoxButtonStyles.text}>{this.props.title}</Text>
-            </TouchableOpacity>
-        )
-    }
+    );
 };
+
+BoxButton.defaultProps = {
+    onPressOut: () => {},
+};
+
 
 const BoxButtonStyles = StyleSheet.create({
     button: {
-        backgroundColor: theme.background,
+        tintColor: theme.text,
+        width: 40,
+        height: 20,
+        marginVertical: 10,
+        marginLeft: 10,
+        borderColor: theme.text,
+        borderWidth: 1,
+        
+        //margin: 10,
+        /* backgroundColor: theme.background,
         width: 99,
         height: 37,
         borderColor: theme.text,
         borderWidth: 1,
         marginTop: 30,
-        alignItems: 'center'
+        alignItems: 'center' */
     },
     text: {
-        fontSize: 17,
+        fontSize: 13,
         color: theme.text,
+        alignItems: 'center',
+        justifyContent: 'center'
     }
 });
+
+BoxButton.propTypes = {
+    //type: PropTypes.oneOf(Object.values(images)).isRequired,
+    onPressOut: PropTypes.func,
+    label: PropTypes.string,
+};
+
+export default BoxButton;
 
