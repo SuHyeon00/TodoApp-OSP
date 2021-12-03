@@ -40,3 +40,10 @@ Open SW Platform Team6 Project
   <li>npm install --save react-native-calendars</li>
   <li>npm install react-native-calendar-strip</li>
 </ul>
+
+
+### 프로그레스 모듈 설치 관련
+<ul>
+  <li>npm install react-native-progress --save</li>
+  <li>expo install react-native-svg</li>
+</ul>
