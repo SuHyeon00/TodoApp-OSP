@@ -1,15 +1,25 @@
 import React, { useState } from "react";
-import { Button, View, Text } from "react-native";
+import { View, Text } from "react-native";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
-import IconButton from "./IconButton";
-import { images } from "../images";
-import { theme } from "../theme";
 import { ThemeProvider } from "@react-navigation/native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { DuedateButtonStyle } from "../styles";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Duedate = () => {
+  
+  const [date, setDate] = useState(new Date());
+
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
+
+  const _saveDuedate = async date => {
+    try{
+      await AsyncStorage.setDate('date',JSON.stringify(date));
+      setDate(date);
+    }catch(e){
+      console.error(e);
+    }
+  };
 
   const showDatePicker = () => {
     setDatePickerVisibility(true);
@@ -20,7 +30,8 @@ const Duedate = () => {
   };
 
   const handleConfirm = (date) => {
-    console.warn("A date has been picked: ", date);
+    setDate(date);  //내가추가
+    //console.warn("A date has been picked: ", date);
     hideDatePicker();
   };
 
@@ -31,6 +42,7 @@ const Duedate = () => {
       <DateTimePickerModal
         isVisible={isDatePickerVisible}
         mode="date"
+        date={date}
         onConfirm={handleConfirm}
         onCancel={hideDatePicker}
       />
