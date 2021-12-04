@@ -52,3 +52,11 @@ Open SW Platform Team6 Project
 <ul>
   <li>expo install react-native-modal-datetime-picker @react-native-community/datetimepicker</li>
 </ul>
+
+app.json 파일에 추가하기
+
+{
+  "expo": {
+    "userInterfaceStyle": "automatic"
+  }
+}
