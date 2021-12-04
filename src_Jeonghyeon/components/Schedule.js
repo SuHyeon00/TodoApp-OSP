@@ -7,7 +7,7 @@ import { images } from "../images";
 import Input from "./Input";
 import { taskStyle } from "../styles";
 
-const Task = ({ item, deleteTask, toggleTask, updateTask }) => {
+const Schedule = ({ item, deleteSchedule, toggleSchedule, updateSchedule }) => {
     const [isEditing, setIsEditing] = useState(false);
     const [text, setText] = useState(item.text);
     const _handleUpdateButtonPress = () => {
@@ -15,9 +15,9 @@ const Task = ({ item, deleteTask, toggleTask, updateTask }) => {
     };
     const _onSubmitEditing = () => {
         if (isEditing) {
-            const editedTask = Object.assign({}, item, {text});
+            const editedSchedule = Object.assign({}, item, {text});
             setIsEditing(false);
-            updateTask(editedTask);
+            updateSchedule(editedSchedule);
         }
     };
     const _onBlur = () => {
@@ -35,7 +35,7 @@ const Task = ({ item, deleteTask, toggleTask, updateTask }) => {
         <View style={taskStyle.container}>
             <IconButton type = {item.completed ? images.completed : images.uncompleted}
                 id = {item.id}
-                onPressOut = {toggleTask}
+                onPressOut = {toggleSchedule}
                 completed = {item.completed} />
             <Text style ={[taskStyle.contents,
                 {color: (item.completed ? theme.done : theme.text)},
@@ -44,16 +44,14 @@ const Task = ({ item, deleteTask, toggleTask, updateTask }) => {
             {item.completed || (<IconButton type={images.update}
             onPressOut={_handleUpdateButtonPress}/>)}
 
-            <IconButton type={images.delete} id={item.id} onPressOut={deleteTask} />
+            <IconButton type={images.delete} id={item.id} onPressOut={deleteSchedule} />
         </View>
     )
 }
 
-
-
-Task.propTypes = {
+Schedule.propTypes = {
     item: PropTypes.object.isRequired,
-    deleteTask: PropTypes.func.isRequired,
+    deleteSchedule: PropTypes.func.isRequired,
 };
 
-export default Task;
+export default Schedule;

@@ -1,34 +1,40 @@
-import React from 'react';
-import { StyleSheet, TextInput, Dimensions } from 'react-native';
-import { theme } from '../theme';
+import React from "react";
+import {TextInput} from "react-native";
+import { inputStyle } from "../styles";
+import {theme} from "../theme";
 
-const Input = ({ value, onChangeText, onSubmitEditing, onBlur }) => {
+const Input = ({value, placeholder, newItem, setNewItem, items, setItems }) => {
+
+
+    // add a item
+    const _addItem = () => {
+        const ID = Date.now().toString();
+        const newItemObject = {
+            [ID]: {id: ID, text: newItem, draggable: true, completed: false},
+        };
+        setNewItem('');
+        setItems({...items, ...newItemObject});
+    };
+
+    const _onBlur = () => {
+        setNewItem('');
+    };
+
+    const _handleTextChange = text => {
+        setNewItem(text);
+    };
+
     return (
-        <TextInput style = {inputStyle.textInput}
-            placeholder="+ Add a task"
+        <TextInput style={inputStyle.textInput}
+            placeholder={placeholder}
             placeholderTextColor= {theme.main}
             maxLength={20}
-            value={value} onChangeText={onChangeText} 
-            onSubmitEditing={onSubmitEditing}
-            onBlur={onBlur}>
+            value={value} 
+            onChangeText={_handleTextChange}
+            onSubmitEditing={_addItem}
+            onBlur={_onBlur}>
         </TextInput>
     );
 };
-
-const inputStyle = StyleSheet.create({     //처음부터 얘가 있다기 보단 category 옆 +버튼을 누르면 보이는 걸루
-    textInput: {
-        fontSize: 20,
-        width: Dimensions.get('window').width-30,
-        height: 30,
-        marginTop: 10,
-        marginLeft: 3,
-        paddingLeft: 15,
-        paddingTop: 2,
-        borderRadius: 0,
-        backgroundColor: theme.itemBackground,
-        color: theme.text,
-    },
-    
-});
 
 export default Input;
