@@ -37,7 +37,7 @@ export const textStyles = StyleSheet.create({
         fontWeight: '300',
         color: theme.text,
         alignItems: 'flex-start',
-        marginVertical: 10,
+        marginVertical: 8,
     }
 });
 

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import { View, Text } from "react-native";
+import { View, Text, Alert } from "react-native";
 import { theme } from "../theme";
-import PropTypes from 'prop-types';
 import IconButton from "./IconButton";
 import { images } from "../images";
 import { categoryStyle, inputStyle, textStyles } from "../styles";
@@ -12,9 +11,18 @@ const Category = ({ item, items, placeholder, saveItems }) => {
 
     // delete a item
     const _deleteItem = id => {
-        const currentItems = Object.assign({}, items);
-        delete currentItems[id];
-        saveItems(currentItems);
+        Alert.alert(
+            'Warning',
+            'Are you sure to delete?',
+            [
+              {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+
+              {text: 'OK', onPress: () => {
+                const currentItems = Object.assign({}, items);
+                delete currentItems[id];
+                saveItems(currentItems);}}
+            ]
+          );
     };
     
     // edit a item
@@ -63,7 +71,7 @@ const Category = ({ item, items, placeholder, saveItems }) => {
             <View style={categoryStyle.container}>
                 <Text style ={textStyles.category}>-- {item.text}</Text>
                 <IconButton type={images.update} onPressOut={_handleUpdateButtonPress}/>
-                <IconButton type={images.delete} id={item.id} onPressOut={_deleteItem} /> 
+                <IconButton type={images.delete} id={item.id} onPressOut={_deleteItem} />
             </View>
             {/* 카테고리별로 태스크 저장하는 ID값 다르게 해야할 듯 */}
             <TaskList categoryId={item.id} />

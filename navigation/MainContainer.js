@@ -8,13 +8,13 @@ import { theme } from '../src_Final/theme';
 // Screens
 import CalendarScreen from './screens/CalendarScreen';
 import TodoListScreen from './screens/TodoListScreen';
-import FriendsScreen from './screens/FriendsScreen';
+import CompletionRateScreen from './screens/CompletionRateScreen';
 import SettingsScreen from './screens/SettingsScreen';
 
 // Screen names
 const calendarName = 'Calendar';
 const todoListName = 'Todo List';
-const friendsName = 'Friends';
+const CompletionRate = 'Completion Rate';
 const settingsName = 'Settings';
 
 const Tab = createBottomTabNavigator();
@@ -37,7 +37,7 @@ export default function MainContainer() {
                             iconName = focused ? 'calendar' : 'calendar-outline';
                         } else if (rn === settingsName) {
                             iconName = focused ? 'settings' : 'settings-outline';
-                        } else if (rn === friendsName) {
+                        } else if (rn === CompletionRate) {
                             iconName = focused ? 'heart' : 'heart-outline';
                         }
 
@@ -54,7 +54,7 @@ export default function MainContainer() {
 
                 <Tab.Screen name={todoListName} component={TodoListScreen} />
                 <Tab.Screen name={calendarName} component={CalendarScreen} />
-                <Tab.Screen name={friendsName} component={FriendsScreen} />
+                <Tab.Screen name={CompletionRate} component={CompletionRateScreen} />
                 <Tab.Screen name={settingsName} component={SettingsScreen} />
 
             </Tab.Navigator>

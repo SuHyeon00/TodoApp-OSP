@@ -9,7 +9,6 @@ const Input = ({ placeholder, value, setNewItem, items, saveItems, categoryId })
 
     // add a item(Schedule or Todo item)
     const _addItem = () => {
-        alert(`Add: ${value}`);
         const ID = Date.now().toString();
         const newItemObject = {
             [ID]: {id: ID, text: value, completed: false, categoryId: categoryId },
@@ -20,7 +19,6 @@ const Input = ({ placeholder, value, setNewItem, items, saveItems, categoryId })
 
     // add a category
     const _addCategory = () => {
-        alert(`Add: ${value}`);
         const ID = Date.now().toString();
         const newItemObject = {
             [ID]: {id: ID, text: value },

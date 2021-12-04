@@ -5,6 +5,8 @@ import Edit from '../assets/edit.png';
 import addCategory from '../assets/folder-plus.png';
 import plus from '../assets/plus.png';
 import Comment from '../assets/comments.png'; 
+import deleteAll from '../assets/deleteAll.png';
+import selectAll from '../assets/selectAll.png'
 
 export const images = {
     uncompleted: UncheckedBox,
@@ -14,4 +16,6 @@ export const images = {
     addCategory: addCategory,
     plut: plus,
     comment : Comment,
+    deleteAll: deleteAll,
+    selectAll: selectAll,
 };
