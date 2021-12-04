@@ -8,20 +8,20 @@ import { categoryStyle, inputStyle, textStyles } from "../styles";
 import TaskList from "./TaskList";
 import { TextInput } from "react-native-gesture-handler";
 
-const Category = ({ item, items, placeholder, setItems }) => {
+const Category = ({ item, items, placeholder, saveItems }) => {
 
     // delete a item
     const _deleteItem = id => {
         const currentItems = Object.assign({}, items);
         delete currentItems[id];
-        setItems(currentItems);
+        saveItems(currentItems);
     };
     
     // edit a item
     const _updateItem = item => {
         const currentItems = Object.assign({}, items);
         currentItems[item.id] = item;
-        setItems(currentItems);
+        saveItems(currentItems);
     };
 
     const [isEditing, setIsEditing] = useState(false);
@@ -65,16 +65,11 @@ const Category = ({ item, items, placeholder, setItems }) => {
                 <IconButton type={images.update} onPressOut={_handleUpdateButtonPress}/>
                 <IconButton type={images.delete} id={item.id} onPressOut={_deleteItem} /> 
             </View>
-
-            <TaskList />
+            {/* 카테고리별로 태스크 저장하는 ID값 다르게 해야할 듯 */}
+            <TaskList categoryId={item.id} />
 
         </View>
     )
 }
-
-Category.propTypes = {
-    item: PropTypes.object.isRequired,
-    deleteCategory: PropTypes.func.isRequired,
-};
 
 export default Category;

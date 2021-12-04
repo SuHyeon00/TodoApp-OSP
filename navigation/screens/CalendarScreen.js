@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { View } from 'react-native';
 import { Calendar } from 'react-native-calendars';
+import { theme } from '../../src_Final/theme';
 
 export default function CalendarScreen({navigation}) {
 
@@ -10,7 +11,7 @@ export default function CalendarScreen({navigation}) {
     function addDates() {
         let obj = dates.reduce(
             (c, v) => Object.assign(c, {
-                [v]: { marked: true, dotColor: 'red' },
+                [v]: { marked: true, dotColor: theme.main },
             }),
             {},
         );
@@ -22,9 +23,7 @@ export default function CalendarScreen({navigation}) {
     return (
         <View style={{alignContent: 'center', justifyContent: 'center', marginVertical: 40}}>
             <Calendar
-                onDayPress={(day) => {
-                    addDates();
-                }}
+                onDayPress={() => navigation.navigate('Todo List')}
                 markedDates={markedDates}
             />
         </View>

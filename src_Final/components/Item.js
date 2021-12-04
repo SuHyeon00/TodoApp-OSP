@@ -7,27 +7,27 @@ import { images } from "../images";
 import { inputStyle, taskStyle } from "../styles";
 import { TextInput } from "react-native-gesture-handler";
 
-const Item = ({ item, items, placeholder, setItems }) => {
+const Item = ({ item, items, saveItems, categoryId , placeholder }) => {
 
     // delete a item
     const _deleteItem = id => {
         const currentItems = Object.assign({}, items);
         delete currentItems[id];
-        setItems(currentItems);
+        saveItems(currentItems);
     };
 
     // check a completed item
     const _toggleItem = id => {
         const currentItems = Object.assign({}, items);
         currentItems[id]['completed'] = !currentItems[id]['completed'];
-        setItems(currentItems);
+        saveItems(currentItems);
     };
     
     // edit a item
     const _updateItem = item => {
         const currentItems = Object.assign({}, items);
         currentItems[item.id] = item;
-        setItems(currentItems);
+        saveItems(currentItems);
     };
 
     const [isEditing, setIsEditing] = useState(false);
@@ -78,12 +78,5 @@ const Item = ({ item, items, placeholder, setItems }) => {
         </View>
     )
 }
-
-
-
-Item.propTypes = {
-    item: PropTypes.object.isRequired,
-    setItems: PropTypes.func.isRequired,
-};
 
 export default Item;

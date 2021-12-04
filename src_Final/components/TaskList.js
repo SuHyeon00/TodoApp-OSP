@@ -1,35 +1,59 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import AppLoading from 'expo-app-loading';
 import * as React from 'react';
-import { useState } from 'react';
 import { View, Dimensions } from 'react-native';
 import Input from '../../src_Final/components/Input';
 import Item from './Item';
 
-const TaskList = () => {
+const TaskList = (categoryId) => {
     const width = Dimensions.get('window').width;
 
-    // Managing Todo Item
-    const [newTask, setNewTask] = useState('');
-    const [tasks, setTasks] = useState({});
+    const [isReady, setIsReady] = React.useState(false);
 
-    return (
+    // Managing Todo Item
+    const [newTask, setNewTask] = React.useState('');
+    const [tasks, setTasks] = React.useState({});
+
+    const _saveTasks = async tasks => {
+        try {
+            await AsyncStorage.setItem('tasks', JSON.stringify(tasks));
+            setTasks(tasks);
+        } catch (e) {
+            console.error(e);
+        }
+    };
+
+    const _loadTasks = async () => {
+        const loadedTasks = await AsyncStorage.getItem('tasks');
+        setTasks(JSON.parse(loadedTasks || '{}'));
+    }
+
+    return isReady? (
         <View>
-            <Input 
-                value={newTask}
+            <Input
                 placeholder="+ Add a task"
-                newItem={newTask}
+                value={newTask}
                 setNewItem={setNewTask}
                 items={tasks}
-                setItems={setTasks}
+                saveItems={_saveTasks}
+                categoryId={categoryId}
                 />
 
             <View style={{marginBottom: 10}} width={width-20}>
                 {Object.values(tasks).reverse().map(item => (
-                    <Item key={item.id} item={item} items={tasks}
-                    setItems={setTasks}
+                    <Item key={item.id} item={item}
+                    items={tasks}
+                    saveItems={_saveTasks}
+                    categoryId={categoryId}
                     placeholder="+ Add a task" />
                 ))}
             </View>
         </View> 
+    ) : (
+        <AppLoading
+        startAsync={_loadTasks}
+        onFinish={() => setIsReady(true)}
+        onError={console.error} />
     );
 }
 

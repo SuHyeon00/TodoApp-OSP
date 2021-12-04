@@ -1,3 +1,5 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import AppLoading from 'expo-app-loading';
 import * as React from 'react';
 import { useState } from 'react';
 import { View, Dimensions } from 'react-native';
@@ -7,28 +9,49 @@ import Input from './Input';
 const AddCategory = () => {
     const width = Dimensions.get('window').width;
 
+    const [isReady, setIsReady] = React.useState(false);
+
     // Managing Category
     const [newCategory, setNewCategory] = useState('');
     const [categories, setCategories] = useState({});
 
-    return (
+    const _saveCategories = async categories => {
+        try {
+            await AsyncStorage.setItem('categories', JSON.stringify(categories));
+            setCategories(categories);
+        } catch (e) {
+            console.error(e);
+        }
+    };
+
+    const _loadCategories = async () => {
+        const loadedCategories = await AsyncStorage.getItem('categories');
+        setCategories(JSON.parse(loadedCategories || '{}'));
+    }
+
+    return isReady? (
         <View>
             <Input
-                value={newCategory} 
                 placeholder="+ Add a Category"
-                newItem={newCategory}
+                value={newCategory}
                 setNewItem={setNewCategory}
                 items={categories}
-                setItems={setCategories} />
+                saveItems={_saveCategories} />
 
             <View width={width-20}>
                 {Object.values(categories).reverse().map(item => (
-                    <Category key={item.id} item={item} items={categories}
-                    setItems={setCategories}
+                    <Category key={item.id} item={item}
+                    items={categories}
+                    saveItems={_saveCategories}
                     placeholder="+ Add a Category" />
                 ))}
             </View>
         </View> 
+    ) : (
+        <AppLoading 
+        startAsync={_loadCategories}
+        onFinish={() => setIsReady(true)}
+        onError={console.error} />
     );
 }
 

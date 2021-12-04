@@ -72,7 +72,6 @@ export const inputStyle = StyleSheet.create({
         borderRadius: 30,
         backgroundColor: '#C0DAB8',
         color: theme.text,
-    
     }
 });
 

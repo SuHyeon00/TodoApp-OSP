@@ -5,16 +5,28 @@ import { inputStyle } from "../styles";
 import {theme} from "../theme";
 import IconButton from "./IconButton";
 
-const Input = ({ placeholder, value, newItem, setNewItem, items, setItems }) => {
+const Input = ({ placeholder, value, setNewItem, items, saveItems, categoryId }) => {
 
-    // add a item
+    // add a item(Schedule or Todo item)
     const _addItem = () => {
+        alert(`Add: ${value}`);
         const ID = Date.now().toString();
         const newItemObject = {
-            [ID]: {id: ID, text: newItem, completed: false},
+            [ID]: {id: ID, text: value, completed: false, categoryId: categoryId },
         };
         setNewItem('');
-        setItems({...items, ...newItemObject});
+        saveItems({...items, ...newItemObject});
+    };
+
+    // add a category
+    const _addCategory = () => {
+        alert(`Add: ${value}`);
+        const ID = Date.now().toString();
+        const newItemObject = {
+            [ID]: {id: ID, text: value },
+        };
+        setNewItem('');
+        saveItems({...items, ...newItemObject});
     };
 
     const _onBlur = () => {
@@ -34,7 +46,7 @@ const Input = ({ placeholder, value, newItem, setNewItem, items, setItems }) => 
                     maxLength={20}
                     value={value} 
                     onChangeText={_handleTextChange}
-                    onSubmitEditing={_addItem}
+                    onSubmitEditing={_addCategory}
                     onBlur={_onBlur}>
                 </TextInput>
         </View>

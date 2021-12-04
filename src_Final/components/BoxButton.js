@@ -48,4 +48,3 @@ BoxButton.propTypes = {
 };
 
 export default BoxButton;
-
