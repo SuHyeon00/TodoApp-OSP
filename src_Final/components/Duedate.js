@@ -1,53 +1,41 @@
 import React, { useState } from "react";
-import { View, Text, TextInput } from "react-native";
-import { theme } from "../theme";
-import PropTypes from 'prop-types';
+import { Button, View, Text } from "react-native";
+import DateTimePickerModal from "react-native-modal-datetime-picker";
 import IconButton from "./IconButton";
 import { images } from "../images";
-import { duedateStyle, inputStyle } from "../styles";  
+import { theme } from "../theme";
+import { ThemeProvider } from "@react-navigation/native";
+import { TouchableOpacity } from "react-native-gesture-handler";
+import { DuedateButtonStyle } from "../styles";
 
+const Duedate = () => {
+  const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
 
-const Duedate = ({ duedate, updateDuedate }) => { 
-    const [isEditing, setIsEditing] = useState(false);
-    const [text, setText] = useState(duedate.text); 
+  const showDatePicker = () => {
+    setDatePickerVisibility(true);
+  };
 
-    const _handleUpdateButtonPress = () => {
-        setIsEditing(true);
-    };
-    const _onSubmitEditing = () => {
-        if (isEditing) {
-            const editedDuedate = Object.assign({}, duedate, {text}); 
-            setIsEditing(false);
-            updateDuedate(editedDuedate);
-        }
-    };
-    const _onBlur = () => {
-        if (isEditing) {
-            setIsEditing(false);
-            setText(duedate.text); 
-        }
-    };
+  const hideDatePicker = () => {
+    setDatePickerVisibility(false);
+  };
 
-    return isEditing ? (
-        <TextInput style={inputStyle.duedateInput}
-            placeholder="+ Set a duedate"
-            value={text}
-            onChangeText={text => setText(text)}
-            onSubmitEditing={_onSubmitEditing}
-            onBlur={_onBlur}/>
-    ) : (
-        <View>
-            <View style={duedateStyle.container}>
-                <Text style ={duedateStyle.contents}>{duedate.text}</Text>
-                <IconButton type={images.update} onPressOut={_handleUpdateButtonPress}/>
-            </View>
+  const handleConfirm = (date) => {
+    console.warn("A date has been picked: ", date);
+    hideDatePicker();
+  };
 
-        </View>
-    )
-}
-
-Duedate.propTypes = {
-    duedate: PropTypes.object.isRequired,  
+  return (
+    <View>
+      <TouchableOpacity onPress={showDatePicker} style={DuedateButtonStyle.button}><Text style={DuedateButtonStyle.text}>DUE DATE</Text>
+        </TouchableOpacity>
+      <DateTimePickerModal
+        isVisible={isDatePickerVisible}
+        mode="date"
+        onConfirm={handleConfirm}
+        onCancel={hideDatePicker}
+      />
+    </View>
+  );
 };
 
 export default Duedate;
