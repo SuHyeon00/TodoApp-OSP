@@ -1,7 +1,10 @@
-import React from 'react';
-import { View, Dimensions } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, Dimensions } from 'react-native';
+import { styles } from '../styles';
 import { theme } from '../theme';
+import PropTypes from 'prop-types';
 import * as Progress from 'react-native-progress';
+import Item from './Item';
 
 const CompletionRate = ({ /* _checkedCount */ items }) => {
     const width = Dimensions.get('window').width;
