@@ -25,6 +25,7 @@ export default function TodoListScreen({navigation}) {
                 {/* Add a Category */}
                 <AddCategory />
             </ScrollView>
+            <ShareExample />
             
             
         </SafeAreaView>
