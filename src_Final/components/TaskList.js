@@ -42,15 +42,13 @@ const TaskList = (categoryId) => {
 
               {text: 'OK', onPress: () => {
                 const currentItems = Object.assign({}, tasks);
-                var array = new Array();
-                for(var i=0;i<array.length;i++){
-                    array[i]=currentItems[id];
-                };
-                for(var i=0;i<array.length;i++){
-                    delete array[i];
+                for(const id in currentItems){
+                    if(currentItems[id]['categoryId'] === categoryId) {
+                        delete currentItems[id];
+                    }
                 }
-                //setItems(array);
-                _saveTasks(array);}}
+                _saveTasks(currentItems);
+              }}
             ]
         );
     }
@@ -58,18 +56,13 @@ const TaskList = (categoryId) => {
     // select all items
     const _selectAll = () => {
         const currentItems = Object.assign({}, tasks);
-        var arr = new Array();
-        for(var i=0; i<arr.length; i++){
-            arr[i]=currentItems[id];
-        };
-        for(var i=0;i<arr.length;i++){
-            arr[i]['completed']=true;
-        };
-        //setItems(arr);
-        _saveTasks(arr);
+        for(const id in currentItems){
+            if(currentItems[id]['categoryId'] === categoryId) {
+                currentItems[id]['completed'] = true;
+            }
+        }
+        _saveTasks(currentItems);
     }
-
-
 
     return isReady? (
         <View>
