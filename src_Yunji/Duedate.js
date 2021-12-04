@@ -1,30 +1,53 @@
-import React, {useState} from 'react';
-import { Text, SafeAreaView, View} from 'react-native';
-import {viewStyles, textStyles} from './styles';
-import Task from './components/Task'
-import Input from './components/Input';
-import { images } from './images';
-import IconButton from './components/IconButton';
-import Memo from './components/Memo';
+import React, { useState } from "react";
+import { View, Text, TextInput } from "react-native";
+import { theme } from "../theme";
+import PropTypes from 'prop-types';
+import IconButton from "./IconButton";
+import { images } from "../images";
+import { duedateStyle, inputStyle } from "../styles";  
 
-const Duedate = () => {
-    return(
-        <SafeAreaView style={{
-            flex:1,
-            backgroundColor: "#ffffff",
-            alignItems: 'center',
-            justifyContent: 'center',
-        }}>
-        <Text style={textStyles.title}>DueDate</Text>
-        <Memo />
-        <View style={{
-            flexDirection: 'row',
-        }}>
-        <IconButton type = {images.check}/>
-        <IconButton type = {images.cancel}/>
+
+const Duedate = ({ duedate, updateDuedate }) => { 
+    const [isEditing, setIsEditing] = useState(false);
+    const [text, setText] = useState(duedate.text); 
+
+    const _handleUpdateButtonPress = () => {
+        setIsEditing(true);
+    };
+    const _onSubmitEditing = () => {
+        if (isEditing) {
+            const editedDuedate = Object.assign({}, duedate, {text}); 
+            setIsEditing(false);
+            updateDuedate(editedDuedate);
+        }
+    };
+    const _onBlur = () => {
+        if (isEditing) {
+            setIsEditing(false);
+            setText(duedate.text); 
+        }
+    };
+
+    return isEditing ? (
+        <TextInput style={inputStyle.duedateInput}
+            placeholder="+ Set a duedate"
+            value={text}
+            onChangeText={text => setText(text)}
+            onSubmitEditing={_onSubmitEditing}
+            onBlur={_onBlur}/>
+    ) : (
+        <View>
+            <View style={duedateStyle.container}>
+                <Text style ={duedateStyle.contents}>{duedate.text}</Text>
+                <IconButton type={images.update} onPressOut={_handleUpdateButtonPress}/>
+            </View>
+
         </View>
-        </SafeAreaView>
-    );
+    )
+}
+
+Duedate.propTypes = {
+    duedate: PropTypes.object.isRequired,  
 };
 
 export default Duedate;
