@@ -63,5 +63,6 @@ app.json 파일에 추가하기
 
 ### Drag and Drop 모듈 설치 관련
 <ul>
+  <li>npm install react-beautiful-dnd</li>
   <li>npm install react-dnd react-dnd-html5-backend</li>  
 </ul>
