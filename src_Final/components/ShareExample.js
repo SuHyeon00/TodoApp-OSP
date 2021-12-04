@@ -1,6 +1,8 @@
 import React from 'react';
-import { Share, View, Button } from 'react-native';
+import { Share, View, Button, Dimensions } from 'react-native';
+import { images } from '../images';
 import { theme } from '../theme';
+import IconButton from './IconButton';
 
 const ShareExample = () => {
   const onShare = async () => {
@@ -24,10 +26,14 @@ const ShareExample = () => {
   };
   return (
     <View style={{ 
-        marginTop: 50,
-        marginBottom: 50,
+        borderRadius: 100/2,
+        backgroundColor: theme.Grey,
+        marginLeft: Dimensions.get('window').width - 60,
+        marginBottom: 10,
+        ustifyContent: 'flex-end',
+        alignItems: 'flex-end',
      }}>
-      <Button onPress={onShare} title="Share" />
+      <IconButton type={images.share} onPressOut={onShare} />
     </View>
   );
 };
