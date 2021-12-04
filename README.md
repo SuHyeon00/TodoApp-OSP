@@ -47,3 +47,8 @@ Open SW Platform Team6 Project
   <li>npm install react-native-progress --save</li>
   <li>expo install react-native-svg</li>
 </ul>
+
+### Duedate 모듈 설치 관련
+<ul>
+  <li>expo install react-native-modal-datetime-picker @react-native-community/datetimepicker</li>
+</ul>
