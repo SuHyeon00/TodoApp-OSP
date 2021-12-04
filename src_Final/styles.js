@@ -37,8 +37,8 @@ export const textStyles = StyleSheet.create({
         fontWeight: '300',
         color: theme.text,
         alignItems: 'flex-start',
-        marginVertical: 8,
-    }
+        marginVertical: 10,
+    },
 });
 
 export const barStyles = StyleSheet.create({
@@ -59,11 +59,11 @@ export const inputStyle = StyleSheet.create({
         backgroundColor: "#E5E5E5",
         color: theme.text,
     },
-    //내가추가
+
     commentInput:{
         fontSize: 15,
         width: Dimensions.get('window').width-30,
-        height: 40,
+        height: 35,
         width: 320,
         marginLeft: 0,
         marginTop: 10,
@@ -72,7 +72,8 @@ export const inputStyle = StyleSheet.create({
         borderRadius: 30,
         backgroundColor: '#C0DAB8',
         color: theme.text,
-    }
+    
+    },
 });
 
 export const categoryStyle = StyleSheet.create({
@@ -86,12 +87,12 @@ export const categoryStyle = StyleSheet.create({
     }
 })
 
-//내가추가
+
 export const commentStyle = StyleSheet.create({
     container: {
         flexDirection: 'row',
         alignItems: 'center',
-        height: 40,
+        height: 35,
         width:320,
         backgroundColor: theme.lightGreen,
         borderRadius: 50,
@@ -104,7 +105,7 @@ export const commentStyle = StyleSheet.create({
 
     contents: {
         flex: 1,
-        fontSize: 20,
+        fontSize: 15,
         color: theme.text,
     }
 })
@@ -126,3 +127,19 @@ export const taskStyle = StyleSheet.create({
         color: theme.text,
     },
 });
+
+export const DuedateButtonStyle = StyleSheet.create({
+    button: {
+        width: 70,
+        height: 30,
+        backgroundColor: theme.lightGreen,
+        justifyContent: "center",
+        alignItems: "center",
+        borderRadius: 20,
+    },
+
+    text: {
+        fontSize: 12,
+        color: theme.itemBackground,
+    }
+})
