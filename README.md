@@ -66,3 +66,8 @@ app.json 파일에 추가하기
   <li>npm install react-beautiful-dnd (혹은) npm install react-dnd</li>
   <li>react-dnd-html5-backend</li>  
 </ul>
+
+### 이미지 모듈 설치 관련
+<ul>
+  <li>expo install expo-image-picker</li>
+</ul>
