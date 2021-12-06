@@ -123,6 +123,7 @@ export const taskStyle = StyleSheet.create({
         flex: 1,
         fontSize: 20,
         color: theme.text,
+        marginTop: 3,
     },
 });
 
