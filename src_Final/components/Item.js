@@ -5,7 +5,7 @@ import IconButton from "./IconButton";
 import { images } from "../images";
 import { inputStyle, taskStyle } from "../styles";
 import { TextInput } from "react-native-gesture-handler";
-import ModalScreen from "../../navigation/screens/ModalScreen";
+import Duedate from "./Duedate";
 
 const Item = ({ item, items, saveItems, categoryId , placeholder }) => {
 
@@ -80,7 +80,7 @@ const Item = ({ item, items, saveItems, categoryId , placeholder }) => {
                 {color: (item.completed ? theme.done : theme.text)},
                 {textDecorationLine: (item.completed ? 'line-through' : 'none')}]}>
                 {item.text}</Text>
-            {(placeholder === "+ Add a schedule") || <ModalScreen />}
+            {(placeholder === "+ Add a schedule") || <Duedate />}
             {item.completed || (<IconButton type={images.update}
                 onPressOut={_handleUpdateButtonPress}/>)}
             <IconButton type={images.delete} id={item.id} onPressOut={_deleteItem} />
