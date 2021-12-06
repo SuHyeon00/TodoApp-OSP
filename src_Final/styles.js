@@ -53,7 +53,7 @@ export const inputStyle = StyleSheet.create({
         width: Dimensions.get('window').width-30,
         height: 40,
         marginLeft: 3,
-        marginBottom: 10,
+        marginBottom: 5,
         paddingLeft: 15,
         borderRadius: 10,
         backgroundColor: "#E5E5E5",
@@ -85,6 +85,7 @@ export const categoryStyle = StyleSheet.create({
     }
 });
 
+
 export const commentStyle = StyleSheet.create({
     container: {
         flexDirection: 'row',
@@ -114,14 +115,14 @@ export const taskStyle = StyleSheet.create({
         backgroundColor: theme.itemBackground,
         marginLeft: 3,
         borderRadius: 10,
+        marginBottom: 5,
         width: Dimensions.get('window').width-30,
     },
 
     contents: {
         flex: 1,
-        fontSize: 18,
+        fontSize: 20,
         color: theme.text,
-        marginTop: 3.2,
     },
 });
 
