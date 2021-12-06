@@ -8,7 +8,7 @@ import { TextInput } from "react-native-gesture-handler";
 import Duedate from "./Duedate";
 import CommentInput from "./CommentInput";
 
-const Item = ({ item, items, saveItems, categoryId , placeholder }) => {
+const Item = ({ item, items, saveItems, categoryId, placeholder }) => {
 
     const [showVisible, setShowVisible] = useState(false);
 
@@ -60,7 +60,10 @@ const Item = ({ item, items, saveItems, categoryId , placeholder }) => {
         if (isEditing) {
             const editedItem = Object.assign({}, item, {text});
             setIsEditing(false);
-            _updateItem(editedItem);
+            if(text != '')
+                _updateItem(editedItem);
+            else
+                alert("Error!");
         }
     };
 
