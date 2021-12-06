@@ -7,6 +7,7 @@ import plus from '../assets/plus.png';
 import Comment from '../assets/comments.png'; 
 import deleteAll from '../assets/deleteAll.png';
 import selectAll from '../assets/selectAll.png'
+import picture from '../assets/picture.png';
 
 export const images = {
     uncompleted: UncheckedBox,
@@ -18,4 +19,5 @@ export const images = {
     comment : Comment,
     deleteAll: deleteAll,
     selectAll: selectAll,
+    picture: picture
 };
