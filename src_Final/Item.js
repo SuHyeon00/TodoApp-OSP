@@ -1,13 +1,12 @@
 import React, { useState } from "react";
-import { View, Text, Alert } from "react-native";
+import { View, Text, Alert, TouchableOpacity } from "react-native";
 import { theme } from "../theme";
 import IconButton from "./IconButton";
 import { images } from "../images";
 import { inputStyle, taskStyle } from "../styles";
 import { TextInput } from "react-native-gesture-handler";
-//import ModalScreen from "../../navigation/screens/ModalScreen";
-import DueDate from './DueDate';
-import Picture from './Picture';
+import Duedate from "./Duedate";
+import CommentInput from "./CommentInput";
 
 const Item = ({ item, items, saveItems, categoryId , placeholder }) => {
 
@@ -73,21 +72,25 @@ const Item = ({ item, items, saveItems, categoryId , placeholder }) => {
             onSubmitEditing={_onSubmitEditing}
             onBlur={_onBlur}/>
     ) : (
-        <View style={taskStyle.container}>
-            <IconButton type = {item.completed ? images.completed : images.uncompleted}
-                id = {item.id}
-                onPressOut = {_toggleItem}
-                completed = {item.completed} />
-            <Text style ={[taskStyle.contents,
-                {color: (item.completed ? theme.done : theme.text)},
-                {textDecorationLine: (item.completed ? 'line-through' : 'none')}]}>
-                {item.text}</Text>
-            {(placeholder === "+ Add a schedule") || <DueDate />}
-            <Picture />
-            {item.completed || (<IconButton type={images.update}
-                onPressOut={_handleUpdateButtonPress}/>)}
-            <IconButton type={images.delete} id={item.id} onPressOut={_deleteItem} />
-            
+        <View>
+            <View style={taskStyle.container}>
+                <IconButton type = {item.completed ? images.completed : images.uncompleted}
+                    id = {item.id}
+                    onPressOut = {_toggleItem}
+                    completed = {item.completed} />
+                <TouchableOpacity style={taskStyle.contents} onPress={() => {
+                    <CommentInput />}}>
+                    <Text style ={[taskStyle.contents,
+                        {color: (item.completed ? theme.done : theme.text)},
+                        {textDecorationLine: (item.completed ? 'line-through' : 'none')}]}>
+                    {item.text}</Text>
+                </TouchableOpacity>
+                {(placeholder === "+ Add a schedule") || 
+                                <Duedate items={item} items={items} saveItems={saveItems} />}
+                {item.completed || (<IconButton type={images.update}
+                    onPressOut={_handleUpdateButtonPress}/>)}
+                <IconButton type={images.delete} id={item.id} onPressOut={_deleteItem} />
+            </View>
         </View>
     )
 }
