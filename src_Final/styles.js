@@ -27,10 +27,10 @@ export const textStyles = StyleSheet.create({
     },
     category: {
         fontSize: 20,
-        fontWeight: '600',
+        fontWeight: 'bold',
         color: theme.text,
         alignItems: 'flex-start',
-        marginVertical: 10,
+        marginVertical: 3,
     },
     comment:{
         fontSize: 15,
@@ -82,11 +82,8 @@ export const categoryStyle = StyleSheet.create({
         alignItems: 'center',
         justifyContent:'flex-start',
         paddingLeft: 5,
-        marginTop: 3,
-        marginLeft: 0,
     }
-})
-
+});
 
 export const commentStyle = StyleSheet.create({
     container: {
@@ -115,16 +112,16 @@ export const taskStyle = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         backgroundColor: theme.itemBackground,
+        marginLeft: 3,
         borderRadius: 10,
-        paddingLeft: 5,
-        marginTop: 3,
-        marginLeft: 0,
+        width: Dimensions.get('window').width-30,
     },
 
     contents: {
         flex: 1,
-        fontSize: 20,
+        fontSize: 18,
         color: theme.text,
+        marginTop: 3.2,
     },
 });
 
