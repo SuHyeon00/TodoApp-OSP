@@ -10,6 +10,8 @@ import CommentInput from "./CommentInput";
 
 const Item = ({ item, items, saveItems, categoryId , placeholder }) => {
 
+    const [showVisible, setShowVisible] = useState(false);
+
     // delete a item
     const _deleteItem = id => {
         Alert.alert(
@@ -38,6 +40,13 @@ const Item = ({ item, items, saveItems, categoryId , placeholder }) => {
         const currentItems = Object.assign({}, items);
         currentItems[item.id] = item;
         saveItems(currentItems);
+    };
+
+    const _showVisible = () => {
+        setShowVisible(!showVisible);
+        return showVisible? (
+            <CommentInput />
+        ) : (null)
     };
 
     const [isEditing, setIsEditing] = useState(false);
@@ -80,8 +89,7 @@ const Item = ({ item, items, saveItems, categoryId , placeholder }) => {
                     completed = {item.completed} />
                 
                 {/* Comment Input 기능 작동 안 하는 부분 */}
-                <TouchableOpacity style={taskStyle.contents} onPress={() => {
-                    <CommentInput />}}>
+                <TouchableOpacity style={taskStyle.contents} onPress={_showVisible}>
                     <Text style ={[taskStyle.contents,
                         {color: (item.completed ? theme.done : theme.text)},
                         {textDecorationLine: (item.completed ? 'line-through' : 'none')}]}>
