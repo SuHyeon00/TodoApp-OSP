@@ -6,20 +6,12 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import { DuedateButtonStyle } from "../styles";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const Duedate = () => {
+const Duedate = ({ item, items, saveItems }) => {
   
-  const [date, setDate] = useState(new Date());
+  const [currentDate, setCurrentDate] = useState(new Date());
+  // const [dates, setDates] = useState({});
 
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
-
-  const _saveDuedate = async date => {
-    try{
-      await AsyncStorage.setDate('date',JSON.stringify(date));
-      setDate(date);
-    }catch(e){
-      console.error(e);
-    }
-  };
 
   const showDatePicker = () => {
     setDatePickerVisibility(true);
@@ -30,19 +22,31 @@ const Duedate = () => {
   };
 
   const handleConfirm = (date) => {
-    setDate(date);  //내가추가
-    //console.warn("A date has been picked: ", date);
+    setCurrentDate(date);
+    // 아래 코드를 실행 시에 오류가 발생합니다!!
+    // const currentItems = Object.assign({}, items);
+    // currentItems[item.id]['Date'] = date;
     hideDatePicker();
   };
 
+  const _saveDates = async dates => {
+    try {
+      await AsyncStorage.setItem('dates', JSON.stringify(dates));
+      setDates(dates);
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
   return (
     <View>
-      <TouchableOpacity onPress={showDatePicker} style={DuedateButtonStyle.button}><Text style={DuedateButtonStyle.text}>DUE DATE</Text>
-        </TouchableOpacity>
+      <TouchableOpacity onPress={showDatePicker} style={DuedateButtonStyle.button}>
+        <Text style={DuedateButtonStyle.text}>DUE DATE</Text>
+      </TouchableOpacity>
       <DateTimePickerModal
         isVisible={isDatePickerVisible}
         mode="date"
-        date={date}
+        date={currentDate}
         onConfirm={handleConfirm}
         onCancel={hideDatePicker}
       />
