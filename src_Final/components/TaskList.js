@@ -19,7 +19,7 @@ const TaskList = (categoryId) => {
 
     const _saveTasks = async tasks => {
         try {
-            await AsyncStorage.setItem('tasks', JSON.stringify(tasks));
+            await AsyncStorage.setItem(JSON.stringify(categoryId) , JSON.stringify(tasks));
             setTasks(tasks);
         } catch (e) {
             console.error(e);
@@ -27,7 +27,7 @@ const TaskList = (categoryId) => {
     };
 
     const _loadTasks = async () => {
-        const loadedTasks = await AsyncStorage.getItem('tasks');
+        const loadedTasks = await AsyncStorage.getItem(JSON.stringify(categoryId));
         setTasks(JSON.parse(loadedTasks || '{}'));
     };
     
@@ -42,9 +42,7 @@ const TaskList = (categoryId) => {
               {text: 'OK', onPress: () => {
                 const currentItems = Object.assign({}, tasks);
                 for(const id in currentItems){
-                    if(currentItems[id]['categoryId'] === categoryId) {
-                        delete currentItems[id];
-                    }
+                    delete currentItems[id];
                 }
                 _saveTasks(currentItems);
               }}
@@ -57,17 +55,9 @@ const TaskList = (categoryId) => {
         const currentItems = Object.assign({}, tasks);
 
         for(const id in currentItems){
-            if(currentItems[id]['categoryId'] === categoryId) {
-                currentItems[id]['completed'] = true;
-            }
+            currentItems[id]['completed'] = true;
         }
         _saveTasks(currentItems);
-    }
-
-    const _changeOrder = () => {
-        const currentItems = Object.assign({}, tasks);
-
-        
     }
 
     return isReady? (
@@ -83,25 +73,23 @@ const TaskList = (categoryId) => {
                 
 
             <View style={{marginBottom: 10}} width={width-20}>
+                <View style={{flexDirection: 'row', paddingHorizontal: 10}}>
+                    <IconButton type={images.deleteAll} onPressOut={_deleteAll} />
+                    <Text style={textStyles.comment}>delete all</Text>
+        
+                    <IconButton type={images.selectAll} onPressOut={_selectAll} />
+                    <Text style={textStyles.comment}>select all</Text>
+        
+                    <IconButton type={images.sort} onPressOut={_selectAll} />
+                    <Text style={textStyles.comment}>change order</Text>
+                </View>
+                
                 {Object.values(tasks).reverse().map(item => (
-                    <View>
-                        <View style={{flexDirection: 'row', paddingHorizontal: 10}}>
-                            <IconButton key='deleteAll' type={images.deleteAll} onPressOut={_deleteAll} />
-                            <Text key='delete_all' style={textStyles.comment}>delete all</Text>
-    
-                            <IconButton key='selectAll' type={images.selectAll} onPressOut={_selectAll} />
-                            <Text key='select_all' style={textStyles.comment}>select all</Text>
-    
-                            <IconButton key='changeOrder' type={images.sort} onPressOut={_selectAll} />
-                            <Text key='change_order' style={textStyles.comment}>change order</Text>
-                        </View>
-                        <Item key={item.id} item={item}
-                            items={tasks}
-                            saveItems={_saveTasks}
-                            categoryId={categoryId}
-                            placeholder="+ Add a task" />
-                    </View>
-                    
+                   <Item key={item.id} item={item}
+                        items={tasks}
+                        saveItems={_saveTasks}
+                        categoryId={categoryId}
+                        placeholder="+ Add a task" />
                 ))}
             </View>
         </View> 
