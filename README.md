@@ -71,3 +71,8 @@ app.json 파일에 추가하기
 <ul>
   <li>expo install expo-image-picker</li>
 </ul>
+
+### Timer 모듈 설치 관련
+<ul>
+  <li>npm install @react-native-community/datetimepicker --save</li>
+</ul>
