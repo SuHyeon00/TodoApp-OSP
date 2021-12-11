@@ -1,5 +1,5 @@
 import React from 'react';
-import { Share, View, Button, Dimensions } from 'react-native';
+import { Share, View, Dimensions } from 'react-native';
 import { images } from '../images';
 import { theme } from '../theme';
 import IconButton from './IconButton';
@@ -27,10 +27,11 @@ const ShareExample = () => {
   return (
     <View style={{ 
         borderRadius: 100/2,
-        backgroundColor: theme.Grey,
-        marginLeft: Dimensions.get('window').width - 60,
-        marginBottom: 10,
-        ustifyContent: 'flex-end',
+        backgroundColor: theme.lightGreen,
+        marginTop: 0,
+        marginBottom: 5,
+        marginLeft: Dimensions.get('window').width - 250,
+        justifyContent: 'flex-end',
         alignItems: 'flex-end',
      }}>
       <IconButton type={images.share} onPressOut={onShare} />

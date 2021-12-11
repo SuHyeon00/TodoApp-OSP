@@ -3,7 +3,6 @@ import { Dimensions, View } from 'react-native';
 import Input from './Input';
 import Item from './Item';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import PropTypes from 'prop-types';
 import AppLoading from 'expo-app-loading';
 
 const ScheduleList = () => {

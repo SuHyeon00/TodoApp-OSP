@@ -56,8 +56,8 @@ const Category = ({ item, items, placeholder, saveItems }) => {
 
     return isEditing ? (
         <View style={{flexDirection: 'row'}}>
-                <IconButton type = {images.addCategory} />
-                <TextInput style={inputStyle.textInput}
+                <IconButton type = {images.addCategory} style={categoryStyle.addIcon} />
+                <TextInput style={{fontSize: 20}}
                     placeholder={placeholder}
                     placeholderTextColor= {theme.main}
                     maxLength={20}
@@ -73,7 +73,7 @@ const Category = ({ item, items, placeholder, saveItems }) => {
                 <IconButton type={images.update} onPressOut={_handleUpdateButtonPress}/>
                 <IconButton type={images.delete} id={item.id} onPressOut={_deleteItem} />
             </View>
-            {/* 카테고리별로 태스크 저장하는 ID값 다르게 해야할 듯 */}
+            
             <TaskList categoryId={item.id} />
 
         </View>

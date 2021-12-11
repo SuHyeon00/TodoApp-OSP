@@ -7,8 +7,9 @@ import { inputStyle, taskStyle } from "../styles";
 import { TextInput } from "react-native-gesture-handler";
 import Duedate from "./Duedate";
 import CommentInput from "./CommentInput";
+import Picture from './Picture';
 
-const Item = ({ item, items, saveItems, categoryId, placeholder }) => {
+const Item = ({ item, items, saveItems, placeholder }) => {
 
     const [showVisible, setShowVisible] = useState(false);
 
@@ -23,7 +24,8 @@ const Item = ({ item, items, saveItems, categoryId, placeholder }) => {
               {text: 'OK', onPress: () => {
                 const currentItems = Object.assign({}, items);
                 delete currentItems[id];
-                saveItems(currentItems);}}
+                saveItems(currentItems);}
+              }
             ]
           );
     };
@@ -99,7 +101,8 @@ const Item = ({ item, items, saveItems, categoryId, placeholder }) => {
                     {item.text}</Text>
                 </TouchableOpacity>
                 {(placeholder === "+ Add a schedule") || 
-                                <Duedate items={item} items={items} saveItems={saveItems} />}
+                                <Duedate task={item} tasks={items} saveTasks={saveItems} />}
+                <Picture />
                 {item.completed || (<IconButton type={images.update}
                     onPressOut={_handleUpdateButtonPress}/>)}
                 <IconButton type={images.delete} id={item.id} onPressOut={_deleteItem} />

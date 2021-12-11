@@ -4,6 +4,7 @@ import {viewStyles, textStyles, barStyles} from '../../src_Final/styles';
 import CalendarWeek from '../../src_Final/components/CalendarWeek';
 import ScheduleList from '../../src_Final/components/ScheduleList';
 import AddCategory from '../../src_Final/components/AddCategory';
+import ShareExample from '../../src_Final/components/ShareExample';
 
 export default function TodoListScreen({navigation}) {
 
@@ -15,7 +16,10 @@ export default function TodoListScreen({navigation}) {
 
             <ScrollView>
                 <View>
-                    <Text style={textStyles.category}>-- Today's Schedule</Text>
+                    <View style={{flexDirection: 'row'}}>
+                        <Text style={textStyles.schedule}> Today's Schedule</Text>
+                        <ShareExample />
+                    </View>
                     {/* Schedule List */}
                     <ScheduleList />
                 </View>
@@ -25,9 +29,6 @@ export default function TodoListScreen({navigation}) {
                 {/* Add a Category */}
                 <AddCategory />
             </ScrollView>
-            <ShareExample />
-            
-            
         </SafeAreaView>
     );
 }

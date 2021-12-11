@@ -1,20 +1,25 @@
 import React from "react";
 import { View, TextInput } from "react-native";
 import { images } from "../images";
-import { inputStyle } from "../styles";
+import { categoryStyle, inputStyle } from "../styles";
 import {theme} from "../theme";
 import IconButton from "./IconButton";
+import ShareExample from "./ShareExample";
 
-const Input = ({ placeholder, value, setNewItem, items, saveItems, categoryId }) => {
+const Input = ({ placeholder, value, setNewItem, items, saveItems }) => {
 
     // add a item(Schedule or Todo item)
     const _addItem = () => {
-        const ID = Date.now().toString();
-        const newItemObject = {
-            [ID]: {id: ID, text: value, completed: false, categoryId: categoryId },
-        };
-        setNewItem('');
-        saveItems({...items, ...newItemObject});
+        if(value != '') {
+            const ID = Date.now().toString();
+            const d = new Date();
+            const newItemObject = {
+                [ID] : { id: ID, text: value, completed: false, dueDate: d.toLocaleDateString() }, // 데이트 저장하는 부분 따로 안 두고 ID값으로 불러와도 될 듯?!
+            };
+            setNewItem('');
+            saveItems({...items, ...newItemObject});
+            console.log(d.toLocaleDateString());
+        }
     };
 
     // add a category
@@ -36,9 +41,9 @@ const Input = ({ placeholder, value, setNewItem, items, saveItems, categoryId })
     };
 
     return placeholder === "+ Add a Category" ? (
-        <View style={{flexDirection: 'row'}}>
+        <View style={{flexDirection: 'row', paddingTop: 5}}>
                 <IconButton type = {images.addCategory} />
-                <TextInput
+                <TextInput style={inputStyle.categoryInput}
                     placeholder={placeholder}
                     placeholderTextColor= {theme.main}
                     maxLength={20}

@@ -7,6 +7,7 @@ import Item from './Item';
 import IconButton from './IconButton';
 import { images } from '../images';
 import { textStyles } from '../styles';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const TaskList = (categoryId) => {
     const width = Dimensions.get('window').width;
@@ -62,7 +63,7 @@ const TaskList = (categoryId) => {
         _saveTasks(currentItems);
     }
 
-    // sort todo items in terms of the added date
+    // sort todo items in terms of the added date or due date
     const _sortByDate = () => {
         setIsSorted(true);
         
@@ -100,16 +101,22 @@ const TaskList = (categoryId) => {
                 />
                 
 
-            <View style={{marginBottom: 10}} width={width-20}>
-                <View style={{flexDirection: 'row', paddingHorizontal: 10}}>
-                    <IconButton type={images.deleteAll} onPressOut={_deleteAll} />
-                    <Text style={textStyles.comment}>delete all</Text>
-        
-                    <IconButton type={images.selectAll} onPressOut={_selectAll} />
-                    <Text style={textStyles.comment}>select all</Text>
-        
-                    <IconButton type={images.sort} onPressOut={_sortByDate} />
-                    <Text style={textStyles.comment}>change order</Text>
+            <View style={{marginBottom: 10, width: width-40}}>
+                <View style={{flexDirection: 'row', justifyContent: 'space-around',}}>
+                    <TouchableOpacity style={{flexDirection: 'row'}} onPressOut={_deleteAll}>
+                        <IconButton type={images.deleteAll}/>
+                        <Text style={textStyles.comment}>delete all</Text>
+                    </TouchableOpacity>
+
+                    <TouchableOpacity style={{flexDirection: 'row'}} onPressOut={_selectAll}>
+                        <IconButton type={images.selectAll}/>
+                        <Text style={textStyles.comment}>select all</Text>
+                    </TouchableOpacity>
+
+                    <TouchableOpacity style={{flexDirection: 'row'}} onPressOut={_sortByDate}>
+                        <IconButton type={images.sort}/>
+                        <Text style={textStyles.comment}>change order</Text>
+                    </TouchableOpacity>
                 </View>
                 
                 {Object.values(tasks).reverse().map(item => (

@@ -6,10 +6,9 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import { DuedateButtonStyle } from "../styles";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const Duedate = ({ item, items, saveItems }) => {
+const Duedate = ({ task, tasks, saveTasks }) => {
   
-  const [currentDate, setCurrentDate] = useState(new Date());
-  // const [dates, setDates] = useState({});
+  const [currentDate, setCurrentDate] = useState(new Date(task.dueDate));
 
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
 
@@ -23,12 +22,13 @@ const Duedate = ({ item, items, saveItems }) => {
 
   const handleConfirm = (date) => {
     setCurrentDate(date);
-    // 아래 코드를 실행 시에 오류가 발생합니다!!
-    // const currentItems = Object.assign({}, items);
-    // currentItems[item.id]['Date'] = date;
+    const currentItems = Object.assign({}, tasks);
+    currentItems[task.id]['dueDate'] = date.toLocaleDateString();
+    saveTasks(currentItems);
     hideDatePicker();
   };
 
+  /*
   const _saveDates = async dates => {
     try {
       await AsyncStorage.setItem('dates', JSON.stringify(dates));
@@ -37,6 +37,7 @@ const Duedate = ({ item, items, saveItems }) => {
       console.error(e);
     }
   }
+  */
 
   return (
     <View>

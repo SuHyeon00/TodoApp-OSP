@@ -42,15 +42,11 @@ export default function MainContainer() {
                         }
 
                         return <Ionicons name={iconName} size={size} color={color}/>
-                    },})
-                }
-                tabBarOptions={{
-                    activeTintColor: theme.main,
-                    inactiveTintColor: theme.Grey,
-                    labelStyle: { paddingBottom: 5, fontSize: 10 },
-                    style: { height: 100 }
-                }}
-            >
+                    },
+                    tabBarActiveTintColor: theme.main,
+                    tabBarInactiveTintColor: theme.Grey,
+                    tabBarLabelStyle: { paddingBottom: 5, fontSize: 10},
+                })}>
 
                 <Tab.Screen name={todoListName} component={TodoListScreen} />
                 <Tab.Screen name={calendarName} component={CalendarScreen} />

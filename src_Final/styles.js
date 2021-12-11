@@ -25,6 +25,13 @@ export const textStyles = StyleSheet.create({
         marginTop: 30,
         marginLeft: 0,
     },
+    schedule: {
+        fontSize: 23,
+        fontWeight: 'bold',
+        color: theme.text,
+        alignItems: 'flex-start',
+        marginVertical: 3,
+    },
     category: {
         fontSize: 20,
         fontWeight: 'bold',
@@ -37,7 +44,7 @@ export const textStyles = StyleSheet.create({
         fontWeight: '300',
         color: theme.text,
         alignItems: 'flex-start',
-        marginVertical: 10,
+        marginVertical: 12,
     },
 });
 
@@ -74,6 +81,12 @@ export const inputStyle = StyleSheet.create({
         color: theme.text,
     
     },
+
+    categoryInput: {
+        marginTop: 8,
+        paddingBottom: 10,
+        fontSize: 18,
+    }
 });
 
 export const categoryStyle = StyleSheet.create({
@@ -82,7 +95,7 @@ export const categoryStyle = StyleSheet.create({
         alignItems: 'center',
         justifyContent:'flex-start',
         paddingLeft: 5,
-    }
+    },
 });
 
 
@@ -123,7 +136,7 @@ export const taskStyle = StyleSheet.create({
         flex: 1,
         fontSize: 20,
         color: theme.text,
-        marginTop: 3,
+        marginTop: 4,
     },
 });
 

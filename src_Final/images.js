@@ -6,7 +6,9 @@ import addCategory from '../assets/folder-plus.png';
 import plus from '../assets/plus.png';
 import Comment from '../assets/comments.png'; 
 import deleteAll from '../assets/deleteAll.png';
-import selectAll from '../assets/selectAll.png'
+import selectAll from '../assets/selectAll.png';
+import sort from '../assets/sort.png';
+import share from '../assets/share.png';
 import picture from '../assets/picture.png';
 
 export const images = {
@@ -19,5 +21,7 @@ export const images = {
     comment : Comment,
     deleteAll: deleteAll,
     selectAll: selectAll,
+    sort: sort,
+    share: share,
     picture: picture
 };

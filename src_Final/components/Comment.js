@@ -1,15 +1,11 @@
 import React, { useState } from "react";
 import { View, Text, TextInput } from "react-native";
-import { theme } from "../theme";
 import PropTypes from 'prop-types';
 import IconButton from "./IconButton";
 import { images } from "../images";
-import Input from "./Input";
-import { commentStyle, inputStyle } from "../styles";  
-import CommentInput from "./CommentInput";
-import Item from "./Item";
+import { commentStyle, inputStyle } from "../styles";
 
-const Comment = ({ setComments,comments, setNewComment, comment, deleteComment, updateComment }) => { //c->i
+const Comment = ({ comment, deleteComment, updateComment }) => { //c->i
     const [isEditing, setIsEditing] = useState(false);
     const [text, setText] = useState(comment.text); //c->i
 
