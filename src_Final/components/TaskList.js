@@ -17,6 +17,8 @@ const TaskList = (categoryId) => {
     const [newTask, setNewTask] = React.useState('');
     const [tasks, setTasks] = React.useState({});
 
+    const [isSorted, setIsSorted] = React.useState(false);
+
     const _saveTasks = async tasks => {
         try {
             await AsyncStorage.setItem(JSON.stringify(categoryId) , JSON.stringify(tasks));
@@ -60,6 +62,33 @@ const TaskList = (categoryId) => {
         _saveTasks(currentItems);
     }
 
+    // sort todo items in terms of the added date
+    const _sortByDate = () => {
+        setIsSorted(true);
+        
+        const currentTasks = Object.assign({}, tasks);
+        const arr = Object.values(currentTasks);
+        if(isSorted === false){
+            var sortedArray;
+            sortedArray = arr.sort(function(x, y) {
+                return(x.dueDate > y.dueDate ? -1 : 0);
+            });
+            console.log(sortedArray);
+            setTasks({...sortedArray});
+            setIsSorted(true);
+        }
+        else{
+            var unsortedArray;
+            unsortedArray = arr.sort(function(x, y) {
+                return(x.id > y.id ? 1 : x.id < y.id ? -1 : 0);
+            });
+            console.log(unsortedArray);
+            setTasks({...unsortedArray});
+            setIsSorted(false);
+        }      
+    };
+
+
     return isReady? (
         <View>
             <Input
@@ -68,7 +97,6 @@ const TaskList = (categoryId) => {
                 setNewItem={setNewTask}
                 items={tasks}
                 saveItems={_saveTasks}
-                categoryId={categoryId}
                 />
                 
 
@@ -80,7 +108,7 @@ const TaskList = (categoryId) => {
                     <IconButton type={images.selectAll} onPressOut={_selectAll} />
                     <Text style={textStyles.comment}>select all</Text>
         
-                    <IconButton type={images.sort} onPressOut={_selectAll} />
+                    <IconButton type={images.sort} onPressOut={_sortByDate} />
                     <Text style={textStyles.comment}>change order</Text>
                 </View>
                 
@@ -88,7 +116,6 @@ const TaskList = (categoryId) => {
                    <Item key={item.id} item={item}
                         items={tasks}
                         saveItems={_saveTasks}
-                        categoryId={categoryId}
                         placeholder="+ Add a task" />
                 ))}
             </View>
