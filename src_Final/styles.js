@@ -66,22 +66,6 @@ export const inputStyle = StyleSheet.create({
         backgroundColor: "#E5E5E5",
         color: theme.text,
     },
-
-    commentInput:{
-        fontSize: 15,
-        width: Dimensions.get('window').width-30,
-        height: 35,
-        width: 320,
-        marginLeft: 0,
-        marginTop: 10,
-        marginBottom: 3,
-        paddingLeft: 15,
-        borderRadius: 30,
-        backgroundColor: '#C0DAB8',
-        color: theme.text,
-    
-    },
-
     categoryInput: {
         marginTop: 8,
         paddingBottom: 10,
@@ -104,9 +88,9 @@ export const commentStyle = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         height: 35,
-        width:320,
+        width:Dimensions.get('window').width-70,
         backgroundColor: theme.lightGreen,
-        borderRadius: 50,
+        borderRadius: 30,
         justifyContent:'flex-start',
         paddingLeft: 15,
         marginTop: 4,
@@ -154,4 +138,4 @@ export const DuedateButtonStyle = StyleSheet.create({
         fontSize: 12,
         color: theme.itemBackground,
     }
-})
+});

@@ -11,7 +11,7 @@ import Picture from './Picture';
 
 const Item = ({ item, items, saveItems, placeholder }) => {
 
-    const [showVisible, setShowVisible] = useState(false);
+    const [showCommentVisible, setShowCommentVisible] = useState(false);
 
     // delete a item
     const _deleteItem = id => {
@@ -45,10 +45,7 @@ const Item = ({ item, items, saveItems, placeholder }) => {
     };
 
     const _showVisible = () => {
-        setShowVisible(!showVisible);
-        return showVisible? (
-            <CommentInput />
-        ) : (null)
+        setShowCommentVisible(!showCommentVisible);
     };
 
     const [isEditing, setIsEditing] = useState(false);
@@ -93,20 +90,24 @@ const Item = ({ item, items, saveItems, placeholder }) => {
                     onPressOut = {_toggleItem}
                     completed = {item.completed} />
                 
-                {/* Comment Input 기능 작동 안 하는 부분 */}
                 <TouchableOpacity style={taskStyle.contents} onPress={_showVisible}>
                     <Text style ={[taskStyle.contents,
                         {color: (item.completed ? theme.done : theme.text)},
                         {textDecorationLine: (item.completed ? 'line-through' : 'none')}]}>
                     {item.text}</Text>
                 </TouchableOpacity>
-                {(placeholder === "+ Add a schedule") || 
-                                <Duedate task={item} tasks={items} saveTasks={saveItems} />}
+
+                {/* 메인 화면 날짜별로 연동되도록 바꾸면 스케줄은 Duedate 필요 없어서 나중에 코드 아래 각주처리한걸로 바꾸기
+                {placeholder === "+ Add a schedule" || <Duedate task={item} tasks={items} saveTasks={saveItems}/>}
+                */}
+                <Duedate text={placeholder === "+ Add a task" ? ("DUE DATE") : ("SET DATE")} task={item} tasks={items} saveTasks={saveItems} />
                 <Picture />
                 {item.completed || (<IconButton type={images.update}
                     onPressOut={_handleUpdateButtonPress}/>)}
                 <IconButton type={images.delete} id={item.id} onPressOut={_deleteItem} />
-            </View>
+                </View>
+                {showCommentVisible ? ( <CommentInput /> ) : null}
+                
         </View>
     )
 }

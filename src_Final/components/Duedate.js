@@ -5,8 +5,9 @@ import { ThemeProvider } from "@react-navigation/native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { DuedateButtonStyle } from "../styles";
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import moment from "moment";
 
-const Duedate = ({ task, tasks, saveTasks }) => {
+const Duedate = ({ text, task, tasks, saveTasks }) => {
   
   const [currentDate, setCurrentDate] = useState(new Date(task.dueDate));
 
@@ -23,7 +24,7 @@ const Duedate = ({ task, tasks, saveTasks }) => {
   const handleConfirm = (date) => {
     setCurrentDate(date);
     const currentItems = Object.assign({}, tasks);
-    currentItems[task.id]['dueDate'] = date.toLocaleDateString();
+    currentItems[task.id]['dueDate'] = moment(date).format('YYYY-MM-DD');
     saveTasks(currentItems);
     hideDatePicker();
   };
@@ -42,7 +43,7 @@ const Duedate = ({ task, tasks, saveTasks }) => {
   return (
     <View>
       <TouchableOpacity onPress={showDatePicker} style={DuedateButtonStyle.button}>
-        <Text style={DuedateButtonStyle.text}>DUE DATE</Text>
+        <Text style={DuedateButtonStyle.text}>{text}</Text>
       </TouchableOpacity>
       <DateTimePickerModal
         isVisible={isDatePickerVisible}

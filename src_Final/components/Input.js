@@ -1,10 +1,10 @@
+import moment from "moment";
 import React from "react";
 import { View, TextInput } from "react-native";
 import { images } from "../images";
-import { categoryStyle, inputStyle } from "../styles";
+import { inputStyle } from "../styles";
 import {theme} from "../theme";
 import IconButton from "./IconButton";
-import ShareExample from "./ShareExample";
 
 const Input = ({ placeholder, value, setNewItem, items, saveItems }) => {
 
@@ -14,11 +14,11 @@ const Input = ({ placeholder, value, setNewItem, items, saveItems }) => {
             const ID = Date.now().toString();
             const d = new Date();
             const newItemObject = {
-                [ID] : { id: ID, text: value, completed: false, dueDate: d.toLocaleDateString() }, // 데이트 저장하는 부분 따로 안 두고 ID값으로 불러와도 될 듯?!
+                [ID] : { id: ID, text: value, completed: false, 
+                    date:`${moment().format('YYYY-MM-DD')}`, dueDate: d.toLocaleDateString() }, // 스케줄 관리할 때 date 변경 가능하도록 세팅해야할 듯
             };
             setNewItem('');
             saveItems({...items, ...newItemObject});
-            console.log(d.toLocaleDateString());
         }
     };
 

@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useState } from 'react';
 import { images } from '../images';
 import IconButton from './IconButton';
-import {TextInput, View, Dimensions} from "react-native";
+import {TextInput, View, Dimensions, Image, StyleSheet} from "react-native";
 import { inputStyle } from "../styles";
 import {theme} from "../theme";
 import Comment from './Comment';
@@ -48,9 +48,9 @@ const CommentInput = () => {
    
     return (
         <View>
-            <View style={{flexDirection:'row'}}>
-                <IconButton type={images.comment} />
-                <TextInput style = {inputStyle.commentInput}
+            <View style={{flexDirection:'row', marginVertical: 3}}>
+                <Image source={images.comment} style={styles.icon}/>
+                <TextInput style = {styles.commentInput}
                     placeholder="+Add a comment"
                     placeholderTextColor= {theme.main}
                     value={newComment} onChangeText={_handleTextChangeComment} onSubmitEditing={_addComment} onBlur={_onBlur}>
@@ -67,6 +67,26 @@ const CommentInput = () => {
         </View>
     );
 };
+
+const styles = StyleSheet.create({
+    icon: {
+        tintColor: theme.text,
+        width: 25,
+        height: 25,
+        marginVertical: 5,
+        marginHorizontal: 8,
+    },
+    commentInput :{
+        fontSize: 15,
+        width: Dimensions.get('window').width-70,
+        height: 35,
+        paddingLeft: 15,
+        borderRadius: 30,
+        backgroundColor: '#C0DAB8',
+        color: theme.text,
+
+    }
+});
 
 export default CommentInput;
 

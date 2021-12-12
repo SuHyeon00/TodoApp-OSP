@@ -1,5 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import AppLoading from 'expo-app-loading';
+import moment from 'moment';
 import * as React from 'react';
 import { View } from 'react-native';
 import { CalendarList } from 'react-native-calendars';
@@ -9,24 +10,50 @@ export default function CalendarScreen({navigation}) {
 
     const [isReady, setIsReady] = React.useState(false);
 
-    const [schedules, setSchedules] = React.useState({});
-    const [dates, setDates] = React.useState([]);
+    const [markedDates, setMarkedDates] = React.useState({
+        [`${moment().format('YYYY-MM-DD')}`] : {selected: true, selectedColor: theme.main}
+    });
 
-    const _loadSchedules = async () => {
+    const _loadCalendar = async () => {
         const loadedSchedules = await AsyncStorage.getItem('schedules');
-        setSchedules(JSON.parse(loadedSchedules || '{}'));
-        for(const id in schedules) {
-            const day = new Date(id);
-            const markedDate = day.getFullYear() + "-" + (day.getMonth()+1) + "-" + day.getDate();
-            console.log(markedDate);
-        }
+        const schedules = Object.assign({}, JSON.parse(loadedSchedules || '{}'));
         
+        const keys = Object.keys(schedules);
+        console.log("schedules copy: " + keys);
+
+        let dates = [];
+    
+        for(let i = 0; i < keys.length; i++) {
+            dates.push(schedules[keys[i]].dueDate);
+        }
+        console.log("dates Array: " + dates);
+    
+        let obj = dates.reduce((c, v) => Object.assign(c, {
+            [v]: {marked: true, dotColor: theme.Green},
+            }), {},
+        );
+        console.log(obj);
+
+        let today = {};
+        if(obj[`${moment().format('YYYY-MM-DD')}`] != null) {
+            today = {
+                [`${moment().format('YYYY-MM-DD')}`] : {selected: true, marked: true, dotColor: theme.Green, selectedColor: theme.main}
+            }
+        } else {
+            today = {
+                [`${moment().format('YYYY-MM-DD')}`] : {selected: true, selectedColor: theme.main}
+            }
+        }
+        setMarkedDates({...obj, ...today});
     }
 
     return isReady? (
-        <View style={{alignContent: 'center', justifyContent: 'center', marginVertical: 5}}>
+        <View style={{alignContent: 'center', justifyContent: 'center', margin: 5}}>
             <CalendarList
-                onDayLongPress={(day) => navigation.navigate('Todo List', {
+                style={{
+                    borderRadius: 15,
+                }}
+                onDayPress={(day) => navigation.navigate('Todo List', {
                     // params 전달
                     /* day Object
                     {
@@ -39,17 +66,13 @@ export default function CalendarScreen({navigation}) {
                     */
                     checkedDate: day})
                 }
-                markedDates={{
-                    'Date.now()' : {selected: true, marked: true, selectedColor: theme.main},
-                    '2021-12-17': {marked: true},
-                    '2021-12-18': {marked: true, dotColor: 'red', activeOpacity: 0},
-                    '2021-12-19': {disabled: true, disableTouchEvent: true}
-                }}
+                markedDates={markedDates}
+                showScrollIndicator={true}
             />
         </View>
     ) : (
         <AppLoading
-        startAsync={_loadSchedules}
+        startAsync={_loadCalendar}
         onFinish={() => setIsReady(true)}
         onError={console.error} />
     );
