@@ -6,20 +6,32 @@ import { inputStyle } from "../styles";
 import {theme} from "../theme";
 import IconButton from "./IconButton";
 
-const Input = ({ placeholder, value, setNewItem, items, saveItems }) => {
+const Input = ({ placeholder, value, setNewItem, items, saveItems, selectedDate, setSelectedItems }) => {
 
     // add a item(Schedule or Todo item)
     const _addItem = () => {
         if(value != '') {
             const ID = Date.now().toString();
             const d = new Date();
+            const date = JSON.stringify(selectedDate).split('"');
+            const parseDate = date[3];
             const newItemObject = {
                 [ID] : { id: ID, text: value, completed: false, 
-                    date:`${moment().format('YYYY-MM-DD')}`, dueDate: d.toLocaleDateString() }, // 스케줄 관리할 때 date 변경 가능하도록 세팅해야할 듯
+                    date: parseDate, dueDate: d.toLocaleDateString() }, // 스케줄 관리할 때 date 변경 가능하도록 세팅해야할 듯
             };
             setNewItem('');
             saveItems({...items, ...newItemObject});
+            console.log(parseDate);
         }
+/*
+        const tmp = Object.assign({}, items);
+        for(const id in tmp) {
+            if(tmp[id]['date'] != selectedDate) {
+                delete tmp[id];
+            }
+        }
+        setSelectedItems(tmp);
+    */
     };
 
     // add a category

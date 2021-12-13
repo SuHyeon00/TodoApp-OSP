@@ -4,8 +4,9 @@ import Input from './Input';
 import Item from './Item';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import AppLoading from 'expo-app-loading';
+import { isFriday } from 'date-fns';
 
-const ScheduleList = () => {
+const ScheduleList = (selectedDate) => {
     const width = Dimensions.get('window').width;
 
     const [isReady, setIsReady] = React.useState(false);
@@ -26,7 +27,17 @@ const ScheduleList = () => {
     const _loadSchedules = async () => {
         const loadedSchedules = await AsyncStorage.getItem('schedules');
         setSchedules(JSON.parse(loadedSchedules || '{}'));
-    }
+    };
+/*
+        // 스케줄에 있는 객체들 하나씩 접근해서 걔의 date가 selectedDate와 같은지 비교하고 같은 애들만 selectedSchedules에 저장
+        const tmp = Object.assign({}, schedules);
+        for(const id in tmp) {
+            if(tmp[id]['date'] != selectedDate) {
+                delete tmp[id];
+            }
+        }
+        setSelectedSchedules(tmp);
+        */
 
     return isReady? (
         <View>
@@ -36,6 +47,7 @@ const ScheduleList = () => {
                 setNewItem={setNewSchedule}
                 items={schedules}
                 saveItems={_saveSchedules}
+                selectedDate={selectedDate}
                 />
 
             <View style={{marginBottom: 10}} width={width-20}>

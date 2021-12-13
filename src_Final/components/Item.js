@@ -97,10 +97,7 @@ const Item = ({ item, items, saveItems, placeholder }) => {
                     {item.text}</Text>
                 </TouchableOpacity>
 
-                {/* 메인 화면 날짜별로 연동되도록 바꾸면 스케줄은 Duedate 필요 없어서 나중에 코드 아래 각주처리한걸로 바꾸기
                 {placeholder === "+ Add a schedule" || <Duedate task={item} tasks={items} saveTasks={saveItems}/>}
-                */}
-                <Duedate text={placeholder === "+ Add a task" ? ("DUE DATE") : ("SET DATE")} task={item} tasks={items} saveTasks={saveItems} />
                 <Picture />
                 {item.completed || (<IconButton type={images.update}
                     onPressOut={_handleUpdateButtonPress}/>)}
