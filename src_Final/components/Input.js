@@ -13,15 +13,16 @@ const Input = ({ placeholder, value, setNewItem, items, saveItems, selectedDate,
         if(value != '') {
             const ID = Date.now().toString();
             const d = new Date();
-            const date = JSON.stringify(selectedDate).split('"');
-            const parseDate = date[3];
+            const selectedDay = JSON.stringify(selectedDate).split('"');
+            const parseDate = selectedDay[3].split("T");
+            const date = parseDate[0];
             const newItemObject = {
                 [ID] : { id: ID, text: value, completed: false, 
-                    date: parseDate, dueDate: d.toLocaleDateString() }, // 스케줄 관리할 때 date 변경 가능하도록 세팅해야할 듯
+                    date: date, dueDate: d.toLocaleDateString() }, // 스케줄 관리할 때 date 변경 가능하도록 세팅해야할 듯
             };
             setNewItem('');
             saveItems({...items, ...newItemObject});
-            console.log(parseDate);
+            console.log(date);
         }
 /*
         const tmp = Object.assign({}, items);

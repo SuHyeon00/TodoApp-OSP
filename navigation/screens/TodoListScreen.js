@@ -8,14 +8,11 @@ import ShareExample from '../../src_Final/components/ShareExample';
 import moment from 'moment';
 import { theme } from '../../src_Final/theme';
 
-export default function TodoListScreen({navigation}) {
+export default function TodoListScreen({route, navigation}) {
 
-    let selectedDate = moment().format('YYYY-MM-DD');
+    const [selectedDate, setSelectedDate] = React.useState(moment().format('YYYY-MM-DD'));
+
     console.log(selectedDate);
-
-    const setSelectedDate = (date) => {
-        selectedDate = date.format('YYYY-MM-DD');
-    }
 
     return (
         <SafeAreaView style={viewStyles.container}>
@@ -24,13 +21,15 @@ export default function TodoListScreen({navigation}) {
             <View style={{ minHeight: 1, minWidth: Dimensions.get('window').width-30, marginTop: 10 }}>
                 <CalendarStrip
                     onDateSelected={(date) => setSelectedDate(date)}
-                    selectedDate={selectedDate}
-                    daySelectionAnimation={{type: 'border', duration: 200, borderWidth: 1, borderHighlightColor: theme.main }}
+                    scrollable={true}
+                    scrollerPaging={true}
+                    selectedDate={(route.params != undefined) ? JSON.stringify(route.params).split('"')[3] : selectedDate}
+                    daySelectionAnimation={{type: 'border', borderWidth: 1, borderHighlightColor: theme.main }}
                     highlightDateNumberStyle={{color: theme.main, fontWeight: 'bold'}}
                     highlightDateNameStyle={{color: theme.main, fontWeight: 'bold'}}
                     style={{height:80, paddingVertical: 10}}
                     calendarColor={'#F2F2F2'}
-                    calendarHeaderStyle={{color: theme.text}}
+                    calendarHeaderStyle={{color: theme.text, }}
                     dateNumberStyle={{color: theme.Grey}}
                     dateNameStyle={{color: theme.Grey}}
                     iconContainer={{flex: 0.1}}

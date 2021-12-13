@@ -21,7 +21,7 @@ export default function CalendarScreen({navigation}) {
         let dates = [];
     
         for(let i = 0; i < keys.length; i++) {
-            dates.push(schedules[keys[i]].dueDate);
+            dates.push(schedules[keys[i]].date);
         }
         // console.log(dates);
     
@@ -50,7 +50,7 @@ export default function CalendarScreen({navigation}) {
                 style={{
                     borderRadius: 15,
                 }}
-                onDayPress={(day) => navigation.navigate('Todo List', {
+                onDayPress={(day) => {navigation.navigate('Todo List', {
                     // params 전달
                     /* day Object
                     {
@@ -61,7 +61,8 @@ export default function CalendarScreen({navigation}) {
                         dateString: '2016-05-13' // date formatted as 'YYYY-MM-DD' string
                     }
                     */
-                    checkedDate: day})
+                    calendarDate: day.dateString
+                    });}
                 }
                 markedDates={markedDates}
                 showScrollIndicator={true}
