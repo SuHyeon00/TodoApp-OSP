@@ -1,5 +1,4 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import AppLoading from 'expo-app-loading';
 import moment from 'moment';
 import * as React from 'react';
 import { View } from 'react-native';
@@ -8,13 +7,11 @@ import { theme } from '../../src_Final/theme';
 
 export default function CalendarScreen({navigation}) {
 
-    const [isReady, setIsReady] = React.useState(false);
-
     const [markedDates, setMarkedDates] = React.useState({
         [`${moment().format('YYYY-MM-DD')}`] : {selected: true, selectedColor: theme.main}
     });
 
-    const _loadCalendar = async () => {
+    React.useEffect(async () => {
         const loadedSchedules = await AsyncStorage.getItem('schedules');
         const schedules = Object.assign({}, JSON.parse(loadedSchedules || '{}'));
         
@@ -45,9 +42,9 @@ export default function CalendarScreen({navigation}) {
             }
         }
         setMarkedDates({...obj, ...today});
-    }
+    })
 
-    return isReady? (
+    return (
         <View style={{alignContent: 'center', justifyContent: 'center', margin: 5}}>
             <CalendarList
                 style={{
@@ -70,10 +67,5 @@ export default function CalendarScreen({navigation}) {
                 showScrollIndicator={true}
             />
         </View>
-    ) : (
-        <AppLoading
-        startAsync={_loadCalendar}
-        onFinish={() => setIsReady(true)}
-        onError={console.error} />
     );
 }
