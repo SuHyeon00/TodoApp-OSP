@@ -44,7 +44,15 @@ export const textStyles = StyleSheet.create({
         fontWeight: '300',
         color: theme.text,
         alignItems: 'flex-start',
-        marginVertical: 12,
+        marginVertical: 10,
+    },
+    account:{
+        fontSize: 50,
+        fontWeight: 'bold',
+        color: theme.main,
+        alignItems: 'flex-start',
+        marginTop: 30,
+        marginLeft: 0,
     },
 });
 
@@ -60,17 +68,18 @@ export const inputStyle = StyleSheet.create({
         width: Dimensions.get('window').width-30,
         height: 40,
         marginLeft: 3,
-        marginBottom: 5,
+        marginBottom: 10,
         paddingLeft: 15,
         borderRadius: 10,
         backgroundColor: "#E5E5E5",
         color: theme.text,
     },
+
     categoryInput: {
         marginTop: 8,
         paddingBottom: 10,
         fontSize: 18,
-    }
+    },
 });
 
 export const categoryStyle = StyleSheet.create({
@@ -79,8 +88,10 @@ export const categoryStyle = StyleSheet.create({
         alignItems: 'center',
         justifyContent:'flex-start',
         paddingLeft: 5,
-    },
-});
+        marginTop: 3,
+        marginLeft: 0,
+    }
+})
 
 
 export const commentStyle = StyleSheet.create({
@@ -88,9 +99,9 @@ export const commentStyle = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         height: 35,
-        width:Dimensions.get('window').width-70,
+        width:320,
         backgroundColor: theme.lightGreen,
-        borderRadius: 30,
+        borderRadius: 50,
         justifyContent:'flex-start',
         paddingLeft: 15,
         marginTop: 4,
@@ -110,17 +121,16 @@ export const taskStyle = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         backgroundColor: theme.itemBackground,
-        marginLeft: 3,
         borderRadius: 10,
-        marginBottom: 5,
-        width: Dimensions.get('window').width-30,
+        paddingLeft: 5,
+        marginTop: 3,
+        marginLeft: 0,
     },
 
     contents: {
         flex: 1,
         fontSize: 20,
         color: theme.text,
-        marginTop: 4,
     },
 });
 
@@ -138,4 +148,4 @@ export const DuedateButtonStyle = StyleSheet.create({
         fontSize: 12,
         color: theme.itemBackground,
     }
-});
+})
