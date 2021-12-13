@@ -97,11 +97,14 @@ const Picture = () => {
                 </View>
             </ModalEx>
             <Pressable onPress = {openModal}>
-            { pickedImagePath !== '' ? (
+            {/*
+             { pickedImagePath !== '' ? (
                 <Image source = {{ uri: pickedImagePath }} style = {styles.picture} />
             ) : (
                 <IconButton type = {images.picture} onPressOut = {openModal} />
             )}
+            */}
+           
             </Pressable>
         </View>
     ) : (

@@ -1,11 +1,7 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { View, Text, Dimensions } from 'react-native';
-import { styles } from '../styles';
+import React, { useState, useEffect } from 'react';
+import { View, Dimensions } from 'react-native';
 import { theme } from '../theme';
-import PropTypes from 'prop-types';
 import * as Progress from 'react-native-progress';
-import Item from './Item';
-import TaskList from './TaskList';
 
 const CompletionRate = ({ tasks }) => {
     const width = Dimensions.get('window').width;

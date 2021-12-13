@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { View, Text, Image, SafeAreaView, StyleSheet, TextInput, Alert, Modal, Pressable } from "react-native";
+import { View, Text, Image, SafeAreaView, StyleSheet, TextInput, Alert, Modal, Pressable, Dimensions } from "react-native";
 import { useState } from 'react/cjs/react.development';
-import { textStyles } from '../../src_Final/styles';
-import Email from './Email';
+import { textStyles, ModalStyles } from '../../src_Final/styles';
+import IconButton from './IconButton';
 import { theme } from '../theme';
 import Password from './Password';
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -11,33 +11,66 @@ import { images } from '../images';
 
 const AccountModal = () => {
     const [modalVisible, setModalVisible] = useState(false);
+    const [newEmail, setNewEmail] = React.useState("Whayeon@ewhain.net");
+    const [newPassword, setNewPassword] = React.useState();
+
+    const _updateEmail = email => {   
+      const currentEmail = Object.assign({}, emails);
+      currentEmail[email.id] = email;
+      setEmails(currentEmail);
+  };
+
+  const _handleEmailChange = text =>{
+    setNewEmail(text);
+  };
 
   return (
-    <SafeAreaView style={styles.centeredView}>
+    <SafeAreaView style={{marginTop: 40}}>
       <Modal
         animationType="slide"
         transparent={true}
         visible={modalVisible}
         onRequestClose={() => {
           setModalVisible(!modalVisible);
-        }}
-      >
-        <View style={styles.centeredView}>
-          <View style={styles.modalView}>
-            <Text style={styles.modalText}>Account Settings</Text>
-            <Email/>
-            <Password/>
-            <Pressable
-              style={[styles.okbutton, styles.buttonClose]}
-              onPress={() => setModalVisible(!modalVisible)}
-            >
-              <Text style={styles.textStyle}>OK</Text>
-            </Pressable>
+        }}>
+      <View style={ModalStyles.modalView}>
+        <Text style={ModalStyles.modalText}>Account Settings</Text>
+        <View style={{flexDirection:'row'}}>
+          <Text style={{
+                fontSize:17,
+                marginTop: 17,
+                marginLeft: 35,
+                fontWeight: "bold",
+            }}>Email</Text>
+            <TextInput style={ModalStyles.input} 
+                      onChangeText={_handleEmailChange}
+                      value={newEmail}
+                      keyboardType="email-address"
+                      placeholder={newEmail}></TextInput>
+        </View>
+          <View style={{flexDirection:'row'}}>
+              <Text style={{
+                  fontSize:17,
+                  marginTop: 17,
+                  fontWeight: "bold",
+              }}>Nickname</Text>
+              <TextInput
+                  style={ModalStyles.input}
+                  onChangeText={setNewPassword}
+                  value={newPassword}
+                  placeholder="Enter your nickname"
+              />
           </View>
+            <Pressable
+              style={[ModalStyles.okbutton, ModalStyles.buttonClose]}
+              onPress={() => setModalVisible(!modalVisible)}>
+              <Text style={ModalStyles.textStyle}>OK</Text>
+            </Pressable>
         </View>
       </Modal>
+
       <Pressable
-        style={[styles.buttonOpen]}
+        style={[ModalStyles.buttonOpen]}
         onPress={() => setModalVisible(true)}
       >
           <View style={{flexDirection:'row'}}>
@@ -50,65 +83,5 @@ const AccountModal = () => {
     </SafeAreaView>
   );
 };
-
-const styles = StyleSheet.create({
-    centeredView: {
-      //flex: 1,
-      justifyContent: "center",
-      alignItems: "center",
-      marginTop: 80,
-    },
-    modalView: {
-    marginTop: 130,
-      margin: 20,
-      backgroundColor: "white",
-      borderRadius: 20,
-      padding: 35,
-      alignItems: "center",
-      shadowColor: "#000",
-      width: 400,
-      shadowOffset: {
-        width: 0,
-        height: 2
-      },
-      shadowOpacity: 0.25,
-      shadowRadius: 4,
-      elevation: 5
-    },
-    button: {
-      borderRadius: 15,
-      padding: 5,
-      elevation: 2,
-      alignItems: "flex-end",
-    },
-    okbutton: {
-        borderRadius: 10,
-        padding: 5,
-        elevation: 2,
-        alignItems: "flex-end",
-    },
-
-    buttonOpen: {
-      backgroundColor: theme.background,
-    },
-    buttonClose: {
-      backgroundColor: theme.lightGreen,
-      marginTop: 20,
-    },
-    textStyle: {
-    fontSize:15,
-    padding: 3,
-      color: "white",
-      fontWeight: "bold",
-      textAlign: "center"
-    },
-    modalText: {
-      fontSize: 25,
-      fontWeight:"bold",
-      color: theme.main,
-      marginBottom: 15,
-      textAlign: "left",
-    }
-  });
 
 export default AccountModal;

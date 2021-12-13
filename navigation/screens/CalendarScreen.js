@@ -19,20 +19,20 @@ export default function CalendarScreen({navigation}) {
         const schedules = Object.assign({}, JSON.parse(loadedSchedules || '{}'));
         
         const keys = Object.keys(schedules);
-        console.log("schedules copy: " + keys);
+        // console.log(keys);
 
         let dates = [];
     
         for(let i = 0; i < keys.length; i++) {
             dates.push(schedules[keys[i]].dueDate);
         }
-        console.log("dates Array: " + dates);
+        // console.log(dates);
     
         let obj = dates.reduce((c, v) => Object.assign(c, {
             [v]: {marked: true, dotColor: theme.Green},
             }), {},
         );
-        console.log(obj);
+        // console.log(obj);
 
         let today = {};
         if(obj[`${moment().format('YYYY-MM-DD')}`] != null) {
