@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
         borderColor: theme.background,
         borderWidth: 0.5,
         alignItems: 'center',
-        width: 200,
+        width: 180,
         height: 30,
         borderRadius: 5
     },
@@ -26,8 +26,9 @@ const styles = StyleSheet.create({
         fontSize: 15,
         color: theme.background,
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
     }
 });
 
 export default BoxButton;
+

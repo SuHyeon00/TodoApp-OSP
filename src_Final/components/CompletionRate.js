@@ -1,12 +1,72 @@
-import React from 'react';
-import { View, Dimensions } from 'react-native';
+import React, { useState, useEffect, useContext } from 'react';
+import { View, Text, Dimensions } from 'react-native';
+import { styles } from '../styles';
 import { theme } from '../theme';
+import PropTypes from 'prop-types';
 import * as Progress from 'react-native-progress';
+import Item from './Item';
+import TaskList from './TaskList';
 
-const CompletionRate = ({ /* _checkedCount */ items }) => {
+const CompletionRate = ({ tasks }) => {
     const width = Dimensions.get('window').width;
 
-    const _checkedCount = id => {
+    const [viewRate, setViewRate] = useState(false);
+
+    const [rate, setRate] = useState();
+
+    /* const currentItems = Object.assign({}, tasks);
+    const completion = Object.assign({}, tasks).filter((items) => {
+        if(items.completed === true){
+            return items;
+        }
+    });
+
+    const percent = (completion.length / currentItems.length*100).toFixed(2); */
+    
+    const todo = Object.values(tasks);
+
+    useEffect(()=> {
+        const completion = todo.filter((tasks) => tasks.completed).length;
+        const total = todo.length;
+
+        const percent = total ? (completion / total).toFixed(2)*100 : 0;
+        
+        setRate(percent);
+    }, [todo]);
+
+    /* const taskitems = TaskList(tasks);
+
+    const completedTasks = Object.values(tasks).reverse().filter((filterItem) => {
+        if(filterItem.completed === true){
+            return filterItem;
+        };
+    });
+
+    const totalTasks = Object.values(tasks);
+
+    const rate = (completedTasks.length / totalTasks.length).toFixed(2)*100; */
+   
+    /* let { tasks } = useContext(TaskList);
+    const [rate, setRate] = useState({
+        percent: 0,
+        str: '',
+    });
+
+    useEffect(() => {
+        if(!todo) return;
+
+        const completion = todo.filter((tasks) => tasks.completed).length;
+        const total = todo.length;
+
+        console.log(completion);
+
+        const percent = total ? (completion / total).toFixed(2)*100 : 0;
+        const str = `${completion}/${total}`;
+        
+        setRate({ percent, str });
+    }, [todo]); */
+
+    /* const _checkedCount = id => {
         const currentItems = Object.assign({}, items);
         var arr = new Array();
         for(var i=0;i<arr.length;i++){
@@ -30,13 +90,16 @@ const CompletionRate = ({ /* _checkedCount */ items }) => {
 
         //console.log(Number(ratio.toFixed(2)));
         return Number(ratio.toFixed(2));
-    };
+    }; */
 
     return(
         <View>
+            {/* <Text>{rate.percent}%</Text>
+            <Text>{rate.str}</Text> */}
             <Progress.Bar 
                 //progress = {Number(_checkedCount)}
-                progress = {0.3}
+                progress = {rate}
+                //progress = {0.3}
                 width = {width-30}
                 height = {30}
                 animated = {true}
@@ -51,8 +114,7 @@ const CompletionRate = ({ /* _checkedCount */ items }) => {
 }
 
 /* CompletionRate.propTypes = {
-    //_checkedCount: PropTypes.func.isRequired
-    items: PropTypes.object.isRequired
+    tasks: PropTypes.object.isRequired
 }; */
 
 export default CompletionRate;

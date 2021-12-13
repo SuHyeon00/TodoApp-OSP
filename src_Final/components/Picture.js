@@ -1,20 +1,38 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Image, Pressable } from 'react-native';
+import { StyleSheet, Text, View, Image, Pressable } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import IconButton from './IconButton';
 import { images } from '../images';
+import { theme } from '../theme';
 import ModalEx from './ModalEx';
 import BoxButton from './BoxButton';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import AppLoading from 'expo-app-loading';
 
-const Picture = ({}) => {
-
+const Picture = () => {
     const [viewModal, setViewModal] = useState(false);
+    const [isReady, setIsReady] = React.useState(false);
 
     const openModal = () => {
         setViewModal(true);
     };
 
     const [pickedImagePath, setPickedImagePath] = useState('');
+
+    const _saveImage = async pickedImagePath => {
+        try{
+            await AsyncStorage.setItem('pickedImagePath', pickedImagePath);
+            setPickedImagePath(pickedImagePath);
+        }
+        catch(e){
+            console.error(e);
+        }
+    };
+
+    const _loadImage = async () => {
+        const loadedImages = await AsyncStorage.getItem('pickedImagePath');
+        setPickedImagePath(JSON.parse(loadedImages || '{}'));
+    };
 
     const showImagePicker = async() => {
         const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
@@ -26,14 +44,14 @@ const Picture = ({}) => {
 
         const result = await ImagePicker.launchImageLibraryAsync();
 
+        AsyncStorage.setItem('uri', JSON.stringify(result.uri));
         if(!result.cancelled) {
-            setPickedImagePath(result.uri);
+            _saveImage(result.uri);
+            //setPickedImagePath(result.uri);
             setViewModal(false);
         }
     };
-
-    
-
+  
     const openCamera = async() => {
         const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
 
@@ -44,23 +62,28 @@ const Picture = ({}) => {
 
         const result = await ImagePicker.launchCameraAsync();
 
+        AsyncStorage.setItem('uri', JSON.stringify(result.uri));
         if(!result.cancelled) {
-            setPickedImagePath(result.uri);
+            _saveImage(result.uri);
+            //setPickedImagePath(result.uri);
             setViewModal(false);
         }
     };
 
-    return(
+    return isReady ? (
         <View>
             <ModalEx viewModal = {viewModal} setViewModal = {setViewModal}>
                 <View style = {{
                     justifyContent: 'center',
                 }}>
                     { pickedImagePath !== '' && (
-                        <BoxButton label = "Remove Current Photo"
+                        <BoxButton style = {{
+                            color: theme.main,
+                        }}
+                            label = "Remove Current Photo"
                             onPress = {() => {
-                            setViewModal(false);
-                            setPickedImagePath("");
+                                setViewModal(false);
+                                setPickedImagePath('');
                         }} />
                     )}
                     <BoxButton label = "Choose from library" 
@@ -81,6 +104,11 @@ const Picture = ({}) => {
             )}
             </Pressable>
         </View>
+    ) : (
+        <AppLoading
+        startAsync={_loadImage}
+        onFinish={() => setIsReady(true)}
+        onError={console.error} />
     );
 };
 
