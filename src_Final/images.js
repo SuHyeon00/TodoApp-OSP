@@ -7,9 +7,13 @@ import plus from '../assets/plus.png';
 import Comment from '../assets/comments.png'; 
 import deleteAll from '../assets/deleteAll.png';
 import selectAll from '../assets/selectAll.png';
-import sort from '../assets/sort.png';
-import share from '../assets/share.png';
 import picture from '../assets/picture.png';
+import share from '../assets/share.png';
+import profile from '../assets/Profile.png';
+import setting from '../assets/settings.png';
+import clock from '../assets/clock.png';
+import star from '../assets/star.png';
+import sort from '../assets/sort.png';
 
 export const images = {
     uncompleted: UncheckedBox,
@@ -21,7 +25,11 @@ export const images = {
     comment : Comment,
     deleteAll: deleteAll,
     selectAll: selectAll,
-    sort: sort,
+    picture: picture,
     share: share,
-    picture: picture
+    profile: profile,
+    setting: setting,
+    clock: clock,
+    star: star,
+    sort: sort,
 };
