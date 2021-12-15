@@ -9,7 +9,7 @@ import { images } from '../images';
 import { textStyles } from '../styles';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
-const TaskList = (categoryId) => {
+const TaskList = ({ categoryId, selectedDate }) => {
     const width = Dimensions.get('window').width;
 
     const [isReady, setIsReady] = React.useState(false);
@@ -98,6 +98,7 @@ const TaskList = (categoryId) => {
                 setNewItem={setNewTask}
                 items={tasks}
                 saveItems={_saveTasks}
+                selectedDate={selectedDate} 
                 />
                 
 

@@ -7,7 +7,7 @@ import { categoryStyle, textStyles } from "../styles";
 import TaskList from "./TaskList";
 import { TextInput } from "react-native-gesture-handler";
 
-const Category = ({ item, items, placeholder, saveItems }) => {
+const Category = ({ item, items, placeholder, saveItems, selectedDate }) => {
 
     // delete a item
     const _deleteItem = id => {
@@ -74,7 +74,7 @@ const Category = ({ item, items, placeholder, saveItems }) => {
                 <IconButton type={images.delete} id={item.id} onPressOut={_deleteItem} />
             </View>
             
-            <TaskList categoryId={item.id} />
+            <TaskList categoryId={item.id} selectedDate={selectedDate}  />
 
         </View>
     )

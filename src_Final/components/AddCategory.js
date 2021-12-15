@@ -6,7 +6,7 @@ import { View, Dimensions } from 'react-native';
 import Category from './Category';
 import Input from './Input';
 
-const AddCategory = () => {
+const AddCategory = (selectedDate) => {
     const width = Dimensions.get('window').width;
 
     const [isReady, setIsReady] = React.useState(false);
@@ -36,14 +36,15 @@ const AddCategory = () => {
                 value={newCategory}
                 setNewItem={setNewCategory}
                 items={categories}
-                saveItems={_saveCategories} />
+                saveItems={_saveCategories}/>
 
             <View width={width-20}>
                 {Object.values(categories).reverse().map(item => (
                     <Category key={item.id} item={item}
                     items={categories}
                     saveItems={_saveCategories}
-                    placeholder="+ Add a Category" />
+                    placeholder="+ Add a Category"
+                    selectedDate={selectedDate}  />
                 ))}
             </View>
         </View> 
