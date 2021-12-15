@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, Alert } from 'react-native';
+import { View, Alert } from 'react-native';
 import { theme } from "../theme";
-import IconButton from "./IconButton";
 import { inputStyle, taskStyle } from '../styles';
-import images from '../images';
 import { TextInput } from "react-native-gesture-handler";
 import Animation from './Animation';
 

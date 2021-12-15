@@ -1,4 +1,3 @@
-import moment from "moment";
 import React from "react";
 import { View, TextInput } from "react-native";
 import { images } from "../images";

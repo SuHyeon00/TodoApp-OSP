@@ -3,7 +3,7 @@ import { View, Text, Alert } from "react-native";
 import { theme } from "../theme";
 import IconButton from "./IconButton";
 import { images } from "../images";
-import { categoryStyle, inputStyle, textStyles } from "../styles";
+import { categoryStyle, textStyles } from "../styles";
 import TaskList from "./TaskList";
 import { TextInput } from "react-native-gesture-handler";
 

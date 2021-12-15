@@ -11,6 +11,8 @@ import { theme } from '../../src_Final/theme';
 export default function TodoListScreen({route, navigation}) {
 
     const [selectedDate, setSelectedDate] = React.useState(moment().format('YYYY-MM-DD'));
+    const calendarDate = React.useMemo(() => (route.params != undefined) ? setSelectedDate(JSON.stringify(route.params).split('"')[3])
+                                                : setSelectedDate(selectedDate), [route.params]);
 
     console.log(selectedDate);
 
@@ -20,10 +22,10 @@ export default function TodoListScreen({route, navigation}) {
             {/* Calendar */}
             <View style={{ minHeight: 1, minWidth: Dimensions.get('window').width-30, marginTop: 10 }}>
                 <CalendarStrip
-                    onDateSelected={(date) => setSelectedDate(date)}
+                    onDateSelected={(date) => setSelectedDate(date.format('YYYY-MM-DD'))}
                     scrollable={true}
                     scrollerPaging={true}
-                    selectedDate={(route.params != undefined) ? JSON.stringify(route.params).split('"')[3] : selectedDate}
+                    selectedDate={selectedDate}
                     daySelectionAnimation={{type: 'border', borderWidth: 1, borderHighlightColor: theme.main }}
                     highlightDateNumberStyle={{color: theme.main, fontWeight: 'bold'}}
                     highlightDateNameStyle={{color: theme.main, fontWeight: 'bold'}}

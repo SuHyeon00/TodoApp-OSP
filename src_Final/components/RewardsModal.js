@@ -1,8 +1,7 @@
 import * as React from 'react';
-import { View, Text, Image, SafeAreaView, StyleSheet, TextInput, Alert, Modal, Pressable } from "react-native";
+import { View, Text, Image, SafeAreaView, Modal, Pressable } from "react-native";
 import { useState } from 'react/cjs/react.development';
 import { ModalStyles, textStyles } from '../../src_Final/styles';
-import { theme } from '../theme';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { images } from '../images';
 import RateInput from './RateInput';

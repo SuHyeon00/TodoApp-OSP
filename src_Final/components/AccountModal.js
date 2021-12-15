@@ -1,10 +1,7 @@
 import * as React from 'react';
-import { View, Text, Image, SafeAreaView, StyleSheet, TextInput, Alert, Modal, Pressable, Dimensions } from "react-native";
+import { View, Text, Image, SafeAreaView, TextInput, Modal, Pressable } from "react-native";
 import { useState } from 'react/cjs/react.development';
 import { textStyles, ModalStyles } from '../../src_Final/styles';
-import IconButton from './IconButton';
-import { theme } from '../theme';
-import Password from './Password';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { images } from '../images';
 

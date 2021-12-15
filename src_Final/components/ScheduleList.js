@@ -4,7 +4,6 @@ import Input from './Input';
 import Item from './Item';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import AppLoading from 'expo-app-loading';
-import { isFriday } from 'date-fns';
 
 const ScheduleList = (selectedDate) => {
     const width = Dimensions.get('window').width;

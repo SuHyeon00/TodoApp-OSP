@@ -1,9 +1,7 @@
 import * as React from 'react';
 import { useState } from 'react';
 import { images } from '../images';
-import IconButton from './IconButton';
 import {TextInput, View, Dimensions, Image, StyleSheet} from "react-native";
-import { inputStyle } from "../styles";
 import {theme} from "../theme";
 import Comment from './Comment';
 

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useState } from "react";
-import {StyleSheet,TextInput, View, Dimensions, Text, Image, Modal, Pressable} from "react-native";
+import {StyleSheet,TextInput, View, Text} from "react-native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import AppLoading from 'expo-app-loading';
 

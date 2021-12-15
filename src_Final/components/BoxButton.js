@@ -1,7 +1,6 @@
 import React from 'react';
 import { Pressable, Text, StyleSheet } from 'react-native';
 import { theme } from '../theme';
-import { images } from '../images';
 
 const BoxButton = ({ onPress, label }) => {
     return (

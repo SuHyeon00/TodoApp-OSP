@@ -1,10 +1,8 @@
 import React, { useState } from "react";
 import { View, Text } from "react-native";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
-import { ThemeProvider } from "@react-navigation/native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { DuedateButtonStyle } from "../styles";
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import moment from "moment";
 
 const Duedate = ({ text, task, tasks, saveTasks }) => {
