@@ -3,7 +3,7 @@ import moment from 'moment';
 import * as React from 'react';
 import { View } from 'react-native';
 import { CalendarList } from 'react-native-calendars';
-import { theme } from '../../src_Final/theme';
+import { theme } from '../../src/theme';
 
 // CalendarScreen - 1928019 Oh SuHyeon
 
