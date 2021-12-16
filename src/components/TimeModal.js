@@ -12,8 +12,8 @@ const TimeModal = () => {
     const [modalVisible, setModalVisible] = useState(false);
     const [isReady, setIsReady] = React.useState(false);
 
-    const [hours, setHours] = useState({});
-    const [minutes, setMinutes] = React.useState({});
+    const [hours, setHours] = useState('');
+    const [minutes, setMinutes] = React.useState('');
 
     /*reward rate 저장*/
     const _saveHour = async hours => {
@@ -36,10 +36,10 @@ const TimeModal = () => {
 
     const _loadData = async () => {
         const loadedHours = await AsyncStorage.getItem('hours');
-        setHours(JSON.parse(loadedHours || '{}'));
+        setHours(loadedHours.split('"')[1] || '');
   
         const loadedMinutes = await AsyncStorage.getItem('minutes');
-        setMinutes(JSON.parse(loadedMinutes || '{}'));
+        setMinutes(loadedMinutes.split('"')[1] || '');
     }
 
     /* 버튼 누르면 저장*/
