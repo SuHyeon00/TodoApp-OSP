@@ -5,7 +5,7 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import { DuedateButtonStyle } from "../styles";
 import moment from "moment";
 
-const Duedate = ({ text, task, tasks, saveTasks }) => {
+const Duedate = ({ task, tasks, saveTasks }) => {
   
   const [currentDate, setCurrentDate] = useState(new Date(task.dueDate));
 
@@ -31,7 +31,7 @@ const Duedate = ({ text, task, tasks, saveTasks }) => {
   return (
     <View>
       <TouchableOpacity onPress={showDatePicker} style={DuedateButtonStyle.button}>
-        <Text style={DuedateButtonStyle.text}>{text}</Text>
+        <Text style={DuedateButtonStyle.text}>DUE DATE</Text>
       </TouchableOpacity>
       <DateTimePickerModal
         isVisible={isDatePickerVisible}
