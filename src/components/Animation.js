@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from "react";
 import { Dimensions, Animated, Text, View, StyleSheet, Button, SafeAreaView, Image } from "react-native";
 import { theme } from '../theme';
-import { image } from '../image';
+import { images } from '../images';
 
 const Animation = (label, children) => {
   // fadeAnim will be used as the value for opacity. Initial Value: 0
@@ -32,10 +32,12 @@ const Animation = (label, children) => {
       >
       
         <View>
-          <Text style = {styles.fadingText}>You've grown up to the next step!</Text>
-          {/* <Image source = {images.growing} style = {{
-            width: 50,
-          }} /> */}
+          {/* <Text style = {styles.fadingText}>You've grown up to the next step!</Text> */}
+          <Image source = {images.growing} style = {{
+            width: Dimensions.get('window').width-20,
+            height: 100,
+            marginRight: 20,
+          }} />
         </View>
       </Animated.View>
       <View style={styles.buttonRow}>
@@ -57,7 +59,7 @@ const styles = StyleSheet.create({
     width: Dimensions.get('window').width-50,
     height: 150,
     padding: 20,
-    backgroundColor: theme.lightGreen,
+    backgroundColor: 'transparent',
     alignItems: "center",
     justifyContent: "space-around",
     marginTop: 50,
