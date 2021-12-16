@@ -1,6 +1,5 @@
 import * as React from 'react';
-import { View, Text, Image, SafeAreaView, StyleSheet, TextInput, Alert, Modal, Pressable } from "react-native";
-import { useState } from 'react/cjs/react.development';
+import { View, Text, Image, SafeAreaView, StyleSheet, TextInput, Modal, Pressable } from "react-native";
 import { textStyles, ModalStyles } from '../styles';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { images } from '../images';
@@ -9,10 +8,10 @@ import AppLoading from 'expo-app-loading';
 
 const RewardsModal = () => {
   
-    const [modalVisible, setModalVisible] = useState(false);
+    const [modalVisible, setModalVisible] = React.useState(false);
     const [isReady, setIsReady] = React.useState(false);
 
-    const [rates, setRates] = useState('');
+    const [rates, setRates] = React.useState('');
 
     /*reward rate 저장*/
     const _saveRate = async rates => {
