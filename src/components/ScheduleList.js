@@ -31,7 +31,7 @@ const ScheduleList = (selectedDate) => {
     };
 
     // filtering per date 1976086 Kim JeongHyeon
-    const filteredSchedules = React.useEffect(() => {
+    const filteredSchedules = React.useMemo(() => {
         const tmp = Object.assign({}, schedules);
         for(const id in tmp) {
             if(tmp[id]['date'] != JSON.stringify(selectedDate).split('"')[3]) {
