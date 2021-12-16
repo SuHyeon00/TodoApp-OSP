@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { useState } from 'react';
 import { images } from '../images';
 import IconButton from './IconButton';
 import {TextInput, View, Dimensions} from "react-native";
@@ -9,13 +8,11 @@ import Comment from './Comment';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import AppLoading from 'expo-app-loading';
 
-// 2071051 Ha YunJi
-
 const CommentInput = () => {
     const width = Dimensions.get('window').width;
 
-    const [newComment, setNewComment] = useState('');
-    const [comments, setComments] = useState({});
+    const [newComment, setNewComment] = React.useState('');
+    const [comments, setComments] = React.useState({});
 
     const [isReady, setIsReady] = React.useState(false);
 
