@@ -1,6 +1,5 @@
 import * as React from 'react';
-import { View, Text, Image, SafeAreaView, StyleSheet, TextInput, Alert, Modal, Pressable, Dimensions, Button } from "react-native";
-import { useState } from 'react/cjs/react.development';
+import { View, Text, Image, SafeAreaView, TextInput, Modal, Pressable } from "react-native";
 import { textStyles, ModalStyles } from '../styles';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { images } from '../images';
@@ -10,7 +9,7 @@ import AppLoading from 'expo-app-loading';
 
 const AccountModal = ({nickname, setNickname}) => {
 
-    const [modalVisible, setModalVisible] = useState(false);
+    const [modalVisible, setModalVisible] = React.useState(false);
     const [isReady, setIsReady] = React.useState(false);
 
    
