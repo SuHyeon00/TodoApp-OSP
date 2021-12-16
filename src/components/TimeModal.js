@@ -36,10 +36,10 @@ const TimeModal = () => {
 
     const _loadData = async () => {
         const loadedHours = await AsyncStorage.getItem('hours');
-        setHours(loadedHours.split('"')[1] || '');
+        setHours( (loadedHours === null) ? '' : loadedHours.split('"')[1]);
   
         const loadedMinutes = await AsyncStorage.getItem('minutes');
-        setMinutes(loadedMinutes.split('"')[1] || '');
+        setMinutes( (loadedMinutes === null) ? '' : loadedMinutes.split('"')[1]);
     }
 
     /* 버튼 누르면 저장*/
