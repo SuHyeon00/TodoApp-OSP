@@ -11,7 +11,7 @@ export const viewStyles = StyleSheet.create({
 
     divisionLine: {
         height: 5,
-        backgroundColor: theme.Green,
+        backgroundColor: theme.main,
         width: Dimensions.get('window').width-30,
     }
 });
