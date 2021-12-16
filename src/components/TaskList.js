@@ -48,10 +48,33 @@ const TaskList = ({ categoryId, selectedDate }) => {
     });
     
     // delete all items 2076016 Kwak SeoJin
-    
+    const _deleteAll = id => {
+        Alert.alert(
+            'Warning',
+            'Are you sure to delete all?',
+            [
+              {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+
+              {text: 'OK', onPress: () => {
+                const currentItems = Object.assign({}, tasks);
+                for(const id in currentItems){
+                    delete currentItems[id];
+                }
+                _saveTasks(currentItems);
+              }}
+            ]
+        );
+    };
     
     // select all items 2076016 Kwak SeoJin
-    
+    const _selectAll = () => {
+        const currentItems = Object.assign({}, tasks);
+
+        for(const id in currentItems){
+            currentItems[id]['completed'] = true;
+        }
+        _saveTasks(currentItems);
+    };
 
     // sort todo items in terms of the added date or due date 1976086 Kim JeongHyeon
     const _sortByDate = () => {
