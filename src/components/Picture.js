@@ -9,7 +9,7 @@ import BoxButton from './BoxButton';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import AppLoading from 'expo-app-loading';
 
-const Picture = () => {
+const Picture = (pictureId) => {
     const [viewModal, setViewModal] = useState(false);
     const [isReady, setIsReady] = React.useState(false);
 
@@ -21,7 +21,7 @@ const Picture = () => {
 
     const _saveImage = async pickedImagePath => {
         try{
-            await AsyncStorage.setItem('pickedImagePath', pickedImagePath);
+            await AsyncStorage.setItem(JSON.stringify(pictureId), pickedImagePath);
             setPickedImagePath(pickedImagePath);
         }
         catch(e){
@@ -30,7 +30,7 @@ const Picture = () => {
     };
 
     const _loadImage = async () => {
-        const loadedImages = await AsyncStorage.getItem('pickedImagePath');
+        const loadedImages = await AsyncStorage.getItem(JSON.stringify(pictureId));
         setPickedImagePath(loadedImages/* JSON.parse(loadedImages || '{}') */);
     };
 
@@ -70,6 +70,7 @@ const Picture = () => {
         }
     };
 
+    console.log(pickedImagePath);
     return isReady ? (
         <View>
             <ModalEx viewModal = {viewModal} setViewModal = {setViewModal}>
@@ -97,10 +98,11 @@ const Picture = () => {
                 </View>
             </ModalEx>
             <Pressable onPress = {openModal}>
-            { pickedImagePath !== '' ? (
+            { pickedImagePath !== (null) ? (
                 <Image source = {{ uri: pickedImagePath }} style = {styles.picture} />
-            ) : (
-                <IconButton type = {images.picture} onPressOut = {openModal} />
+            ) : ( //pickedImagePath === null
+                <Image source = {images.picture} style = {styles.picture} />
+                /* <IconButton type = {images.picture} onPressOut = {openModal} /> */
             )}
             </Pressable>
         </View>
