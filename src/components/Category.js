@@ -12,10 +12,27 @@ import { TextInput } from "react-native-gesture-handler";
 const Category = ({ item, items, placeholder, saveItems, selectedDate }) => {
 
     // delete a item 1976086 Kim JeongHyeon
-    
+    const _deleteItem = id => {
+        Alert.alert(
+            'Warning',
+            'Are you sure to delete?',
+            [
+              {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+
+              {text: 'OK', onPress: () => {
+                const currentItems = Object.assign({}, items);
+                delete currentItems[id];
+                saveItems(currentItems);}}
+            ]
+          );
+    };
     
     // edit a item 1976086 Kim JeongHyeon
-    
+    const _updateItem = item => {
+        const currentItems = Object.assign({}, items);
+        currentItems[item.id] = item;
+        saveItems(currentItems);
+    };
 
     const [isEditing, setIsEditing] = useState(false);
     const [text, setText] = useState(item.text);
@@ -28,6 +45,7 @@ const Category = ({ item, items, placeholder, saveItems, selectedDate }) => {
         if (isEditing) {
             const editedItem = Object.assign({}, item, {text});
             setIsEditing(false);
+            _updateItem(editedItem);
         }
     };
 
