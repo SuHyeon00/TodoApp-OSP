@@ -1,20 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { View, Alert, Text, StyleSheet, Dimensions } from 'react-native';
 import { theme } from "../theme";
-import { inputStyle, taskStyle } from '../styles';
+import { inputStyle, textStyles } from '../styles';
 import { TextInput } from "react-native-gesture-handler";
 import Animation from './Animation';
 import IconButton from './IconButton';
 import { images } from '../images';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const Reward = ({ rate }) => {
+const Reward = () => {
 
     const [newReward, setNewReward] = useState('');
     const [rewards, setRewards] = useState({});
-    //const [animation, setAnimation] = useState(false);
     const [isReady, setIsReady] = useState(false);
-    const [rates, setRates] = useState({});
+    const [rate, setRate] = useState(0);
+    const [rates, setRates] = useState(0);
 
     const _saveRewards = async rewards => {
         try {
@@ -25,67 +25,31 @@ const Reward = ({ rate }) => {
         }
     };
 
-    /* const _loadRates = async () => {
-      const loadedRates = await AsyncStorage.getItem('rates');
-      setRates(JSON.parse(loadedRates || '{}'));
-    } */
     useEffect(() => {
-        AsyncStorage.getItem('rewards').then(loadedRewards => {
-            setRewards(JSON.parse(loadedRewards));
 
+        AsyncStorage.multiGet(['rate', 'rates']).then(response => {
+            const loadedRate = response[0][1];
+            const _rewardRate = (JSON.stringify(loadedRate));
+            const _rewardString = (JSON.parse(_rewardRate));
+            const _numString = _rewardString.replace(/["]+/g, '');
+            const _number = parseFloat(_numString);
+            setRate(_number*100);
+
+            const loadedRates = response[1][1];
+            const rewardRate = (JSON.stringify(loadedRates));
+            const rewardString = (JSON.parse(rewardRate));
+            const numString = rewardString.replace(/["]+/g, '');
+            const number = parseInt(numString);
+            setRates(number);
+            setIsReady(false);
         });
-        /* AsyncStorage.getItem('rates').then(loadedRates => {
-            setRates(JSON.parse(loadedRates || '{}'));
-        }); */
     });
-
-    /* const _loadRewards = async () => {
-        const loadedRewards = await AsyncStorage.getItem('rewards');
-        
-
-        const loadedRates = await AsyncStorage.getItem('rates');
-        if(rate > loadedRates){
-            setAnimation(true);
-        }
-    }; */
-
-    /* const _addReward = () => {
-        const newReward = {
-            [ID] : { id: ID, text: value }
-        };
-        _saveRewards({...rewards, ...newReward});
-    }; */
-
-    /* const _updateReward = rewards => {
-        const currentRewards = Object.assign({}, rewards);
-        currentRewards[rewards.id] = rewards;
-        _saveRewards(currentRewards);
-    }; */
-
-    //const [isEditing, setIsEditing] = useState(false);
-    //const [text, setText] = useState(newReward);
     
     const _handleRewardsChange = () => {
         setNewReward(newReward);
     };
-
-    /* const _onSubmitEditing = () => {
-        if (isEditing) {
-            const editedRewards = Object.assign({}, rewards, {text});
-            setIsEditing(false);
-            if(text != '')
-                _updateReward(editedRewards);
-            else
-                alert("Error!");
-        }
-    }; */
-
-    /* const _onBlur = () => {
-        if (isEditing) {
-            setIsEditing(false);
-            setText(rewards.text);
-        }
-    }; */
+    console.log({rate});
+    console.log({rates});
     return isReady ? (
         <Text>Loading...</Text>
     ) : (
@@ -95,7 +59,7 @@ const Reward = ({ rate }) => {
                 fontSize: 23,
                 fontWeight: 'bold',
                 color: theme.main,
-                //backgroundColor: theme.background,
+                marginTop: 30,
             }}>Want to do</Text>
             <TextInput 
                 style={inputStyle.textInput}
@@ -104,33 +68,29 @@ const Reward = ({ rate }) => {
                 maxLength={20}
                 value={newReward}
                 onChangeText={setNewReward}
-                //onSubmitEditing={_saveRewards} 
                 />
             </View>
             <View style = {{
                 width: Dimensions.get('window').width-70,
                 height: 150,
             }}>
-            <Text style = {{
-                    fontSize: 25,
+            { (rate >= rates) ? (
+                <>
+                <Text style = {{
+                    fontSize: 30,
                     fontWeight: 'bold',
                     color: theme.main,
                     alignItems: 'center',
                     justifyContent: 'space-between',
                     textAlign: 'center',
-                    marginTop: 100,
-                    //backgroundColor: 'transparent',
+                    marginTop: 80,
                 }}>{newReward}</Text>
-            <Animation />
-            {/* <>
-            { (rate > rates) ? (
-                
                 <Animation />
-                //setAnimation(true);
+                </>
             ) : (
                 null
             )}
-            </> */}
+            
             </View>
         </View>
     );
@@ -142,7 +102,8 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignSelf: 'center',
         backgroundColor: 'transparent',
-        width: Dimensions.get('window').width-70,
+        width: Dimensions.get('window').width-80,
+        marginRight: 20,
     },
 
 })
