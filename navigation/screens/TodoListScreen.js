@@ -2,11 +2,11 @@ import * as React from 'react';
 import { StatusBar, SafeAreaView, Text, View, ScrollView, Dimensions } from 'react-native';
 import {viewStyles, textStyles, barStyles} from '../../src_Final/styles';
 import CalendarStrip from 'react-native-calendar-strip';
-import ScheduleList from '../../src_Final/components/ScheduleList';
-import AddCategory from '../../src_Final/components/AddCategory';
-import ShareExample from '../../src_Final/components/ShareExample';
+import ScheduleList from '../../src/components/ScheduleList';
+import AddCategory from '../../src/components/AddCategory';
+import ShareExample from '../../src/components/ShareExample';
 import moment from 'moment';
-import { theme } from '../../src_Final/theme';
+import { theme } from '../../src/theme';
 
 // 1976086 Kim JeongHyeon 1928019 Oh SuHyeon
 
