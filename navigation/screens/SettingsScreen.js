@@ -12,8 +12,6 @@ import AppLoading from 'expo-app-loading';
 
 export default function SettingsScreen({navigation}) {
 
-    AsyncStorage.clear();
-
     const [nickname, setNickname] = React.useState('USER');
     const [isReady, setIsReady] = React.useState(false);
 
