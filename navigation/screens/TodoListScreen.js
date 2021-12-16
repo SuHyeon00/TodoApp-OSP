@@ -20,7 +20,24 @@ export default function TodoListScreen({route, navigation}) {
     return (
         <SafeAreaView style={viewStyles.container}>
             <StatusBar style={barStyles.statusbar} />
-            {/* Calendar*/}
+            {/* Calendar 1976086 Kim JeongHyeon */}
+            <View style={{ minHeight: 1, minWidth: Dimensions.get('window').width-30, marginTop: 10 }}>
+                <CalendarStrip
+                    onDateSelected={(date) => setSelectedDate(date.format('YYYY-MM-DD'))}
+                    scrollable={true}
+                    scrollerPaging={true}
+                    selectedDate={selectedDate}
+                    daySelectionAnimation={{type: 'border', borderWidth: 1, borderHighlightColor: theme.main }}
+                    highlightDateNumberStyle={{color: theme.main, fontWeight: 'bold'}}
+                    highlightDateNameStyle={{color: theme.main, fontWeight: 'bold'}}
+                    style={{height:80, paddingVertical: 10}}
+                    calendarColor={'#F2F2F2'}
+                    calendarHeaderStyle={{color: theme.text, }}
+                    dateNumberStyle={{color: theme.Grey}}
+                    dateNameStyle={{color: theme.Grey}}
+                    iconContainer={{flex: 0.1}}
+                />
+            </View>
 
             <ScrollView>
                 <View>
