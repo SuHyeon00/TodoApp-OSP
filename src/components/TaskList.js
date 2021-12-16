@@ -65,7 +65,7 @@ const TaskList = ({ categoryId, selectedDate }) => {
                 return(x.dueDate > y.dueDate ? -1 : 0);
             });
             console.log(sortedArray);
-            setTasks({…sortedArray});
+            setTasks({...sortedArray});
             setIsSorted(true);
         }
         else{
@@ -74,7 +74,7 @@ const TaskList = ({ categoryId, selectedDate }) => {
                 return(x.id > y.id ? 1 : x.id < y.id ? -1 : 0);
             });
             console.log(unsortedArray);
-            setTasks({…unsortedArray});
+            setTasks({...unsortedArray});
             setIsSorted(false);
         }      
     };
