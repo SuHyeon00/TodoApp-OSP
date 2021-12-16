@@ -14,8 +14,7 @@ import profile from '../assets/Profile.png';
 import setting from '../assets/settings.png';
 import clock from '../assets/clock.png';
 import star from '../assets/star.png';
-import whiteCircle from '../assets/WhiteCircle.png'
-import Gro from '../assets/MyNameIsGro.png'
+import growing from '../assets/GrowingWithGroWing.png';
 
 export const images = {
     uncompleted: UncheckedBox,
@@ -34,6 +33,5 @@ export const images = {
     setting: setting,
     clock: clock,
     star: star,
-    whiteCircle: whiteCircle,
-    Gro: Gro,
+    growing: growing,
 };
