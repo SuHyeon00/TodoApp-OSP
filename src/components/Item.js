@@ -16,13 +16,31 @@ const Item = ({ item, items, saveItems, placeholder }) => {
     const [showCommentVisible, setShowCommentVisible] = useState(false);
 
     // delete a item 1976086 Kim JeongHyeon
+    const _deleteItem = id => {
+        Alert.alert(
+            'Warning',
+            'Are you sure to delete?',
+            [
+              {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
 
+              {text: 'OK', onPress: () => {
+                const currentItems = Object.assign({}, items);
+                delete currentItems[id];
+                saveItems(currentItems);}
+              }
+            ]
+          );
+    };
 
     // check a completed item 2076016 Kwak SeoJin
     
     
     // edit a item 1976086 Kim JeongHyeon
-
+    const _updateItem = item => {
+        const currentItems = Object.assign({}, items);
+        currentItems[item.id] = item;
+        saveItems(currentItems);
+    };
 
     const _showVisible = () => {
         setShowCommentVisible(!showCommentVisible);
