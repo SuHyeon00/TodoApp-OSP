@@ -33,7 +33,11 @@ const Item = ({ item, items, saveItems, placeholder }) => {
     };
 
     // check a completed item 2076016 Kwak SeoJin
-    
+    const _toggleItem = id => {
+        const currentItems = Object.assign({}, items);
+        currentItems[id]['completed'] = !currentItems[id]['completed'];
+        saveItems(currentItems);
+    };
     
     // edit a item 1976086 Kim JeongHyeon
     const _updateItem = item => {
@@ -96,7 +100,7 @@ const Item = ({ item, items, saveItems, placeholder }) => {
                 </TouchableOpacity>
 
                 {placeholder === "+ Add a schedule" || <Duedate task={item} tasks={items} saveTasks={saveItems}/>}
-                <Picture />
+                <Picture pictureId = {item.id}/>
                 {item.completed || (<IconButton type={images.update}
                     onPressOut={_handleUpdateButtonPress}/>)}
                 <IconButton type={images.delete} id={item.id} onPressOut={_deleteItem} />
