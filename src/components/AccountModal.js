@@ -39,10 +39,10 @@ const AccountModal = ({nickname, setNickname}) => {
 
     const _loadData = async () => {
       const loadedEmails = await AsyncStorage.getItem('emails');
-      setEmails(loadedEmails.split('"')[1] || '');
+      setEmails( (loadedEmails === null) ? '' : loadedEmails.split('"')[1]);
 
       const loadedNickname = await AsyncStorage.getItem('nickname');
-      setNewNickname(loadedNickname.split('"')[1] || '');
+      setNewNickname( (loadedNickname === null) ? '' : loadedNickname.split('"')[1]);
 
     };
 
