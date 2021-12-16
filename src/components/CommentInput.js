@@ -9,6 +9,8 @@ import Comment from './Comment';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import AppLoading from 'expo-app-loading';
 
+// 2071051 Ha YunJi
+
 const CommentInput = () => {
     const width = Dimensions.get('window').width;
 
@@ -66,6 +68,14 @@ const CommentInput = () => {
    
     return isReady? (
         <View>
+            <View width={width-20}>
+                {Object.values(comments).reverse().map(comment => (
+                    <Comment key={comment.id} comment={comment}
+                    deleteComment={_deleteComment}
+                    updateComment={_updateComment} setNewComment={setNewComment} comments={comments} setComments={setComments}/>
+                ))}
+            </View>
+            
             <View style={{flexDirection:'row'}}>
                 <IconButton type={images.comment} />
                 <TextInput style = {inputStyle.commentInput}
@@ -73,14 +83,6 @@ const CommentInput = () => {
                     placeholderTextColor= {theme.main}
                     value={newComment} onChangeText={_handleTextChangeComment} onSubmitEditing={_addComment} onBlur={_onBlur}>
                 </TextInput>
-            </View>
-
-            <View width={width-20}>
-                {Object.values(comments).reverse().map(comment => (
-                    <Comment key={comment.id} comment={comment}
-                    deleteComment={_deleteComment}
-                    updateComment={_updateComment} setNewComment={setNewComment} comments={comments} setComments={setComments}/>
-                ))}
             </View>
         </View>
     )   :   (
