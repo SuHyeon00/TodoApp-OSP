@@ -17,7 +17,7 @@ const Picture = (pictureId) => {
         setViewModal(true);
     };
 
-    const [pickedImagePath, setPickedImagePath] = useState('');
+    const [pickedImagePath, setPickedImagePath] = useState(null);
 
     const _saveImage = async pickedImagePath => {
         try{
@@ -77,14 +77,14 @@ const Picture = (pictureId) => {
                 <View style = {{
                     justifyContent: 'center',
                 }}>
-                    { pickedImagePath !== '' && (
+                    { pickedImagePath !== (null) && (
                         <BoxButton style = {{
                             color: theme.main,
                         }}
                             label = "Remove Current Photo"
                             onPress = {() => {
                                 setViewModal(false);
-                                setPickedImagePath('');
+                                setPickedImagePath(null);
                         }} />
                     )}
                     <BoxButton label = "Choose from library" 
@@ -102,7 +102,6 @@ const Picture = (pictureId) => {
                 <Image source = {{ uri: pickedImagePath }} style = {styles.picture} />
             ) : ( //pickedImagePath === null
                 <Image source = {images.picture} style = {styles.picture} />
-                /* <IconButton type = {images.picture} onPressOut = {openModal} /> */
             )}
             </Pressable>
         </View>
