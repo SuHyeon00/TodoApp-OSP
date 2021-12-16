@@ -1,6 +1,5 @@
 import * as React from 'react';
-import { View, Text, Image, SafeAreaView, StyleSheet, TextInput, Alert, Modal, Pressable } from "react-native";
-import { useState } from 'react/cjs/react.development';
+import { View, Text, Image, SafeAreaView, StyleSheet, TextInput, Modal, Pressable } from "react-native";
 import { textStyles, ModalStyles } from '../styles';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { images } from '../images';
@@ -9,10 +8,10 @@ import AppLoading from 'expo-app-loading';
 
 const TimeModal = () => {
   
-    const [modalVisible, setModalVisible] = useState(false);
+    const [modalVisible, setModalVisible] = React.useState(false);
     const [isReady, setIsReady] = React.useState(false);
 
-    const [hours, setHours] = useState('');
+    const [hours, setHours] = React.useState('');
     const [minutes, setMinutes] = React.useState('');
 
     /*reward rate 저장*/
