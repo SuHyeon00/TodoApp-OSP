@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { StatusBar, SafeAreaView, Text, View, ScrollView, Dimensions } from 'react-native';
-import {viewStyles, textStyles, barStyles} from '../../src_Final/styles';
+import {viewStyles, textStyles, barStyles} from '../../src/styles';
 import CalendarStrip from 'react-native-calendar-strip';
 import ScheduleList from '../../src/components/ScheduleList';
 import AddCategory from '../../src/components/AddCategory';
