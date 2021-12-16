@@ -28,7 +28,7 @@ const AccountModal = () => {
     };
 
     /*nickname 저장*/
-    const _saveNickname = async () => {
+    const _saveNickname = async nicknames => {
       try {
           await AsyncStorage.setItem("nicknames" , JSON.stringify(nicknames));
           setNicknames(nicknames);
