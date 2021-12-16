@@ -15,7 +15,6 @@ export default function TodoListScreen({route, navigation}) {
     const [selectedDate, setSelectedDate] = React.useState(moment().format('YYYY-MM-DD'));
     const calendarDate = React.useEffect(() => (route.params != undefined) ? setSelectedDate(JSON.stringify(route.params).split('"')[3])
                                                 : setSelectedDate(selectedDate), [route.params]);
-    console.log(selectedDate);
 
     return (
         <SafeAreaView style={viewStyles.container}>
@@ -44,7 +43,7 @@ export default function TodoListScreen({route, navigation}) {
                     <View style={{flexDirection: 'row'}}>
                         <Text style={textStyles.schedule}>
                             {selectedDate != moment().format('YYYY-MM-DD')? 
-                            selectedDate.split("-")[1] + "/" + selectedDate.split("-")[2] : 'Today\'s' } Schedule
+                            "  " + selectedDate.split("-")[1] + "/" + selectedDate.split("-")[2] : 'Today\'s' } Schedule
                             </Text>
                         <ShareExample />
                     </View>
