@@ -1,7 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import AppLoading from 'expo-app-loading';
 import * as React from 'react';
-import { useState } from 'react';
 import { View, Dimensions } from 'react-native';
 import Category from './Category';
 import Input from './Input';
@@ -14,8 +13,8 @@ const AddCategory = (selectedDate) => {
     const [isReady, setIsReady] = React.useState(false);
 
     // Managing Category
-    const [newCategory, setNewCategory] = useState('');
-    const [categories, setCategories] = useState({});
+    const [newCategory, setNewCategory] = React.useState('');
+    const [categories, setCategories] = React.useState({});
 
     const _saveCategories = async categories => {
         try {
