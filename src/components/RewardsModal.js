@@ -12,7 +12,7 @@ const RewardsModal = () => {
     const [modalVisible, setModalVisible] = useState(false);
     const [isReady, setIsReady] = React.useState(false);
 
-    const [rates, setRates] = useState({});
+    const [rates, setRates] = useState('');
 
     /*reward rate 저장*/
     const _saveRate = async rates => {
@@ -26,7 +26,8 @@ const RewardsModal = () => {
 
     const _loadRates = async () => {
       const loadedRates = await AsyncStorage.getItem('rates');
-      setRates(JSON.parse(loadedRates || '{}'));
+      setRates( (loadedRates === null) ? '' : loadedRates);
+      console.log(rates);
     }
 
     /* 버튼 누르면저장*/
