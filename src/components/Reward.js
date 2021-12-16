@@ -1,105 +1,111 @@
-import * as React from 'react';
-import { View, Text, Image, SafeAreaView, StyleSheet, TextInput, Alert, Modal, Pressable } from "react-native";
-import { useState } from 'react/cjs/react.development';
-import { textStyles, ModalStyles } from '../styles';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import React, { useState, useEffect, useContext } from 'react';
+import { View, Alert, Text, StyleSheet, Dimensions } from 'react-native';
+import { theme } from "../theme";
+import { inputStyle, textStyles } from '../styles';
+import { TextInput } from "react-native-gesture-handler";
+import Animation from './Animation';
+import IconButton from './IconButton';
 import { images } from '../images';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import AppLoading from 'expo-app-loading';
 
-const RewardsModal = () => {
-  
-    const [modalVisible, setModalVisible] = useState(false);
-    const [isReady, setIsReady] = React.useState(false);
+const Reward = () => {
 
-    const [rates, setRates] = useState('');
+    const [newReward, setNewReward] = useState('');
+    const [rewards, setRewards] = useState({});
+    const [isReady, setIsReady] = useState(false);
+    const [rate, setRate] = useState(0);
+    const [rates, setRates] = useState(0);
 
-    /*reward rate 저장*/
-    const _saveRate = async rates => {
-      try {
-          await AsyncStorage.setItem('rates', JSON.stringify(rates));
-          setRates(rates);
-      } catch (e) {
-          console.error(e);
-      }
+    const _saveRewards = async rewards => {
+        try {
+            await AsyncStorage.setItem('rewards', JSON.stringify(rewards));
+            setRewards(rewards);
+        } catch (e) {
+            console.error(e);
+        }
     };
 
-    const _loadRates = async () => {
-      const loadedRates = await AsyncStorage.getItem('rates');
-      setRates( (loadedRates === null) ? '' : loadedRates);
-      console.log(rates);
-    }
+    useEffect(() => {
 
-    /* 버튼 누르면저장*/
-    const handleConfirm = () => {
-      _saveRate(rates); 
-      setModalVisible(!modalVisible)      
+        AsyncStorage.multiGet(['rate', 'rates']).then(response => {
+            const loadedRate = response[0][1];
+            const _rewardRate = (JSON.stringify(loadedRate));
+            const _rewardString = (JSON.parse(_rewardRate));
+            const _numString = _rewardString.replace(/["]+/g, '');
+            const _number = parseFloat(_numString);
+            setRate(_number*100);
+
+            const loadedRates = response[1][1];
+            const rewardRate = (JSON.stringify(loadedRates));
+            const rewardString = (JSON.parse(rewardRate));
+            const numString = rewardString.replace(/["]+/g, '');
+            const number = parseInt(numString);
+            setRates(number);
+            setIsReady(false);
+        });
+    });
+    
+    const _handleRewardsChange = () => {
+        setNewReward(newReward);
     };
-
-  return isReady? (
-    <SafeAreaView style={{marginTop: 40}}>
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={modalVisible}
-        onRequestClose={() => {
-          setModalVisible(!modalVisible);
-        }}>
-        <View style={ModalStyles.modalView}>
-          <Text style={ModalStyles.modalTextTitle}>Rewards Settings</Text>
-          <View style={{flexDirection:'row'}}>
-              <Text style={styles.texts}>Completion rate</Text>
-
-              <TextInput
-                  style={styles.input}
-                  value={rates}
-                  onChangeText={(value)=>{setRates(value);}}
-                  keyboardType="number-pad"
-                  maxLength={3}>
-                  </TextInput>
-              
-                                    
-              <Text style={styles.texts}>%</Text>
-          </View>
-
-          <Pressable
-            style={[ModalStyles.okbutton, ModalStyles.buttonClose]}
-            onPress={handleConfirm}>
-            <Text style={ModalStyles.textStyle}>OK</Text>
-          </Pressable>
+    console.log({rate});
+    console.log({rates});
+    return isReady ? (
+        <Text>Loading...</Text>
+    ) : (
+        <View>
+            <View style = {styles.rewardInput}>
+            <Text style = {{
+                fontSize: 23,
+                fontWeight: 'bold',
+                color: theme.main,
+                marginTop: 30,
+            }}>Want to do</Text>
+            <TextInput 
+                style={inputStyle.textInput}
+                placeholder="+Add a reward"
+                placeholderTextColor= {theme.main}
+                maxLength={20}
+                value={newReward}
+                onChangeText={setNewReward}
+                />
+            </View>
+            <View style = {{
+                width: Dimensions.get('window').width-70,
+                height: 150,
+            }}>
+            { (rate >= rates) ? (
+                <>
+                <Text style = {{
+                    fontSize: 30,
+                    fontWeight: 'bold',
+                    color: theme.main,
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    textAlign: 'center',
+                    marginTop: 80,
+                }}>{newReward}</Text>
+                <Animation />
+                </>
+            ) : (
+                null
+            )}
+            
+            </View>
         </View>
-      </Modal>
-      <Pressable style={[ModalStyles.buttonOpen]} onPress={() => setModalVisible(true)}>
-        <View style={{flexDirection:'row'}}>
-          <Image style={{ width: 30, height: 30, marginLeft: 15, marginRight:20, marginTop: 30,}} source={images.star}/>
-          <TouchableOpacity><Text style={textStyles.title}>Rewards Settings</Text></TouchableOpacity>
-        </View>
-      </Pressable>  
-    </SafeAreaView>
-  ) : (
-        <AppLoading
-        startAsync={_loadRates} 
-        onFinish={() => setIsReady(true)}
-        onError={console.error} />
-  );
+    );
 };
 
 const styles = StyleSheet.create({
-  input: {
-    width: 45,
-    height: 40,
-    margin: 8,
-    borderWidth: 1,
-    padding: 10,
-    borderRadius: 5,
-  },
-  texts:{
-      fontSize:17,
-      marginTop: 17,
-      fontWeight: "bold",
-      marginRight: 5,
-      marginLeft: 10,
-  }
-});
+    rewardInput: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        alignSelf: 'center',
+        backgroundColor: 'transparent',
+        width: Dimensions.get('window').width-80,
+        marginRight: 20,
+    },
 
-export default RewardsModal;
+})
+
+export default Reward;
