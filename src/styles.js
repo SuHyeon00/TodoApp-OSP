@@ -20,9 +20,9 @@ export const textStyles = StyleSheet.create({
     title: {
         fontSize: 25,
         fontWeight: 'bold',
-        color: theme.main,
+        color: 'black',
         alignItems: 'flex-start',
-        marginTop: 30,
+        marginTop: 28,
         marginLeft: 0,
     },
     schedule: {
@@ -49,9 +49,9 @@ export const textStyles = StyleSheet.create({
     account:{
         fontSize: 50,
         fontWeight: 'bold',
-        color: theme.main,
+        color: 'black',
         alignItems: 'flex-start',
-        marginTop: 30,
+        marginTop: 17,
         marginLeft: 0,
     },
 });
