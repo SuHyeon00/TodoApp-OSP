@@ -100,7 +100,7 @@ const Item = ({ item, items, saveItems, placeholder }) => {
                 </TouchableOpacity>
 
                 {placeholder === "+ Add a schedule" || <Duedate task={item} tasks={items} saveTasks={saveItems}/>}
-                <Picture pictureId = {item.id}/>
+                {placeholder === "+ Add a task" ? (<Picture pictureId = {item.id}/>) : (null)}
                 {item.completed || (<IconButton type={images.update}
                     onPressOut={_handleUpdateButtonPress}/>)}
                 <IconButton type={images.delete} id={item.id} onPressOut={_deleteItem} />
