@@ -1,11 +1,10 @@
 import * as React from 'react';
 import { View, Text, Dimensions } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import CompletionRate from '../../src/components/CompletionRate';
 import { textStyles, viewStyles } from '../../src/styles';
 import Reward from '../../src/components/Reward';
 
-export default function CompletionRateScreen({navigation}) {
+export default function CompletionRateScreen() {
     const width = Dimensions.get('window').width;
 
     return (

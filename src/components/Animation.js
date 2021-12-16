@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from "react";
-import { Dimensions, Animated, Text, View, StyleSheet, Button, SafeAreaView, Image } from "react-native";
+import { Dimensions, Animated, View, StyleSheet, SafeAreaView, Image } from "react-native";
 import { theme } from '../theme';
 import { images } from '../images';
 

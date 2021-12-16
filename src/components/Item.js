@@ -9,7 +9,7 @@ import Duedate from "./Duedate";
 import CommentInput from "./CommentInput";
 import Picture from './Picture';
 
-// 1928019 Oh SuHyeon 1976086 Kim JeongHyeon
+// 1928019 Oh SuHyeon 1976086 Kim JeongHyeon 2076016 Kwak SeoJin
 
 const Item = ({ item, items, saveItems, placeholder }) => {
 

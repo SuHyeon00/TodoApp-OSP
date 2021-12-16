@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, Image, Pressable } from 'react-native';
+import { StyleSheet, View, Image, Pressable } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
-import IconButton from './IconButton';
 import { images } from '../images';
 import { theme } from '../theme';
 import ModalEx from './ModalEx';
 import BoxButton from './BoxButton';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import AppLoading from 'expo-app-loading';
+
+// 2076016 Kwak SeoJin
 
 const Picture = (pictureId) => {
     const [viewModal, setViewModal] = useState(false);
@@ -21,8 +22,10 @@ const Picture = (pictureId) => {
 
     const _saveImage = async pickedImagePath => {
         try{
-            await AsyncStorage.setItem(JSON.stringify(pictureId), pickedImagePath);
-            setPickedImagePath(pickedImagePath);
+            if(pickedImagePath != null) {
+                await AsyncStorage.setItem(JSON.stringify(pictureId), pickedImagePath);
+                setPickedImagePath(pickedImagePath);
+            }
         }
         catch(e){
             console.error(e);
@@ -43,12 +46,14 @@ const Picture = (pictureId) => {
         }
 
         const result = await ImagePicker.launchImageLibraryAsync();
-
-        AsyncStorage.setItem('uri', JSON.stringify(result.uri));
-        if(!result.cancelled) {
-            _saveImage(result.uri);
-            //setPickedImagePath(result.uri);
-            setViewModal(false);
+        
+        if(result.uri != null) {
+            AsyncStorage.setItem('uri', JSON.stringify(result.uri));
+            if(!result.cancelled) {
+                _saveImage(result.uri);
+                //setPickedImagePath(result.uri);
+                setViewModal(false);
+            }
         }
     };
   

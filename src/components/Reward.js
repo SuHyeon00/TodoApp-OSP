@@ -1,11 +1,9 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { View, Alert, Text, StyleSheet, Dimensions } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, StyleSheet, Dimensions } from 'react-native';
 import { theme } from "../theme";
-import { inputStyle, textStyles } from '../styles';
+import { inputStyle } from '../styles';
 import { TextInput } from "react-native-gesture-handler";
 import Animation from './Animation';
-import IconButton from './IconButton';
-import { images } from '../images';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Reward = () => {

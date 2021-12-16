@@ -1,8 +1,6 @@
-import React, { useState, useEffect, useContext, createContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, Dimensions } from 'react-native';
-import { styles } from '../styles';
 import { theme } from '../theme';
-import PropTypes from 'prop-types';
 import * as Progress from 'react-native-progress';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 

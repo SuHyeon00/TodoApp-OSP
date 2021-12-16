@@ -2,7 +2,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import AppLoading from 'expo-app-loading';
 import * as React from 'react';
 import { View, Dimensions, Text, Alert } from 'react-native';
-import Input from '../../src_Final/components/Input';
+import Input from './Input';
 import Item from './Item';
 import IconButton from './IconButton';
 import { images } from '../images';

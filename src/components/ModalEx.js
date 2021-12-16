@@ -1,6 +1,8 @@
 import React from 'react';
 import { StyleSheet, View, Modal, Dimensions } from 'react-native';
 
+// 2076016 Kwak SeoJin
+
 const ModalEx = ({ viewModal, setViewModal, children }) => {
     const width = Dimensions.get('window').width;
 

@@ -15,8 +15,6 @@ const Input = ({ placeholder, value, setNewItem, items, saveItems, selectedDate 
             const ID = Date.now().toString();
             const d = new Date();
             const selectedDay = JSON.stringify(selectedDate).split('"');
-            console.log(selectedDate);
-            console.log(selectedDay);
             const date = selectedDay[3];
             const newItemObject = {
                 [ID] : { id: ID, text: value, completed: false, 
