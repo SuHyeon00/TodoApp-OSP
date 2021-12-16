@@ -12,12 +12,14 @@ import AppLoading from 'expo-app-loading';
 
 export default function SettingsScreen({navigation}) {
 
+    AsyncStorage.clear();
+
     const [nickname, setNickname] = React.useState('USER');
     const [isReady, setIsReady] = React.useState(false);
 
     const _loadData = async () => {
         const loadedNickname = await AsyncStorage.getItem('nickname');
-        setNickname(loadedNickname.split('"')[1] || 'USER');
+        setNickname( (loadedNickname === null) ? 'USER' : loadedNickname.split('"')[1]);
     };
 
     return isReady? (
