@@ -8,14 +8,14 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import AppLoading from 'expo-app-loading';
 
 
-const AccountModal = () => {
+const AccountModal = ({nickname, setNickname}) => {
 
     const [modalVisible, setModalVisible] = useState(false);
     const [isReady, setIsReady] = React.useState(false);
 
    
     const [emails, setEmails] = React.useState('');
-    const [nicknames, setNicknames] = React.useState('');
+    const [newNickname, setNewNickname] = React.useState('');
 
     /*email 저장*/
     const _saveEmail = async emails => {
@@ -28,22 +28,21 @@ const AccountModal = () => {
     };
 
     /*nickname 저장*/
-    const _saveNickname = async nicknames => {
+    const _saveNickname = async nickname => {
       try {
-          await AsyncStorage.setItem("nicknames" , JSON.stringify(nicknames));
-          setNicknames(nicknames);
+          await AsyncStorage.setItem("nickname" , JSON.stringify(nickname));
+          setNickname(nickname);
       } catch (e) {
           console.error(e);
       }
-      
     };
 
     const _loadData = async () => {
       const loadedEmails = await AsyncStorage.getItem('emails');
       setEmails(JSON.parse(loadedEmails || ''));
 
-      const loadedNicknames = await AsyncStorage.getItem('nicknames');
-      setNicknames(JSON.parse(loadedNicknames || ''));
+      const loadedNickname = await AsyncStorage.getItem('nickname');
+      setNewNickname(JSON.parse(loadedNickname || ''));
 
     };
 
@@ -51,7 +50,7 @@ const AccountModal = () => {
     /* 버튼 누르면저장 */
     const handleConfirm = () => {
       _saveEmail(emails);
-      _saveNickname(nicknames);
+      _saveNickname(newNickname);
       setModalVisible(!modalVisible)      
     };
   
@@ -75,7 +74,7 @@ const AccountModal = () => {
             }}>Email</Text>
             <TextInput style={ModalStyles.input} 
                       value={emails}
-                      onChangeText={(value)=>{setEmails(value);}}
+                      onChangeText={(text)=>{setEmails(text);}}
                       placeholder={emails || "Enter your email address"}
                       keyboardType="email-address"
                       maxLength={40}
@@ -89,9 +88,9 @@ const AccountModal = () => {
               }}>Nickname</Text>
               <TextInput
                   style={ModalStyles.input}
-                  value={nicknames}
-                  onChangeText={(value)=>{setNicknames(value);}}
-                  placeholder={nicknames || "Enter your nickname"}
+                  value={newNickname}
+                  onChangeText={(text)=>{setNewNickname(text);}}
+                  placeholder={nickname || "Enter your nickname"}
                   maxLength={40}
               />
           </View>
