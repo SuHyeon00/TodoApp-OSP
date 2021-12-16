@@ -42,7 +42,10 @@ export default function TodoListScreen({route, navigation}) {
             <ScrollView>
                 <View>
                     <View style={{flexDirection: 'row'}}>
-                        <Text style={textStyles.schedule}> Today's Schedule</Text>
+                        <Text style={textStyles.schedule}>
+                            {selectedDate != moment().format('YYYY-MM-DD')? 
+                            selectedDate.split("-")[1] + "/" + selectedDate.split("-")[2] : 'Today\'s' } Schedule
+                            </Text>
                         <ShareExample />
                     </View>
                     {/* Schedule List */}
