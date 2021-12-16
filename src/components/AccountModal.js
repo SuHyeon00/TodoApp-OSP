@@ -14,8 +14,8 @@ const AccountModal = () => {
     const [isReady, setIsReady] = React.useState(false);
 
    
-    const [emails, setEmails] = React.useState({});
-    const [nicknames, setNicknames] = React.useState({});
+    const [emails, setEmails] = React.useState('');
+    const [nicknames, setNicknames] = React.useState('');
 
     /*email 저장*/
     const _saveEmail = async emails => {
@@ -40,22 +40,21 @@ const AccountModal = () => {
 
     const _loadData = async () => {
       const loadedEmails = await AsyncStorage.getItem('emails');
-      setEmails(JSON.parse(loadedEmails || '{}'));
+      setEmails(JSON.parse(loadedEmails || ''));
 
       const loadedNicknames = await AsyncStorage.getItem('nicknames');
-      setNicknames(JSON.parse(loadedNicknames || '{}'));
+      setNicknames(JSON.parse(loadedNicknames || ''));
 
     };
 
     
-    /* 버튼 누르면저장*/
+    /* 버튼 누르면저장 */
     const handleConfirm = () => {
       _saveEmail(emails);
       _saveNickname(nicknames);
       setModalVisible(!modalVisible)      
     };
   
-
   return isReady? (
     <SafeAreaView style={{marginTop: 40}}>
       <Modal
@@ -77,9 +76,9 @@ const AccountModal = () => {
             <TextInput style={ModalStyles.input} 
                       value={emails}
                       onChangeText={(value)=>{setEmails(value);}}
-                      placeholder="Enter your email address"
+                      placeholder={emails || "Enter your email address"}
                       keyboardType="email-address"
-                      maxLength={40}                
+                      maxLength={40}
                       ></TextInput>
         </View>
           <View style={{flexDirection:'row'}}>
@@ -92,7 +91,7 @@ const AccountModal = () => {
                   style={ModalStyles.input}
                   value={nicknames}
                   onChangeText={(value)=>{setNicknames(value);}}
-                  placeholder="Enter your nickname"
+                  placeholder={nicknames || "Enter your nickname"}
                   maxLength={40}
               />
           </View>
