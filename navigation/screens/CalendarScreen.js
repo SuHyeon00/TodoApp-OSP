@@ -52,7 +52,7 @@ export default function CalendarScreen({navigation}) {
                 style={{
                     borderRadius: 15,
                 }}
-                onDayPress={(day) => {navigation.navigate('Todo List', {
+                onDayPress={(day) => {navigation.navigate('Main', {
                     // params 전달
                     /* day Object
                     {
