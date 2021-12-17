@@ -18,6 +18,7 @@ import Gro from '../assets/MyNameIsGro.png';
 import More from '../assets/MoreStepsToGo.png';
 import icon from '../assets/icon.png';
 import iconGrey from '../assets/iconGrey.png';
+import growing from '../assets/GrowingWithGroWing.png';
 
 export const images = {
     uncompleted: UncheckedBox,
@@ -40,4 +41,5 @@ export const images = {
     More: More,
     icon: icon,
     iconGrey: iconGrey,
+    growing: growing,
 };
