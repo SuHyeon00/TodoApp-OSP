@@ -1,26 +1,36 @@
-import React, { useRef, useEffect } from "react";
-import { Dimensions, Animated, View, StyleSheet, SafeAreaView, Image } from "react-native";
+import React, { useRef, useEffect, useState } from "react";
+import { Dimensions, Animated, Text, View, StyleSheet, Button, SafeAreaView, Image } from "react-native";
 import { theme } from '../theme';
 import { images } from '../images';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const Animation = (label, children) => {
+const Animation = () => {
   // fadeAnim will be used as the value for opacity. Initial Value: 0
   const fadeAnim = useRef(new Animated.Value(0)).current;
+  const [rewards, setRewards] = useState('');
 
   useEffect(() => {
-    //const fadeIn = () => {
       // Will change fadeAnim value to 1 in 5 seconds
       Animated.timing(fadeAnim, {
         toValue: 1,
         duration: 5000,
         useNativeDriver: true,
       }).start();
-    //};
+
+     AsyncStorage.getItem('rewards').then(loadedRewards => {
+        const _rewardStringify = (JSON.stringify(loadedRewards));
+        const _rewardParse = (JSON.parse(_rewardStringify));
+        if(_rewardParse != null){
+            const _reward = _rewardParse.replace(/["]+/g, '');
+            setRewards(_reward);
+        }
+    });
   }, []);
   
-
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={{
+      width: Dimensions.get('window').width-80,
+      }}>
       <Animated.View
         style={[
           styles.fadingContainer,
@@ -30,53 +40,39 @@ const Animation = (label, children) => {
           }
         ]}
       >
-      
         <View>
-          {/* <Text style = {styles.fadingText}>You've grown up to the next step!</Text> */}
-          <Image source = {images.growing} style = {{
-            width: Dimensions.get('window').width-20,
-            height: 100,
-            marginRight: 20,
-          }} />
+          <Text style = {{
+            fontSize: 25,
+            fontWeight: 'bold',
+            color: theme.main,
+            alignItems: 'flex-start',
+            justifyContent: 'space-between',
+            textAlign: 'center',
+            marginTop: 10,
+          }}>{rewards}</Text>
+          <Image source = {images.growing}
+            style={{ 
+              width: 350,
+              height: 100,
+              marginTop: 10,
+            }} />
         </View>
       </Animated.View>
-      <View style={styles.buttonRow}>
-        
-        {/* <Button title="fadein" onPress={fadeIn} /> */}
-      </View>
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "space-around",
-    marginTop: 100,
-  },
   fadingContainer: {
-    width: Dimensions.get('window').width-50,
-    height: 150,
-    padding: 20,
+    //width: Dimensions.get('window').width-50,
+    //height: 250,
+    //padding: 20,
     backgroundColor: 'transparent',
     alignItems: "center",
-    justifyContent: "space-around",
-    marginTop: 50,
+    justifyContent: "flex-start",
+    marginTop: 6,
+    //marginBottom: 50,
   },
-  fadingText: {
-    fontSize: 28,
-    fontWeight: 'bold',
-    color: theme.main,
-    textAlign: 'center' //가운데 정렬
-    //alignSelf: 'center',
-    //justifyContent: 'center'
-  },
-  buttonRow: {
-    flexBasis: 100,
-    justifyContent: "space-evenly",
-    marginVertical: 16
-  }
 });
 
 export default Animation;

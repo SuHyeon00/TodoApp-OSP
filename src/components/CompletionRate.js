@@ -34,16 +34,17 @@ const CompletionRate = ({isToday}) => {
     let endOfMonth = moment(today.split('-')[0] + today.split('-')[1] + moment().daysInMonth()).format('YYYY-MM-DD');
 
     useEffect(async () => {
-        
+
         const loadedCategories = await AsyncStorage.getItem('categories');
         // console.log(loadedCategories);
-        const id = Object.keys(JSON.parse(loadedCategories));
-
-        for(let i=0; i < id.length; i++) {
-            const loadedTasks = await AsyncStorage.getItem(JSON.stringify(id[i]));
-            const loaded = Object.assign({}, JSON.parse(loadedTasks || '{}'));
-            for(const id in loaded) {
-                todo.push(loaded[id]);
+        if(loadedCategories != null){
+            const id = Object.keys(JSON.parse(loadedCategories));
+            for(let i=0; i < id.length; i++) {
+                const loadedTasks = await AsyncStorage.getItem(JSON.stringify(id[i]));
+                const loaded = Object.assign({}, JSON.parse(loadedTasks || '{}'));
+                for(const id in loaded) {
+                    todo.push(loaded[id]);
+                }
             }
         }
 
