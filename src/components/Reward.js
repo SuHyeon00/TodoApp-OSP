@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, Dimensions } from 'react-native';
+import { View, Text, StyleSheet, Dimensions, Image } from 'react-native';
 import { theme } from "../theme";
 import { inputStyle } from '../styles';
 import { TextInput } from "react-native-gesture-handler";
 import Animation from './Animation';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { images } from '../images';
 
 const Reward = () => {
 
@@ -66,6 +67,7 @@ const Reward = () => {
                 maxLength={20}
                 value={newReward}
                 onChangeText={setNewReward}
+                // onSubmitEditing={_saveRewards}
                 />
             </View>
             <View style = {{
@@ -86,7 +88,9 @@ const Reward = () => {
                 <Animation />
                 </>
             ) : (
-                null
+                <Image style={{ width: 240, height: 150, 
+                    marginVertical: 15, marginHorizontal: 45, 
+                    position: 'absolute' }} source={images.More}/>
             )}
             
             </View>

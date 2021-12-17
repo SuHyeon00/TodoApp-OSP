@@ -46,7 +46,7 @@ const CompletionRate = ({isToday}) => {
                 todo.push(loaded[id]);
             }
         }
-        console.log(todo);
+
         let completion = 0;
         let total = 0;
     
@@ -68,10 +68,10 @@ const CompletionRate = ({isToday}) => {
             tasks.date >= startOfMonth && endOfMonth).length;
         }
 
-        const percent = total ? Number((completion / total).toFixed(2)) : 0;
+        const percent = total != 0 ? Number((completion / total).toFixed(2)) : 0;
         console.log(percent);
         setIsReady(false);
-        _saveRate(percent);
+        { isToday != "Today" ? setRate(percent) : _saveRate(percent); } // save the Today's completion rate
         
     });
 

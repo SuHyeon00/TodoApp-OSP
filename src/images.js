@@ -14,7 +14,10 @@ import profile from '../assets/Profile.png';
 import setting from '../assets/settings.png';
 import clock from '../assets/clock.png';
 import star from '../assets/star.png';
-import Gro from '../assets/MyNameIsGro.png'
+import Gro from '../assets/MyNameIsGro.png';
+import More from '../assets/MoreStepsToGo.png';
+import icon from '../assets/icon.png';
+import iconGrey from '../assets/iconGrey.png';
 
 export const images = {
     uncompleted: UncheckedBox,
@@ -34,4 +37,7 @@ export const images = {
     clock: clock,
     star: star,
     Gro: Gro,
+    More: More,
+    icon: icon,
+    iconGrey: iconGrey,
 };

@@ -25,7 +25,7 @@ const RewardsModal = () => {
 
     const _loadRates = async () => {
       const loadedRates = await AsyncStorage.getItem('rates');
-      setRates( (loadedRates === null) ? '' : loadedRates);
+      setRates( (loadedRates === null) ? '' : loadedRates.split('"')[1]);
       console.log(rates);
     }
 

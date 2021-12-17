@@ -7,15 +7,17 @@ import { theme } from '../src/theme';
 
 // Screens
 import CalendarScreen from './screens/CalendarScreen';
-import TodoListScreen from './screens/TodoListScreen';
+import MainScreen from './screens/MainScreen';
 import CompletionRateScreen from './screens/CompletionRateScreen';
 import SettingsScreen from './screens/SettingsScreen';
+import TodoListScreen from './screens/TodoListScreen';
 
 // Screen names
 const calendarName = 'Calendar';
-const todoListName = 'Todo List';
+const MainName = 'Main';
 const CompletionRate = 'Completion Rate';
 const settingsName = 'Settings';
+const TodoListName = 'Todo List'
 
 const Tab = createBottomTabNavigator();
 
@@ -25,14 +27,14 @@ export default function MainContainer() {
     return (
         <NavigationContainer>
             <Tab.Navigator
-                initialRouteName={todoListName}
+                initialRouteName={MainName}
                 screenOptions={
                     ({route}) => ({
                     tabBarIcon: ({focused, color, size}) => {
                         let iconName;
                         let rn = route.name;
 
-                        if (rn === todoListName) {
+                        if (rn === MainName) {
                             iconName = focused ? 'list' : 'list-outline';
                         }
                         else if (rn === calendarName) {
@@ -41,6 +43,8 @@ export default function MainContainer() {
                             iconName = focused ? 'settings' : 'settings-outline';
                         } else if (rn === CompletionRate) {
                             iconName = focused ? 'heart' : 'heart-outline';
+                        } else if (rn === TodoListName) {
+                            iconName = focused ? 'list' : 'list-outline';
                         }
 
                         return <Ionicons name={iconName} size={size} color={color}/>
@@ -50,8 +54,10 @@ export default function MainContainer() {
                     tabBarLabelStyle: { paddingBottom: 5, fontSize: 10},
                 })}>
 
-                <Tab.Screen name={todoListName} component={TodoListScreen} />
+                
+                <Tab.Screen name={TodoListName} component={TodoListScreen} />
                 <Tab.Screen name={calendarName} component={CalendarScreen} />
+                <Tab.Screen name={MainName} component={MainScreen} />
                 <Tab.Screen name={CompletionRate} component={CompletionRateScreen} />
                 <Tab.Screen name={settingsName} component={SettingsScreen} />
 

@@ -102,6 +102,8 @@ const TaskList = ({ categoryId, selectedDate }) => {
         }      
     };
 
+    console.log(tasks);
+
 
     return isReady? (
         <View>

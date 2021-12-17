@@ -75,7 +75,6 @@ const Picture = (pictureId) => {
         }
     };
 
-    console.log(pickedImagePath);
     return isReady ? (
         <View>
             <ModalEx viewModal = {viewModal} setViewModal = {setViewModal}>
