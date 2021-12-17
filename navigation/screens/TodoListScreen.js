@@ -19,19 +19,22 @@ export default function TodoListScreen({navigation}) {
     const todo = [];
 
     const _loadTasks = async () => {
+        
         const loadedCategories = await AsyncStorage.getItem('categories');
         // console.log(loadedCategories);
-        const id = Object.keys(JSON.parse(loadedCategories));
+        if(loadedCategories != null){
+            const id = Object.keys(JSON.parse(loadedCategories));
 
-        for(let i=0; i < id.length; i++) {
-            const loadedTasks = await AsyncStorage.getItem(JSON.stringify(id[i]));
-            const loaded = Object.assign({}, JSON.parse(loadedTasks || '{}'));
-            for(const id in loaded) {
-                todo.push(loaded[id]);
+            for(let i=0; i < id.length; i++) {
+                const loadedTasks = await AsyncStorage.getItem(JSON.stringify(id[i]));
+                const loaded = Object.assign({}, JSON.parse(loadedTasks || '{}'));
+                for(const id in loaded) {
+                    todo.push(loaded[id]);
+                }
             }
+            const tmp = Object.assign({}, todo);
+            setTasks(tmp);
         }
-        const tmp = Object.assign({}, todo);
-        setTasks(tmp);
     };
 
     const _sortByDueDate = () => {
