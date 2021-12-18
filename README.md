@@ -12,6 +12,7 @@ Open SW Platform Team6 Project
   <li>npm -g install react-native</li>
   <li>npm install prop-types</li>
   <li>expo install @react-native-async-storage/async-storage</li>
+  <li>expo install expo-app-loading</li>
   <li>npm install --save styled-components</li>
 </ul>
 
@@ -35,10 +36,11 @@ Open SW Platform Team6 Project
 </ul>
 
 
-### 캘린더 모듈 설치 관련
+### 캘린더 모듈 설치 관련 (+ moment)
 <ul>
   <li>npm install --save react-native-calendars</li>
   <li>npm install react-native-calendar-strip</li>
+  <li>npm install moment --save</li>
 </ul>
 
 
