@@ -8,7 +8,7 @@ const ShareExample = () => {
     try {
       const result = await Share.share({
         message:
-          'React Native | A framework for building native apps using React',
+          'React Native | A framework for building native apps using React \nhttps://expo.dev/@ossu/gro-wing',
       });
       if (result.action === Share.sharedAction) {
         if (result.activityType) {

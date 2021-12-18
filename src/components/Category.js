@@ -1,11 +1,10 @@
 import React, { useState } from "react";
-import { View, Text, Alert } from "react-native";
+import { View, Text, Alert, TextInput } from "react-native";
 import { theme } from "../theme";
 import IconButton from "./IconButton";
 import { images } from "../images";
 import { categoryStyle, textStyles } from "../styles";
 import TaskList from "./TaskList";
-import { TextInput } from "react-native-gesture-handler";
 
 // 1928019 Oh SuHyeon 1976086 Kim JeongHyeon
 

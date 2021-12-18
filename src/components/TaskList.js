@@ -1,13 +1,12 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import AppLoading from 'expo-app-loading';
 import * as React from 'react';
-import { View, Dimensions, Text, Alert } from 'react-native';
+import { View, Dimensions, Text, Alert, TouchableOpacity } from 'react-native';
 import Input from './Input';
 import Item from './Item';
 import IconButton from './IconButton';
 import { images } from '../images';
 import { textStyles } from '../styles';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 
 // 1976086 Kim JeongHyeon 1928019 Oh SuHyeon 2076016 Kwak SeoJin
 
@@ -22,22 +21,7 @@ const TaskList = ({ categoryId, selectedDate }) => {
 
     const [isSorted, setIsSorted] = React.useState(false);
 
-    const _saveTasks = async tasks => {
-        try {
-            await AsyncStorage.setItem(JSON.stringify(categoryId) , JSON.stringify(tasks));
-            setTasks(tasks);
-        } catch (e) {
-            console.error(e);
-        }
-    };
-
-    const _loadTasks = async () => {
-        const loadedTasks = await AsyncStorage.getItem(JSON.stringify(categoryId));
-        setTasks(JSON.parse(loadedTasks || '{}'));
-    };
-
-    // 1976086 Kim JeongHyeon
-    const filteredTasks = React.useMemo(() => {
+    var filteredTasks = React.useMemo(() => {
         const tmp = Object.assign({}, tasks);
         for(const id in tmp) {
             if(tmp[id]['date'] != JSON.stringify(selectedDate).split('"')[3]) {
@@ -46,6 +30,41 @@ const TaskList = ({ categoryId, selectedDate }) => {
         }
         return tmp;
     });
+
+    const _saveTasks = async tasks => {
+        try {
+            await AsyncStorage.setItem(JSON.stringify(categoryId) , JSON.stringify(tasks));
+            setTasks(tasks);
+        } catch (e) {
+            console.error(e);
+        }
+
+         // 1976086 Kim JeongHyeon
+        filteredTasks = () => {
+            const tmp = Object.assign({}, tasks);
+            for(const id in tmp) {
+                if(tmp[id]['date'] != JSON.stringify(selectedDate).split('"')[3]) {
+                    delete tmp[id];
+                }
+            }
+            return tmp;
+        };
+    };
+
+    const _loadTasks = async () => {
+        const loadedTasks = await AsyncStorage.getItem(JSON.stringify(categoryId));
+        setTasks(JSON.parse(loadedTasks || '{}'));
+
+        filteredTasks = () => {
+            const tmp = Object.assign({}, loadedTasks);
+            for(const id in tmp) {
+                if(tmp[id]['date'] != JSON.stringify(selectedDate).split('"')[3]) {
+                    delete tmp[id];
+                }
+            }
+            return tmp;
+        };
+    };
     
     // delete all items 2076016 Kwak SeoJin
     const _deleteAll = id => {
@@ -87,8 +106,9 @@ const TaskList = ({ categoryId, selectedDate }) => {
             sortedArray = arr.sort(function(x, y) {
                 return(x.dueDate > y.dueDate ? -1 : 0);
             });
-            console.log(sortedArray);
-            setTasks({...sortedArray});
+            const tmp = Object.assign({}, sortedArray)
+            console.log(tmp);
+            _saveTasks(tmp);
             setIsSorted(true);
         }
         else{
@@ -96,13 +116,12 @@ const TaskList = ({ categoryId, selectedDate }) => {
             unsortedArray = arr.sort(function(x, y) {
                 return(x.id > y.id ? 1 : x.id < y.id ? -1 : 0);
             });
-            console.log(unsortedArray);
-            setTasks({...unsortedArray});
+            const tmp = Object.assign({}, unsortedArray)
+            // console.log(tmp);
+            _saveTasks(tmp);
             setIsSorted(false);
         }      
     };
-
-    console.log(tasks);
 
 
     return isReady? (

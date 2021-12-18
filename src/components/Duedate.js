@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import { View, Text } from "react-native";
+import { View, Text, TouchableOpacity } from "react-native";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
-import { TouchableOpacity } from "react-native-gesture-handler";
 import { DuedateButtonStyle } from "../styles";
 import moment from "moment";
 
@@ -22,7 +21,10 @@ const Duedate = ({ task, tasks, saveTasks }) => {
   const handleConfirm = (date) => {
     setCurrentDate(date);
     const currentItems = Object.assign({}, tasks);
-    currentItems[task.id]['dueDate'] = moment(date).format('YYYY-MM-DD');
+    for(id in currentItems) {
+      if(currentItems[id]['id'] === task.id)
+        currentItems[id]['dueDate'] = moment(date).format('YYYY-MM-DD');
+    }
     saveTasks(currentItems);
     hideDatePicker();
   };

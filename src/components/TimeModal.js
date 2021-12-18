@@ -1,7 +1,6 @@
 import * as React from 'react';
-import { View, Text, Image, SafeAreaView, StyleSheet, TextInput, Modal, Pressable } from "react-native";
+import { View, Text, Image, SafeAreaView, StyleSheet, TextInput, Modal, Pressable, TouchableOpacity } from "react-native";
 import { textStyles, ModalStyles } from '../styles';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 import { images } from '../images';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import AppLoading from 'expo-app-loading';

@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import { View, Text, Alert, TouchableOpacity } from "react-native";
+import { View, Text, Alert, TouchableOpacity, TextInput } from "react-native";
 import { theme } from "../theme";
 import IconButton from "./IconButton";
 import { images } from "../images";
 import { inputStyle, taskStyle } from "../styles";
-import { TextInput } from "react-native-gesture-handler";
 import Duedate from "./Duedate";
 import CommentInput from "./CommentInput";
 import Picture from './Picture';
@@ -16,7 +15,7 @@ const Item = ({ item, items, saveItems, placeholder }) => {
     const [showCommentVisible, setShowCommentVisible] = useState(false);
 
     // delete a item 1976086 Kim JeongHyeon
-    const _deleteItem = id => {
+    const _deleteItem = key => {
         Alert.alert(
             'Warning',
             'Are you sure to delete?',
@@ -25,7 +24,10 @@ const Item = ({ item, items, saveItems, placeholder }) => {
 
               {text: 'OK', onPress: () => {
                 const currentItems = Object.assign({}, items);
-                delete currentItems[id];
+                for(id in currentItems) {
+                    if(currentItems[id]['id'] === key)
+                        delete currentItems[id];
+                }
                 saveItems(currentItems);}
               }
             ]
@@ -33,16 +35,22 @@ const Item = ({ item, items, saveItems, placeholder }) => {
     };
 
     // check a completed item 2076016 Kwak SeoJin
-    const _toggleItem = id => {
+    const _toggleItem = key => {
         const currentItems = Object.assign({}, items);
-        currentItems[id]['completed'] = !currentItems[id]['completed'];
+        for(id in currentItems) {
+            if(currentItems[id]['id'] === key)
+                currentItems[id]['completed'] = !currentItems[id]['completed'];
+        }
         saveItems(currentItems);
     };
     
     // edit a item 1976086 Kim JeongHyeon
     const _updateItem = item => {
         const currentItems = Object.assign({}, items);
-        currentItems[item.id] = item;
+        for(id in items) {
+            if(currentItems[id]['id'] === item.id)
+                currentItems[id] = item;
+        }
         saveItems(currentItems);
     };
 
