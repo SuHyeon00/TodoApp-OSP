@@ -56,10 +56,6 @@ const Reward = () => {
             setRewards(_reward);
         }
     });
-        
-    //console.log({rate});
-    //console.log({rates});
-    //console.log(rewards);
 
     const handleConfirm = () => {
         _saveRewards(rewards);
@@ -111,11 +107,10 @@ const Reward = () => {
                 </>
             ) : (
                 <Image style={{ width: 240, height: 150, 
-                    marginVertical: 15, marginHorizontal: 45, 
+                    marginVertical: 20, marginHorizontal: 45, 
                     position: 'absolute' }} 
                     source={images.More} />
             )}
-            
             </View>
         </View>
     );

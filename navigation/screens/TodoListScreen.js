@@ -1,11 +1,11 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import AppLoading from 'expo-app-loading';
 import * as React from 'react';
-import { Dimensions, Image, StatusBar, Text, TouchableOpacity, View } from 'react-native';
+import { Dimensions, StatusBar, Text, TouchableOpacity, View } from 'react-native';
 import IconButton from '../../src/components/IconButton';
 import ListAll from '../../src/components/ListAll';
 import { images } from '../../src/images';
-import { barStyles, taskStyle } from '../../src/styles';
+import { barStyles } from '../../src/styles';
 import { theme } from '../../src/theme';
 
 // 1928019 Oh SuHyeon

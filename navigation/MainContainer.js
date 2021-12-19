@@ -35,7 +35,7 @@ export default function MainContainer() {
                         let rn = route.name;
 
                         if (rn === MainName) {
-                            iconName = focused ? 'list' : 'list-outline';
+                            iconName = focused ? 'home' : 'home-outline';
                         }
                         else if (rn === calendarName) {
                             iconName = focused ? 'calendar' : 'calendar-outline';
